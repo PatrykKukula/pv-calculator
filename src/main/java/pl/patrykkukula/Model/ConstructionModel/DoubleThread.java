@@ -1,48 +1,39 @@
-package pl.patrykkukula.Model;
-
+package pl.patrykkukula.Model.ConstructionModel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import pl.patrykkukula.Utils.Constants;
-
-import java.util.List;
+import pl.patrykkukula.DataPresentationFormatters.DoubleThreadFormatter;
+import pl.patrykkukula.Model.ConstructionModel.Abstract.AbstractNotFlatConstructionModel;
+import pl.patrykkukula.Model.Installation;
+import static java.lang.Math.ceil;
+import static pl.patrykkukula.Constants.ConstructionConstants.BETWEEN_RAFTER;
+import static pl.patrykkukula.Constants.ConstructionConstants.PROFILE_LENGTH;
 
 @Getter
-@NoArgsConstructor
-public class DoubleThread {
-    private Installation installation;
+public class DoubleThread extends AbstractNotFlatConstructionModel {
     private double profile;
     private int profileJoiner;
     private int doubleThreadScrew;
     private int adapter;
     private int hexagonScrew;
     private int hexagonNut;
-    private int endClamp;
-    private int midClamp;
-    private int allenScrew;
-    private int slidingKey;
 
     public DoubleThread(Installation installation) {
-        this.installation = installation;
+        super(installation);
     }
 
-    public void setProfile(Installation installation, String orientation){
-            this.profile = calculateProfile(installation, orientation);
+    @Override
+    protected void setAdditionalDetails() {
+        this.profile = installation.calculateProfile();
+        this.profileJoiner = (int) ceil(this.profile / PROFILE_LENGTH);
+        this.doubleThreadScrew = (int) ceil(this.profile / BETWEEN_RAFTER);
+        this.adapter = doubleThreadScrew; // it is always equal
+        this.hexagonScrew = doubleThreadScrew; // it is always equal
+        this.hexagonNut = doubleThreadScrew; // it is always equal
     }
-    public void setAll(Installation installation, DoubleThread doubleThread){
-        this.profileJoiner = (int)(doubleThread.getProfile()/6.65);
-        this.doubleThreadScrew = (int)(doubleThread.getProfile()/Constants.BETWEEN_RAFTER);
-    }
-
-    private double calculateProfile(Installation installation, String orientation){
-        int modulesQty = installation.getModulesQty();
-        double calculationLenght = 0.0;
-        if (orientation.equals("vertical")){
-          calculationLenght = installation.getModule().getWidth();
-        } else if (orientation.equals("horizontal")) {
-           calculationLenght = installation.getModule().getLength();
-        }
-        return modulesQty*calculationLenght*2*1.05;
+    public String getDetails() {
+      return DoubleThreadFormatter.format(this);
     }
 
-
+    public int getProfile(){
+        return (int)ceil(this.profile);
+    }
 }

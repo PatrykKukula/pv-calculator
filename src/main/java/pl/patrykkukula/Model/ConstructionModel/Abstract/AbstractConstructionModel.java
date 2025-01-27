@@ -6,16 +6,18 @@ import pl.patrykkukula.Model.Installation;
 
 @Getter
 @NoArgsConstructor
-public abstract class AbstracConstructionModel {
+public abstract class AbstractConstructionModel {
     protected Installation installation;
     protected int endClamp;
     protected int midClamp;
     protected int allenScrew;
     protected int slidingKey;
 
-    public AbstracConstructionModel(Installation installation) {
+    public AbstractConstructionModel(Installation installation) {
         if (installation == null || installation.getRowsAndModules().isEmpty())
             throw new IllegalArgumentException("Instalacja nie istnieje lub nie dodano do niej żadnych modułów");
         this.installation = installation;
     }
+    protected abstract void setAdditionalDetails();
+
 }

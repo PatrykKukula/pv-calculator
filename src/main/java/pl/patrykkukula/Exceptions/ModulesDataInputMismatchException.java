@@ -1,5 +1,9 @@
 package pl.patrykkukula.Exceptions;
 
-public class PowerInputMismatchException extends RuntimeException {
-    public PowerInputMismatchException(){}
+public class ModulesDataInputMismatchException extends RuntimeException {
+    public ModulesDataInputMismatchException() {
     }
+    public ModulesDataInputMismatchException(String message) {
+        super(message);
+    }
+}

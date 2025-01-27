@@ -1,19 +1,16 @@
-package pl.patrykkukula.Model.ConstructionModel;
-
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+package pl.patrykkukula.Model.ConstructionModel.Abstract;
 import pl.patrykkukula.Model.Installation;
 
-@Getter
-@NoArgsConstructor
-public abstract class AbstractConstructionModel {
-    protected Installation installation;
-    protected int endClamp;
-    protected int midClamp;
-    protected int allenScrew;
-    protected int slidingKey;
+public abstract class AbstractNotFlatConstructionModel extends AbstractConstructionModel {
 
-    protected AbstractConstructionModel(Installation installation) {
-        this.installation = installation;
+    protected AbstractNotFlatConstructionModel(Installation installation) {
+        super(installation);
+    }
+    public void setDetails(){
+        this.allenScrew = installation.getTotalEdge();
+        this.slidingKey = allenScrew; // it is always equal
+        this.endClamp = installation.calculateEndClamp();
+        this.midClamp = allenScrew - endClamp;
+        setAdditionalDetails();
     }
 }
