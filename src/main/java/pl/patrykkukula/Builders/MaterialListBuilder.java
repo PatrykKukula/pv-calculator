@@ -1,5 +1,4 @@
 package pl.patrykkukula.Builders;
-
 import pl.patrykkukula.Model.Installation;
 import pl.patrykkukula.Model.InstallationList;
 import pl.patrykkukula.Utils.ConstructionMapper;
@@ -7,16 +6,15 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class ConstructionBuilder {
+public class MaterialListBuilder {
     InstallationList installationList;
     Map<String, Integer> materials = new LinkedHashMap<>();
 
-
-    public ConstructionBuilder(InstallationList installationList) {
+    public MaterialListBuilder(InstallationList installationList) {
         this.installationList = installationList;
     }
 
-    public Map<String, Integer> materials(){
+    public Map<String, Integer> printMaterialList(){
         for (int i = 0; i<installationList.getInstallationList().size(); i++){
             Installation installation = installationList.getInstallationList().get(i);
             ConstructionMapper mapper = new ConstructionMapper();

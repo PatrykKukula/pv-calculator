@@ -1,5 +1,4 @@
 package pl.patrykkukula.Model.ConstructionModel.Abstract;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import pl.patrykkukula.Model.Installation;
@@ -14,10 +13,7 @@ public abstract class AbstractConstructionModel {
     protected int slidingKey;
 
     public AbstractConstructionModel(Installation installation) {
-        if (installation == null || installation.getRowsAndModules().isEmpty())
-            throw new IllegalArgumentException("Instalacja nie istnieje lub nie dodano do niej żadnych modułów");
         this.installation = installation;
     }
     protected abstract void setAdditionalDetails();
-
 }

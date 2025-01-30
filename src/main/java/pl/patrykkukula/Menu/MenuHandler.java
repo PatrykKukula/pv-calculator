@@ -41,22 +41,27 @@ public class MenuHandler {
         System.out.println("[2] - Zakończ");
     }
     private void handleAction(int action){
-
+        try {
         switch (MenuOption.fromCode(action)) {
-            case CREATE -> {
-                PvModuleBuilder pvModuleBuilder = new PvModuleBuilder();
-                InstallationBuilder installationBuilder = new InstallationBuilder();
-                System.out.println("Podaj wymagane dane wejściowe, wyświetlane w następnych wierszach");
-                if (pvModule == null) {
-                    pvModule = pvModuleBuilder.build();
-                    // Tworzenie modułu PV na podstawie danych wejściowych
-                    System.out.println("Moduł PV został poprawnie utworzony");
+
+                case CREATE -> {
+                    PvModuleBuilder pvModuleBuilder = new PvModuleBuilder();
+                    InstallationBuilder installationBuilder = new InstallationBuilder();
+                    System.out.println("Podaj wymagane dane wejściowe, wyświetlane w następnych wierszach");
+                    if (pvModule == null) {
+                        pvModule = pvModuleBuilder.build();
+                        if (pvModule != null) {
+                            System.out.println("Moduł PV został poprawnie utworzony");
+                        } else System.out.println("Niepowodzenie w dodawaniu danych modułu. Wprowadź dane ponownie");
+                    }
+                    installationBuilder.build(pvModule);
                 }
-                else System.out.println("Dane modułu zostały już przekazane");
-                InstallationList installationList = installationBuilder.build(pvModule); // tworzenie listy instalacji
+                case EXIT -> shouldContinue = false;
+                default -> throw new IllegalArgumentException();
             }
-            case EXIT -> shouldContinue = false;
-            default -> throw new IllegalArgumentException();
+        }
+        catch (IllegalArgumentException ex){
+            System.out.println("Nieprawidłowa opcja menu. Wybierz [1] lub [2]");
         }
     }
 }

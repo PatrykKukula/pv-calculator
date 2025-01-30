@@ -9,8 +9,9 @@ public class ConstructionConstants {
     public static final double PROFILE_LENGTH = 6.65; // meters
     public static final int THREADED_ROD_PER_ANGLE_BAR = 2; // no unit
     public static final int THREADED_ROD_PER_CHEMICAL_ANCHOR = 6; // no unit
-    public static final int SCREWS_FOR_TRAPEZE = 6; // no unit
+    public static final int SCREWS_PER_TRAPEZE = 6;
+    public static final int SCREWS_PER_VARIO = 4;// no unit
     public static final double SURPLUS_FACTOR = 1.07; // no unit
-    public static final int MAP_MILLIMETER_TO_METER = 1000; // no unit
+    public static final int CONVERT_UNIT_FROM_KILOS = 1000; // no unit
     public static final int END_CLAMPS_PER_ROW = 4; // no unit
 }

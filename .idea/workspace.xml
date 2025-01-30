@@ -5,8 +5,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6dab4fd-e979-42d3-8fee-ebb6e4b33f80" name="Changes" comment="Project update">
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/VarioHook.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Builders/ConstructionBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Builders/MaterialListBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Builders/InstallationBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Builders/InstallationBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Builders/PvModuleBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Builders/PvModuleBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Constants/ConstructionConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Constants/ConstructionConstants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Constants/ElectricConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Constants/ElectricConstants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/DataPresentationFormatters/DoubleThreadFormatter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/DataPresentationFormatters/FlatDoubleThreadFormatter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/DataPresentationFormatters/FlatThreadedRodFormatter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/DataPresentationFormatters/InstallationFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/DataFormatters/InstallationFormatter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/DataPresentationFormatters/TrapezeFormatter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Exceptions/InstallationDataInputMismatchException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Exceptions/ModulesDataInputMismatchException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Exceptions/modulesQtyInputMismatchException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Menu/MenuHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Menu/MenuHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Menu/MenuOption.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Menu/MenuOption.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/Abstract/AbstractConstructionModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/Abstract/AbstractConstructionModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/Abstract/AbstractFlatConstructionModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/Abstract/AbstractProfileConstructionModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/Abstract/AbstractNotFlatConstructionModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/Abstract/AbstractNoProfileConstructionModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/DoubleThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/DoubleThreaded.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/FlatDoubleThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/FlatDoubleThreaded.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/FlatThreaderRod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/FlatThreadedRod.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/Trapeze.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/Trapeze.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/Installation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/Installation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/InstallationList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/InstallationList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/PvModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/PvModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Utils/ConstructionMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Utils/ConstructionMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Utils/SaveUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Utils/FileMenager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +54,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Asteez&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/PatrykKukula/pv-calculator.git",
+    "accountId": "f1b2d4f6-aeee-473d-805e-dde50950012a"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -43,7 +84,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "Merging master",
+    "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Projekty/pv-calculator",
     "node.js.detected.package.eslint": "true",
@@ -51,6 +92,9 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   },
@@ -76,7 +120,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1737751853690</updated>
-      <workItem from="1737995261502" duration="4276000" />
+      <workItem from="1737995261502" duration="11371000" />
+      <workItem from="1738011450059" duration="152000" />
+      <workItem from="1738014504944" duration="152000" />
+      <workItem from="1738092030084" duration="7497000" />
+      <workItem from="1738167443847" duration="16109000" />
+      <workItem from="1738258322001" duration="5898000" />
     </task>
     <task id="LOCAL-00001" summary="Project update">
       <option name="closed" value="true" />
@@ -86,14 +135,43 @@
       <option name="project" value="LOCAL" />
       <updated>1737995909875</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Project update">
+      <option name="closed" value="true" />
+      <created>1737999768152</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1737999768152</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Project update" />
     <option name="LAST_COMMIT_MESSAGE" value="Project update" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint type="java-exception">
+          <properties class="java.lang.RuntimeException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

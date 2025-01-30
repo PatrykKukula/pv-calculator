@@ -1,5 +1,4 @@
 package pl.patrykkukula.Model;
-
 import lombok.*;
 
 @Data

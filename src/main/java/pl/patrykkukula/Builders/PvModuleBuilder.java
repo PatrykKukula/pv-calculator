@@ -1,50 +1,100 @@
 package pl.patrykkukula.Builders;
-import pl.patrykkukula.Exceptions.ModulesDataInputMismatchException;
 import pl.patrykkukula.Model.PvModule;
-import pl.patrykkukula.Utils.ScannerUtil;
+import static pl.patrykkukula.Constants.ElectricConstants.*;
+import static pl.patrykkukula.Utils.ScannerUtil.readInt;
 public class PvModuleBuilder {
-    private static boolean notCorrect = true;
 
+    String allowedFrame = "[30, 35 lub 40 mm]";
 
     public PvModule build() {
-        while (notCorrect) {
-            try {
-                System.out.println("Podaj dane dotyczące modułów PV");
-                System.out.println("Podaj moc modułów [370-650 W]");
-                int power = ScannerUtil.readInt();
-                if (power < 370 || power > 650) throw new ModulesDataInputMismatchException();
-                System.out.println("Podaj grubość ramy [30, 35 lub 40 mm]");
-                int frame = ScannerUtil.readInt();
-                if (frame != 30 && frame != 35 && frame != 40) throw new ModulesDataInputMismatchException();
-                System.out.println("Podaj szerokość modułu [1050-1320 mm]");
-                int width = ScannerUtil.readInt();
-                System.out.println("Podaj długość modułu [1697-2350 mm]");
-                int lenght = ScannerUtil.readInt();
-                if (width < 1050 || width > 1320 || lenght < 1697 || lenght > 2350)
-                    throw new ModulesDataInputMismatchException();
-                PvModule pvModule = new PvModule(power, frame, width, lenght);
-                System.out.println("Podano poniższe parametry panela. Jeśli się zgadza naciśnij [1], aby przejść dalej." +
-                        " Jeśli chcesz poprawić dane wciśnij [2]");
-                System.out.println(pvModule.getModuleDetails());
-                int action = ScannerUtil.readInt();
-                if (action == 1) {
-                    notCorrect = false;
-                    return pvModule;
-                } else if (action == 2) {
-                    System.out.println("Wprowadź dane ponownie");
-                    notCorrect = true;
-                } else throw new IllegalArgumentException();
-            } catch (IllegalArgumentException ex) {
-                System.out.println("Nieznana opcja menu. Wybierz [1] lub [2]");
-            } catch (ModulesDataInputMismatchException ex) {
-                System.out.println("Podano błędne dane wejściowe. Podaj parametry z zakresu w nawiasie []:");
-                System.out.println("Moc z przedziału [370-650W]");
-                System.out.println("Grubość ramki [30, 35 lub 40mm]");
-                System.out.println("Szerokość modułu z przedziału [1050-1320mm]");
-                System.out.println("Wysokość modułu z przedziału [1697-2350mm]");
+        while (true) {
+            int power = readValidPower();
+            int frame = readValidFrame();
+            int width = readValidWidth();
+            int length = readValidLength();
+            PvModule pvModule = new PvModule(power, frame, width, length);
+            System.out.println("Podano poniższe parametry panela. Jeśli się zgadza naciśnij [1] aby przejść dalej."
+                    + System.lineSeparator() + " Jeśli chcesz poprawić dane wciśnij [2]");
+            System.out.println(pvModule.getModuleDetails());
+            if (confirmData()) {
+                return pvModule;
+            } else {
+                System.out.println("Podaj dane ponownie");
             }
         }
-        return null;
+        }
+        private boolean confirmData() {
+            while (true) {
+                int action = readInt();
+                if (action == 1) {
+                    return true;
+                }
+                else if (action == 2) {
+                    System.out.println("Wprowadź dane ponownie");
+                    return false;
+                }
+                System.out.println("Nieprawidłowa opcja menu. Wybierz [1] lub [2]");
+            }
+        }
+    private int readValidPower(){
+        while (true) {
+            try {
+                System.out.println("Podaj moc modułów [" + MIN_POWER + "-" + MAX_POWER + " W]");
+                int power = readInt();
+                if (power >= 370 && power <= 650) {
+                    return power;
+                }
+                System.out.println("Moc paneli spoza zakresu");
+            }
+            catch (IllegalArgumentException ex){
+                System.out.println("Błędnie wprowadzone dane. Podaj wartość z zakresu [" + MIN_POWER + "-" + MAX_POWER + " W]");
+            }
+        }
+
+    }
+    private int readValidFrame(){
+        while (true){
+            try{
+            System.out.println("Podaj grubość ramy " + allowedFrame);
+            int frame = readInt();
+            if (frame == 30 || frame == 35 || frame == 40) {
+                return frame;
+            }
+            System.out.println("Nieproprawna grubość ramy");
+        }
+            catch (IllegalArgumentException ex){
+                System.out.println("Błędnie wprowadzone dane. Podaj wartość z zakresu [30, 35 lub 40 mm]");
+            }
+        }
+    }
+    private int readValidWidth(){
+        while (true) {
+            try{
+            System.out.println("Podaj szerokość modułu [" + MIN_WIDTH + "-" + MAX_WIDTH + " mm]");
+            int width = readInt();
+            if (width >= 1050 && width <= 1320) {
+                return width;
+            }
+            System.out.println("Szerokość spoza przedziału");
+        }
+            catch (IllegalArgumentException ex){
+                System.out.println("Błędnie wprowadzone dane. Podaj wartość z zakresu [" + MIN_WIDTH + "-" + MAX_WIDTH +" mm]");}
+        }
+    }
+    private int readValidLength(){
+        while (true) {
+            try {
+                System.out.println("Podaj długość modułu [" + MIN_LENTGH + "-" + MAX_LENTGH + " mm");
+                int length = readInt();
+                if (length >= 1697 && length <= 2350) {
+                    return length;
+                }
+                System.out.println("Długość spoza przedziału");
+            }
+            catch (IllegalArgumentException ex){
+                System.out.println("Błędnie wprowadzone dane. Podaj wartość z zakresu ["+ MIN_LENTGH + "-" + MAX_LENTGH + " mm]");
+            }
+        }
     }
 }
 

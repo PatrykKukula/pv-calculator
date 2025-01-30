@@ -5,21 +5,20 @@ import static java.lang.Math.ceil;
 import static pl.patrykkukula.Constants.ConstructionConstants.PROFILE_LENGTH;
 
 @Getter
-public abstract class AbstractFlatConstructionModel extends AbstractConstructionModel {
-    protected double profile;
-    protected double angleBar;
-    protected int profileJoiner;
+public abstract class AbstractProfileConstructionModel extends AbstractConstructionModel {
     protected int hexagonScrew;
     protected int hexagonNut;
+    protected double profile;
+    protected int profileJoiner;
+    protected int doubleThreadScrew;
+    protected double angleBar;
 
-    protected AbstractFlatConstructionModel(Installation installation) {
+    protected AbstractProfileConstructionModel(Installation installation) {
        super(installation);
     }
-
     public void setDetails(){
         this.profile = installation.calculateProfile();
         this.profileJoiner = (int) ceil(this.profile / PROFILE_LENGTH);
-        this.angleBar = installation.calculateAngleBarLength();
         this.endClamp = installation.calculateEndClamp();
         this.allenScrew = installation.getTotalEdge();
         this.slidingKey = allenScrew; // it is always equal
@@ -32,5 +31,4 @@ public abstract class AbstractFlatConstructionModel extends AbstractConstruction
     public int getAngleBar(){
         return (int)ceil(angleBar);
     }
-
 }

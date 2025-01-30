@@ -1,14 +1,13 @@
 package pl.patrykkukula.Model.ConstructionModel;
 import lombok.Getter;
-import pl.patrykkukula.DataPresentationFormatters.TrapezeFormatter;
-import pl.patrykkukula.Model.ConstructionModel.Abstract.AbstractNotFlatConstructionModel;
+import pl.patrykkukula.Model.ConstructionModel.Abstract.AbstractNoProfileConstructionModel;
 import pl.patrykkukula.Model.Installation;
-import static pl.patrykkukula.Constants.ConstructionConstants.SCREWS_FOR_TRAPEZE;
+import static pl.patrykkukula.Constants.ConstructionConstants.SCREWS_PER_TRAPEZE;
 
 @Getter
-public class Trapeze extends AbstractNotFlatConstructionModel {
+public class Trapeze extends AbstractNoProfileConstructionModel {
     private int trapeze;
-    private int screw;
+    private int selfDrillingScrew;
 
     public Trapeze(Installation installation){
      super(installation);
@@ -17,10 +16,6 @@ public class Trapeze extends AbstractNotFlatConstructionModel {
     @Override
     protected void setAdditionalDetails() {
         this.trapeze = installation.getTotalEdge();
-        this.screw = this.trapeze * SCREWS_FOR_TRAPEZE;
-    }
-
-    public String getDetails(){
-        return TrapezeFormatter.format(this);
+        this.selfDrillingScrew = this.trapeze * SCREWS_PER_TRAPEZE;
     }
 }

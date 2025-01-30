@@ -1,9 +1,9 @@
 package pl.patrykkukula.Model.ConstructionModel.Abstract;
 import pl.patrykkukula.Model.Installation;
 
-public abstract class AbstractNotFlatConstructionModel extends AbstractConstructionModel {
+public abstract class AbstractNoProfileConstructionModel extends AbstractConstructionModel {
 
-    protected AbstractNotFlatConstructionModel(Installation installation) {
+    protected AbstractNoProfileConstructionModel(Installation installation) {
         super(installation);
     }
     public void setDetails(){
