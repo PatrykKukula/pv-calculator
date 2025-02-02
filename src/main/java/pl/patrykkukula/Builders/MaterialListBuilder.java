@@ -7,24 +7,23 @@ import java.util.Map;
 import java.util.Set;
 
 public class MaterialListBuilder {
-    InstallationList installationList;
-    Map<String, Integer> materials = new LinkedHashMap<>();
+    private final InstallationList installationList;
+    private final Map<String, Integer> constructionMaterials = new LinkedHashMap<>();
 
-    public MaterialListBuilder(InstallationList installationList) {
+    protected MaterialListBuilder(InstallationList installationList) {
         this.installationList = installationList;
     }
-
-    public Map<String, Integer> printMaterialList(){
+   protected Map<String, Integer> printMaterialList(){
         for (int i = 0; i<installationList.getInstallationList().size(); i++){
             Installation installation = installationList.getInstallationList().get(i);
             ConstructionMapper mapper = new ConstructionMapper();
             Map<String, Integer> map = mapper.map(installation, installation.getModel());
             Set<String> keys = map.keySet();
             for (String key : keys) {
-                materials.put(key, materials.getOrDefault(key,0) + map.get(key));
+                constructionMaterials.put(key, constructionMaterials.getOrDefault(key,0) + map.get(key));
             }
         }
-        return materials;
+        return constructionMaterials;
     }
 
 //    public Map<String, Integer> calculateMaterials(){

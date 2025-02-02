@@ -30,7 +30,6 @@ public class PvModuleBuilder {
                     return true;
                 }
                 else if (action == 2) {
-                    System.out.println("Wprowadź dane ponownie");
                     return false;
                 }
                 System.out.println("Nieprawidłowa opcja menu. Wybierz [1] lub [2]");
@@ -50,7 +49,6 @@ public class PvModuleBuilder {
                 System.out.println("Błędnie wprowadzone dane. Podaj wartość z zakresu [" + MIN_POWER + "-" + MAX_POWER + " W]");
             }
         }
-
     }
     private int readValidFrame(){
         while (true){
@@ -84,7 +82,7 @@ public class PvModuleBuilder {
     private int readValidLength(){
         while (true) {
             try {
-                System.out.println("Podaj długość modułu [" + MIN_LENTGH + "-" + MAX_LENTGH + " mm");
+                System.out.println("Podaj długość modułu [" + MIN_LENTGH + "-" + MAX_LENTGH + " mm]");
                 int length = readInt();
                 if (length >= 1697 && length <= 2350) {
                     return length;

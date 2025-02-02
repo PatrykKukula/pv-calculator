@@ -11,6 +11,8 @@ import pl.patrykkukula.Utils.ScannerUtil;
 public class MenuHandler {
     boolean shouldContinue = true;
     PvModule pvModule;
+    InstallationList installationList = new InstallationList();
+
 
     public void start() {
         printWelcomeMessage();
@@ -46,7 +48,7 @@ public class MenuHandler {
 
                 case CREATE -> {
                     PvModuleBuilder pvModuleBuilder = new PvModuleBuilder();
-                    InstallationBuilder installationBuilder = new InstallationBuilder();
+                    InstallationBuilder installationBuilder = new InstallationBuilder(installationList);
                     System.out.println("Podaj wymagane dane wejściowe, wyświetlane w następnych wierszach");
                     if (pvModule == null) {
                         pvModule = pvModuleBuilder.build();
@@ -54,7 +56,7 @@ public class MenuHandler {
                             System.out.println("Moduł PV został poprawnie utworzony");
                         } else System.out.println("Niepowodzenie w dodawaniu danych modułu. Wprowadź dane ponownie");
                     }
-                    installationBuilder.build(pvModule);
+                    installationList = installationBuilder.build(pvModule);
                 }
                 case EXIT -> shouldContinue = false;
                 default -> throw new IllegalArgumentException();

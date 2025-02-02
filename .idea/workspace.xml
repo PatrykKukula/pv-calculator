@@ -5,37 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6dab4fd-e979-42d3-8fee-ebb6e4b33f80" name="Changes" comment="Project update">
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/VarioHook.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/Inverter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Builders/ConstructionBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Builders/MaterialListBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Builders/ElectricBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Builders/ElectricListBuilder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Builders/InstallationBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Builders/InstallationBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Builders/MaterialListBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Builders/MaterialListBuilder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Builders/PvModuleBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Builders/PvModuleBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Constants/ConstructionConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Constants/ConstructionConstants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Constants/ElectricConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Constants/ElectricConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/DataPresentationFormatters/DoubleThreadFormatter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/DataPresentationFormatters/FlatDoubleThreadFormatter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/DataPresentationFormatters/FlatThreadedRodFormatter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/DataPresentationFormatters/InstallationFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/DataFormatters/InstallationFormatter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/DataPresentationFormatters/TrapezeFormatter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Exceptions/InstallationDataInputMismatchException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Exceptions/ModulesDataInputMismatchException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Exceptions/modulesQtyInputMismatchException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/DataFormatters/InstallationFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/DataFormatters/InstallationFormatter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Menu/MenuHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Menu/MenuHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Menu/MenuOption.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Menu/MenuOption.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/Abstract/AbstractConstructionModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/Abstract/AbstractConstructionModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/Abstract/AbstractFlatConstructionModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/Abstract/AbstractProfileConstructionModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/Abstract/AbstractNotFlatConstructionModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/Abstract/AbstractNoProfileConstructionModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/DoubleThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/DoubleThreaded.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/FlatDoubleThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/FlatDoubleThreaded.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/FlatThreaderRod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/FlatThreadedRod.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/Trapeze.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/Trapeze.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/DoubleThreaded.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/DoubleThreaded.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/Installation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/Installation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/InstallationList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/InstallationList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/PvModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/PvModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Utils/ConstructionMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Utils/ConstructionMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Utils/SaveUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Utils/FileMenager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Utils/FileMenager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Utils/FileMenager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,12 +41,12 @@
     &quot;assignee&quot;: &quot;Asteez&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/PatrykKukula/pv-calculator.git",
-    "accountId": "f1b2d4f6-aeee-473d-805e-dde50950012a"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/PatrykKukula/pv-calculator.git&quot;,
+    &quot;accountId&quot;: &quot;f1b2d4f6-aeee-473d-805e-dde50950012a&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -77,33 +58,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "Java Scratch.Scratch.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Projekty/pv-calculator",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Java Scratch.Scratch.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Projekty/pv-calculator&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "JAVA"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;JAVA&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -125,7 +106,11 @@
       <workItem from="1738014504944" duration="152000" />
       <workItem from="1738092030084" duration="7497000" />
       <workItem from="1738167443847" duration="16109000" />
-      <workItem from="1738258322001" duration="5898000" />
+      <workItem from="1738258322001" duration="14049000" />
+      <workItem from="1738362300133" duration="3192000" />
+      <workItem from="1738402939704" duration="11964000" />
+      <workItem from="1738431021710" duration="3919000" />
+      <workItem from="1738436885487" duration="1203000" />
     </task>
     <task id="LOCAL-00001" summary="Project update">
       <option name="closed" value="true" />

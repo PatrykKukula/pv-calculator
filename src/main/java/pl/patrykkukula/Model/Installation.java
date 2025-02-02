@@ -5,11 +5,12 @@ import lombok.NoArgsConstructor;
 import pl.patrykkukula.Constants.ConstructionConstants;
 import pl.patrykkukula.DataFormatters.InstallationFormatter;
 import pl.patrykkukula.Model.ConstructionModel.Abstract.AbstractConstructionModel;
-import java.util.InputMismatchException;
+
 import java.util.List;
 
 import static java.lang.Math.*;
 import static pl.patrykkukula.Constants.ConstructionConstants.*;
+import static pl.patrykkukula.Constants.ElectricConstants.*;
 
 @Data
 @NoArgsConstructor
@@ -22,20 +23,26 @@ public class Installation {
     private int dcCable;
     private int acCable;
     private List<Integer> rowsAndModules;
+    private int strings;
+    private String surgeArrester;
+    private Inverter inverter;
     public static int count;
 
-    public Installation(int acCable, int dcCable, List<Integer> modules, PvModule module, String orientation) {
+    public Installation(int acCable, int dcCable, List<Integer> modules, PvModule module, String orientation, int strings, String surgeArrester) {
         this.acCable = acCable;
         this.dcCable = dcCable;
         this.rowsAndModules = modules;
         this.module = module;
         this.orientation = orientation;
+        this.strings = strings;
+        this.surgeArrester = surgeArrester;
+        setTotalPower();
         count++;
     }
-    public void setTotalPower() {
+    private void setTotalPower() {
         int modulesQty = getModulesQty();
         int modulePower = module.getPower();
-        this.totalPower = modulesQty * modulePower;
+        this.totalPower = (double)modulesQty * modulePower / CONVERT_UNIT_FROM_KILOS;
     }
     public int getModulesQty() {
         if (rowsAndModules==null || rowsAndModules.isEmpty()) throw new IllegalArgumentException("Do instalacji nie dodano żadnych modułów");
@@ -49,9 +56,9 @@ public class Installation {
     public double calculateProfile(){
         int modulesQty = getModulesQty();
         double calculationLength = 0.0;
-        if (this.orientation.equals("pionowo")){
+        if (orientation.equals("pionowo")){
             calculationLength = getModule().getWidth();
-        } else if (this.orientation.equals("poziomo")) {
+        } else if (orientation.equals("poziomo")) {
             calculationLength = getModule().getLength();
         }
         return modulesQty* calculationLength * 2 * SURPLUS_FACTOR / CONVERT_UNIT_FROM_KILOS; // *2 because it takes 2 profiles for 1 module
@@ -80,8 +87,22 @@ public class Installation {
                 .mapToInt(row -> (row+1))// this is general pattern for calculating construction circles based on how many edges are present in installation
                 .sum();
     }
+    public double getAcCableCrossSection(){
+        double voltageDrop;
+        double returnValue = 0;
+        for (Double crossSectionValue : crossSectionValues) {
+            voltageDrop = (100 * Math.sqrt(3.0) * getInverter().getCurrent() * acCable * COS_FI) / (COOPER_CONDUCTIVITY * crossSectionValue * THREE_PHASE_VOLTAGE);
+            returnValue = crossSectionValue;
+            if (voltageDrop <= 1.0) break; //allowed voltage drop is 1%
+        }
+        return returnValue;
+    }
+    private static final List<Double> crossSectionValues = List.of(2.5, 4.0,6.0,10.0,16.0,25.0); // typical cables crossSections available on market
+
     public <T extends AbstractConstructionModel> void setModel(T model){
         this.model = model;
     }
+
+
 }
 

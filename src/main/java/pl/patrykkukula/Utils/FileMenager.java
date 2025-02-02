@@ -8,20 +8,23 @@ import pl.patrykkukula.Model.InstallationList;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Map;
-import static pl.patrykkukula.Constants.ConstructionConstants.CONVERT_UNIT_FROM_KILOS;
-
 public class FileMenager {
 
-    public void saveFile(Map<String, Integer> materials, InstallationList installationList, String path) throws IOException {
+    public void saveFile(Map<String, Integer> constructionMaterials, Map<String,Integer> electricMaterials,
+                         InstallationList installationList, String path) throws IOException {
         try (FileOutputStream output = new FileOutputStream(path);
                 XSSFWorkbook workbook = new XSSFWorkbook()) {
-                XSSFSheet sheet = workbook.createSheet();
+                XSSFSheet sheet = workbook.createSheet("Materiały");
                 int rowNum = 1;
                 XSSFRow row = sheet.createRow(0);
-                rowNum = saveMaterialList(materials, workbook, sheet, row, rowNum);
+                rowNum = saveMaterialList(constructionMaterials, workbook, sheet, row, rowNum);
+                rowNum = saveMaterialList(electricMaterials, workbook, sheet, row, rowNum);
                 sheet.createRow(rowNum++);
                 row = sheet.createRow(rowNum++);
                 saveInstallationList(installationList, workbook, sheet, row, rowNum);
+                for (int i = 0; i<3; i++){
+                    sheet.autoSizeColumn(i);
+                }
                 workbook.write(output);
             }
         }
@@ -45,10 +48,9 @@ public class FileMenager {
             for (int i = 0; i<installationList.getInstallationList().size(); i++){
                 row = sheet.createRow(rowNum++);
                 row.createCell(0).setCellValue(installationList.getInstallationList().get(i).getType());
-                row.createCell(1).setCellValue(installationList.getInstallationList().get(i).getTotalPower() / CONVERT_UNIT_FROM_KILOS);
+                row.createCell(1).setCellValue(installationList.getInstallationList().get(i).getTotalPower());
                 row.createCell(2).setCellValue(installationList.getInstallationList().get(i).getModulesQty());
             }
         }
-
     }
 

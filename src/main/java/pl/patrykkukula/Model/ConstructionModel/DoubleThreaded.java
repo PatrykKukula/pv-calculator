@@ -18,7 +18,7 @@ public class DoubleThreaded extends AbstractProfileConstructionModel {
     @Override
     protected void setAdditionalDetails() {
         this.profile = installation.calculateProfile();
-        this.profileJoiner = (int) ceil(this.profile / PROFILE_LENGTH);
+        this.profileJoiner = (int)ceil(this.profile / PROFILE_LENGTH);
         this.doubleThreadScrew = (int) ceil(this.profile / BETWEEN_RAFTER);
         this.adapter = doubleThreadScrew; // it is always equal
         this.hexagonScrew = doubleThreadScrew; // it is always equal
