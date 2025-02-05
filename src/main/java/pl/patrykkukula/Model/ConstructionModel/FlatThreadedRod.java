@@ -26,7 +26,7 @@ public class FlatThreadedRod extends AbstractProfileConstructionModel {
         this.hexagonScrew = threadedRod + angleBarQty * PER_ANGLE_BAR ;
         this.hexagonNut = hexagonScrew + threadedRod * NUT_PER_THREADED_ROD;
         this.epdm = threadedRod; // it is always equal
-        this.chemicalAnchor = (int) ceil(threadedRod / THREADED_ROD_PER_CHEMICAL_ANCHOR); // value of dividing these two values is very likely to be double type
+        this.chemicalAnchor = (int) ceil((double)threadedRod / THREADED_ROD_PER_CHEMICAL_ANCHOR); // value of dividing these two values is very likely to be double type
         this.sleeve = threadedRod; // it is always equal
     }
 }

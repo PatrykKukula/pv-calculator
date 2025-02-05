@@ -2,7 +2,6 @@ package pl.patrykkukula.Model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.patrykkukula.Constants.ConstructionConstants;
 import pl.patrykkukula.DataFormatters.InstallationFormatter;
 import pl.patrykkukula.Model.ConstructionModel.Abstract.AbstractConstructionModel;
 
@@ -53,7 +52,7 @@ public class Installation {
     public String getInstallationDetails() {
         return InstallationFormatter.format(this);
     }
-    public double calculateProfile(){
+    public double calculateProfileLength(){
         int modulesQty = getModulesQty();
         double calculationLength = 0.0;
         if (orientation.equals("pionowo")){
@@ -61,7 +60,7 @@ public class Installation {
         } else if (orientation.equals("poziomo")) {
             calculationLength = getModule().getLength();
         }
-        return modulesQty* calculationLength * 2 * SURPLUS_FACTOR / CONVERT_UNIT_FROM_KILOS; // *2 because it takes 2 profiles for 1 module
+        return round((modulesQty* calculationLength * 2 * SURPLUS_FACTOR / CONVERT_UNIT_FROM_KILOS) * 100 / 100); // *2 because it takes 2 profiles for 1 module
     }
     public void setType(int constructionType){
         if (constructionType == 1) this.type = "Mostki trapezowe";
@@ -69,17 +68,18 @@ public class Installation {
         else if (constructionType == 3) this.type = "Dach płaski - śruba dwugwintowa";
         else if (constructionType == 4) this.type = "Dach płaski - pręt gwintowany";
         else if (constructionType == 5) this.type = "Hak vario";
+        else throw new IllegalArgumentException("Nieznany typ instalacji");
     }
     public int calculateEndClamp(){
         return getRowsAndModules().size()*END_CLAMPS_PER_ROW;
     }
-    public int getTotalEdge() {
+    public int calculateTotalEdge() {
         return getRowsAndModules().stream()
-                .mapToInt(row -> row * 2 + 2) // this is general pattern for calculating some material based on how many edges are present in installation
+                .mapToInt(row -> row * 2 + 2) // this is general pattern for calculating some material based on how many edges are present in installation for example allen screw
                 .sum();
     }
     public int calculateAngleBarLength(){
-        return (int) ceil(calculateAngleBarQty() * ConstructionConstants.SINGLE_ANGLE_BAR_LENGTH);
+        return (int) ceil(calculateAngleBarQty() * SINGLE_ANGLE_BAR_LENGTH);
         // this is general pattern for calculating angle bar lenght based on how many edges are present in installation
     }
     public int calculateAngleBarQty(){
@@ -91,7 +91,7 @@ public class Installation {
         double voltageDrop;
         double returnValue = 0;
         for (Double crossSectionValue : crossSectionValues) {
-            voltageDrop = (100 * Math.sqrt(3.0) * getInverter().getCurrent() * acCable * COS_FI) / (COOPER_CONDUCTIVITY * crossSectionValue * THREE_PHASE_VOLTAGE);
+            voltageDrop = (100 * sqrt(3.0) * getInverter().getCurrent() * acCable * COS_FI) / (COOPER_CONDUCTIVITY * crossSectionValue * THREE_PHASE_VOLTAGE);
             returnValue = crossSectionValue;
             if (voltageDrop <= 1.0) break; //allowed voltage drop is 1%
         }

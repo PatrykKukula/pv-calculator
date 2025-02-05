@@ -15,14 +15,8 @@ public abstract class AbstractProfileConstructionModel extends AbstractConstruct
 
     protected AbstractProfileConstructionModel(Installation installation) {
        super(installation);
-    }
-    public void setDetails(){
-        this.profile = installation.calculateProfile();
+        this.profile = installation.calculateProfileLength();
         this.profileJoiner = (int) ceil(this.profile / PROFILE_LENGTH);
-        this.endClamp = installation.calculateEndClamp();
-        this.allenScrew = installation.getTotalEdge();
-        this.slidingKey = allenScrew; // it is always equal
-        this.midClamp = allenScrew - endClamp;
         setAdditionalDetails();
     }
     public int getProfile(){

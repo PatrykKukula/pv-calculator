@@ -5,7 +5,9 @@ import pl.patrykkukula.Builders.InstallationBuilder;
 import pl.patrykkukula.Builders.PvModuleBuilder;
 import pl.patrykkukula.Model.InstallationList;
 import pl.patrykkukula.Model.PvModule;
-import pl.patrykkukula.Utils.ScannerUtil;
+
+import static pl.patrykkukula.Utils.ScannerUtil.closeScanner;
+import static pl.patrykkukula.Utils.ScannerUtil.readInt;
 
 @NoArgsConstructor
 public class MenuHandler {
@@ -13,29 +15,28 @@ public class MenuHandler {
     PvModule pvModule;
     InstallationList installationList = new InstallationList();
 
-
     public void start() {
         printWelcomeMessage();
         while (shouldContinue) {
             try {
                 printMainMenu();
-                int action = ScannerUtil.readInt();
+                int action = readInt();
                 handleAction(action);
-            } catch (IllegalArgumentException ex) {
+            } catch (NumberFormatException ex) {
                 System.out.println("Nieprawidłowy format danych. Upewnij się, że podałeś właściwą wartość");
             }
         }
-        ScannerUtil.closeScanner();
+        closeScanner();
     }
 
     private void printWelcomeMessage(){
         System.out.println("""
                 .:: Witaj w programie do tworzenia list materiałowych instalacji PV ::.
-                    Po podaniu wymaganych danych wejściowych program wyliczy podstawowe
-                    materiały konstrukcyjne i elektryczne. Postępuj zgodnie z instrukcjami
-                                         widocznymi na ekranie
-                    _________________________________________________________________________________
-                """);
+                    Po podaniu wymaganych danych wejściowych program wyliczy
+                     materiały konstrukcyjne i podstawowe materiałyelektryczne.
+                      Postępuj zgodnie z instrukcjami widocznymi na ekranie
+            _________________________________________________________________________________
+            """);
     }
     private void printMainMenu(){
         System.out.println("Wybierz, co chcesz zrobić");
@@ -45,11 +46,12 @@ public class MenuHandler {
     private void handleAction(int action){
         try {
         switch (MenuOption.fromCode(action)) {
-
                 case CREATE -> {
                     PvModuleBuilder pvModuleBuilder = new PvModuleBuilder();
                     InstallationBuilder installationBuilder = new InstallationBuilder(installationList);
-                    System.out.println("Podaj wymagane dane wejściowe, wyświetlane w następnych wierszach");
+                    System.out.println("Podaj wymagane dane wejściowe wyświetlane w następnych wierszach");
+                    System.out.println("Dane będą wykorzystane przy tworzeniu listy materiałowej");
+                    System.out.println();
                     if (pvModule == null) {
                         pvModule = pvModuleBuilder.build();
                         if (pvModule != null) {

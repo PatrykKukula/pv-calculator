@@ -34,7 +34,7 @@ public class Inverter {
     }
 
     public Inverter(Installation installation) {
-        Objects.requireNonNull(installation, "Instalacja nie może być ");
+        Objects.requireNonNull(installation, "Instalacja nie może być nullem");
         setPower(installation);
         setCurrent(installation);
     }

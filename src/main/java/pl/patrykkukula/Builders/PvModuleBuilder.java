@@ -8,18 +8,17 @@ public class PvModuleBuilder {
 
     public PvModule build() {
         while (true) {
+            System.out.println("Podaj dane dotyczące modułów PV");
             int power = readValidPower();
             int frame = readValidFrame();
             int width = readValidWidth();
             int length = readValidLength();
             PvModule pvModule = new PvModule(power, frame, width, length);
-            System.out.println("Podano poniższe parametry panela. Jeśli się zgadza naciśnij [1] aby przejść dalej."
-                    + System.lineSeparator() + " Jeśli chcesz poprawić dane wciśnij [2]");
+            System.out.println("Podano następujące dane");
             System.out.println(pvModule.getModuleDetails());
+            System.out.println("Jeśli się zgadza naciśnij [1] aby przejść dalej. Jeśli chcesz poprawić dane wciśnij [2]");
             if (confirmData()) {
                 return pvModule;
-            } else {
-                System.out.println("Podaj dane ponownie");
             }
         }
         }
@@ -61,7 +60,7 @@ public class PvModuleBuilder {
             System.out.println("Nieproprawna grubość ramy");
         }
             catch (IllegalArgumentException ex){
-                System.out.println("Błędnie wprowadzone dane. Podaj wartość z zakresu [30, 35 lub 40 mm]");
+                System.out.println("Błędnie wprowadzone dane. Podaj wartość z zakresu " + allowedFrame);
             }
         }
     }

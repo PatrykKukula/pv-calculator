@@ -5,17 +5,19 @@ import pl.patrykkukula.Model.ConstructionModel.Abstract.AbstractProfileConstruct
 import pl.patrykkukula.Model.Installation;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class ConstructionMapper {
     Map<String, Integer> materials = new LinkedHashMap<>();
 
-    public  <T extends AbstractConstructionModel> Map<String, Integer> map(Installation installation, T type){
+    public  <T extends AbstractConstructionModel> Map<String, Integer> printMaterials(Installation installation, T type){
+        Objects.requireNonNull(installation, "Instalacja nie może być null");
         if (type.getClass() == Trapeze.class) return mapToTrapeze(installation, (Trapeze)type);
-        if (type.getClass() == DoubleThreaded.class) return mapToDoubleThread(installation, (DoubleThreaded) type);
-        if (type.getClass() == FlatDoubleThreaded.class) return mapToFlatDoubleThread(installation, (FlatDoubleThreaded) type);
+        if (type.getClass() == DoubleThreaded.class) return mapToDoubleThreaded(installation, (DoubleThreaded) type);
+        if (type.getClass() == FlatDoubleThreaded.class) return mapToFlatDoubleThreaded(installation, (FlatDoubleThreaded) type);
         if (type.getClass() == FlatThreadedRod.class) return mapToFlatThreadedRod(installation, (FlatThreadedRod) type);
         if (type.getClass() == VarioHook.class) return mapToVario(installation, (VarioHook) type);
-        return null;
+        throw new IllegalArgumentException("Nieznany typ instalacji: " + type.getClass());
     }
     private Map<String, Integer> mapToTrapeze(Installation installation, Trapeze trapeze){
         materials.put("Mostek trapezowy", trapeze.getTrapeze());
@@ -30,16 +32,16 @@ public class ConstructionMapper {
         setBase(installation, varioHook);
         return materials;
     }
-    private Map<String, Integer> mapToDoubleThread(Installation installation, DoubleThreaded doubleThreaded){
+    private Map<String, Integer> mapToDoubleThreaded(Installation installation, DoubleThreaded doubleThreaded){
         setProfileBase(doubleThreaded);
-        materials.put("Śruba Dwugwintowa M10x250", doubleThreaded.getDoubleThreadScrew());
+        materials.put("Śruba Dwugwintowa M10x250", doubleThreaded.getDoubleThreadedScrew());
         materials.put("Adapter montażowy", doubleThreaded.getAdapter());
         setBase(installation, doubleThreaded);
         return materials;
     }
-    private Map<String, Integer> mapToFlatDoubleThread(Installation installation, FlatDoubleThreaded flatDoubleThreaded){
+    private Map<String, Integer> mapToFlatDoubleThreaded(Installation installation, FlatDoubleThreaded flatDoubleThreaded){
         setFlatBase(installation, flatDoubleThreaded);
-        materials.put("Śruba Dwugwintowa M10x250", flatDoubleThreaded.getDoubleThreadScrew());
+        materials.put("Śruba Dwugwintowa M10x250", flatDoubleThreaded.getDoubleThreadedScrew());
         setBase(installation, flatDoubleThreaded);
         return materials;
     }

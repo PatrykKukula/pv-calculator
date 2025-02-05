@@ -18,6 +18,6 @@ public enum MenuOption {
         return Arrays.stream(values())
                 .filter(option -> option.code == code)
                 .findFirst()
-                .orElseThrow(IllegalArgumentException::new);
+                .orElseThrow(() -> new IllegalArgumentException("Nieznany kod: " + code));
     }
 }

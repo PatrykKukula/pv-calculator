@@ -8,7 +8,7 @@ import static pl.patrykkukula.Constants.ConstructionConstants.*;
 @Getter
 public class FlatDoubleThreaded extends AbstractProfileConstructionModel {
     private int angleBar;
-    private int doubleThreadScrew;
+    private int doubleThreadedScrew;
 
     public FlatDoubleThreaded(Installation installation) {
         super(installation);
@@ -16,9 +16,9 @@ public class FlatDoubleThreaded extends AbstractProfileConstructionModel {
 
     @Override
     protected void setAdditionalDetails() {
-        this.doubleThreadScrew = (int) ceil(this.profile / BETWEEN_RAFTER);
+        this.doubleThreadedScrew = (int) ceil(this.profile / BETWEEN_RAFTER);
         this.angleBar = installation.calculateAngleBarLength();
-        this.hexagonScrew = doubleThreadScrew + installation.calculateAngleBarQty() * PER_ANGLE_BAR ;
+        this.hexagonScrew = installation.calculateAngleBarQty() * 2 + installation.calculateAngleBarQty() * PER_ANGLE_BAR ;
         this.hexagonNut = hexagonScrew; // it is always equal
     }
 }

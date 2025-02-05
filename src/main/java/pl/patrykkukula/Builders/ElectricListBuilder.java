@@ -12,9 +12,8 @@ public class ElectricListBuilder {
     private static final NavigableSet<Integer> currentSet = Collections.unmodifiableNavigableSet(new TreeSet<>(Set.of(6, 10, 16, 20, 25, 32, 40, 50)));
     private static final NavigableSet<Integer> switchboardSize = Collections.unmodifiableNavigableSet(new TreeSet<>(Set.of(6, 12, 18, 24, 36, 48)));
 
-    protected Map<String, Integer> buildElectricMaterials(InstallationList installationList) {
+    public Map<String, Integer> buildElectricMaterials(InstallationList installationList) {
         for (Installation installation : installationList.getInstallationList()) {
-            addMaterial("Falownik fotowoltaiczny " + installation.getInverter().getPower() + " kW", 1);
             addMaterial("Falownik fotowoltaiczny " + installation.getInverter().getPower() + " kW", 1);
             addMaterial("Kabel AC 5x" + installation.getAcCableCrossSection() + " mm2", installation.getAcCable());
             if (installation.getTotalPower() >= 10) addMaterial("Kabel DC 6 mm2", installation.getDcCable());
@@ -24,7 +23,7 @@ public class ElectricListBuilder {
             addMaterial("Zabezpieczenie nadprądowe typ B" + currentSet.ceiling(getCurrent(installation)), 1);
             addMaterial("Zabezpieczenie nadprądowe typ C" + currentSet.ceiling(getCurrent(installation)), 1);
             addMaterial("Wyłącznik RCD " + currentSet.ceiling(getCurrent(installation)) + "/0,1A", 1);
-            addMaterial("Ogranicznik przepieć AC 4P" + installation.getSurgeArrester(), 1);
+            addMaterial("Ogranicznik przepieć AC 4P " + installation.getSurgeArrester(), 1);
             addMaterial("Ogranicznik przepięć DC typ " + installation.getSurgeArrester(), installation.getStrings());
             addMaterial("Rozłącznik bezpiecznikowy DC 2p", installation.getStrings());
             addMaterial("Wkładka bezpiecznikowa gG 15A", installation.getStrings() * FUSE_PER_DC_DISCONNECTOR);
@@ -42,7 +41,7 @@ public class ElectricListBuilder {
         return (int) installation.getInverter().getCurrent();
     }
 
-    private int setDcSwitchboardSize(Installation installation) {
+    protected int setDcSwitchboardSize(Installation installation) {
         int minSize = installation.getStrings() * POLES_PER_STRING;
         return switchboardSize.ceiling(minSize);
     }

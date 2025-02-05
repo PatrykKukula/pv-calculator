@@ -4,19 +4,48 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e6dab4fd-e979-42d3-8fee-ebb6e4b33f80" name="Changes" comment="Project update">
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/Inverter.java" afterDir="false" />
+    <list default="true" id="e6dab4fd-e979-42d3-8fee-ebb6e4b33f80" name="Changes" comment="Added unit testing">
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Builders/BuilderUtils/InstallationBuilderUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Builders/BuilderUtils/InstallationBuilderUtilsTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Builders/ElectricListBuilderTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Builders/InstallationBuilderTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Builders/MaterialListBuilderTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Menu/MenuHandlerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Menu/MenuOptionTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Model/ConstructionModel/Abstract/AbstractConstructionModelTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Model/ConstructionModel/Abstract/AbstractProfileConstructionModelTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Model/ConstructionModel/DoubleThreadedTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Model/ConstructionModel/FlatDoubleThreadedTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Model/ConstructionModel/FlatThreadedRodTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Model/ConstructionModel/TrapezeTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Model/ConstructionModel/VarioHookTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Model/InstallationListTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Model/InstallationTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Model/InverterTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/TestInstallation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Utils/ConstructionMapperTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Utils/FileManagerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Builders/ElectricBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Builders/ElectricListBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Builders/ElectricListBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Builders/ElectricListBuilder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Builders/InstallationBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Builders/InstallationBuilder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Builders/MaterialListBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Builders/MaterialListBuilder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Builders/PvModuleBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Builders/PvModuleBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Constants/ElectricConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Constants/ElectricConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/DataFormatters/InstallationFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/DataFormatters/InstallationFormatter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Menu/MenuHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Menu/MenuHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Menu/MenuOption.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Menu/MenuOption.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/Abstract/AbstractConstructionModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/Abstract/AbstractConstructionModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/Abstract/AbstractNoProfileConstructionModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/Abstract/AbstractNoProfileConstructionModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/Abstract/AbstractProfileConstructionModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/Abstract/AbstractProfileConstructionModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/DoubleThreaded.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/DoubleThreaded.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/FlatDoubleThreaded.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/FlatDoubleThreaded.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/FlatThreadedRod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/FlatThreadedRod.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/Trapeze.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/Trapeze.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/Installation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/Installation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Utils/FileMenager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Utils/FileMenager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/Inverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/Inverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Utils/ConstructionMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Utils/ConstructionMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Utils/FileMenager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Utils/FileManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,6 +90,24 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AbstractConstructionModelTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AbstractProfileConstructionModelTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ConstructionMapperTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.DoubleThreadedTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ElectricListBuilderTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FileManagerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FlatDoubleThreadedTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FlatThreadedRodTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InstallationBuilderTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InstallationBuilderUtilsTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InstallationListTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InstallationTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InverterTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MaterialListBuilderTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MenuHandlerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MenuOptionTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TrapezeTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.VarioHookTest.executor&quot;: &quot;Run&quot;,
     &quot;Java Scratch.Scratch.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
@@ -85,6 +132,11 @@
     ]
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="pl.patrykkukula.Builders" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -111,6 +163,18 @@
       <workItem from="1738402939704" duration="11964000" />
       <workItem from="1738431021710" duration="3919000" />
       <workItem from="1738436885487" duration="1203000" />
+      <workItem from="1738501279349" duration="357000" />
+      <workItem from="1738502486818" duration="10057000" />
+      <workItem from="1738523656879" duration="3808000" />
+      <workItem from="1738577527547" duration="10229000" />
+      <workItem from="1738588190790" duration="12431000" />
+      <workItem from="1738659153248" duration="16961000" />
+      <workItem from="1738678143534" duration="7827000" />
+      <workItem from="1738687698163" duration="1076000" />
+      <workItem from="1738690685301" duration="1048000" />
+      <workItem from="1738698005658" duration="2588000" />
+      <workItem from="1738702530124" duration="78000" />
+      <workItem from="1738744459543" duration="6697000" />
     </task>
     <task id="LOCAL-00001" summary="Project update">
       <option name="closed" value="true" />
@@ -147,7 +211,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Project update" />
-    <option name="LAST_COMMIT_MESSAGE" value="Project update" />
+    <MESSAGE value="Added unit testing" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added unit testing" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -158,5 +223,9 @@
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
