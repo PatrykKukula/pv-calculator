@@ -33,7 +33,6 @@ public class VarioHookTest {
         int expectedHexagonNut = 113;
         assertEquals(expectedHexagonNut, varioHook.getHexagonNut());
     }
-
     private VarioHook createTestVarioHook(){
         return new VarioHook(installation);
     }

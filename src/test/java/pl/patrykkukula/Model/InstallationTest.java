@@ -15,7 +15,7 @@ public class InstallationTest {
         assertEquals(expectedTotalPower, actualTotalPower, 0.01);
     }
     @Test
-    public void shouldGetModulesQty(){
+    public void shouldGetModulesQtyCorrectly(){
         int actualModulesQty = installation.getModulesQty();
         assertEquals(18, actualModulesQty);
     }
@@ -26,46 +26,41 @@ public class InstallationTest {
         assertEquals("Do instalacji nie dodano żadnych modułów", ex.getMessage());
     }
     @Test
-    public void shouldCalculateProfileLength(){
+    public void shouldCalculateProfileLengthCorrectly(){
         double actualValue = installation.calculateProfileLength();
         double expectedValue = round(((18 * 2.05 * 2 * 1.07) * 100 )/100);
         assertEquals(expectedValue, actualValue);
     }
     @Test
-    public void shouldCalculateEndClamp(){
+    public void shouldCalculateEndClampCorrectly(){
         int actualValue = installation.calculateEndClamp();
         assertEquals(8, actualValue);
     }
     @Test
-    public void shouldCalculateTotalEdge(){
+    public void shouldCalculateTotalEdgeCorrectly(){
         int actualValue = installation.calculateTotalEdge();
         assertEquals(40, actualValue);
     }
     @Test
-    public void shouldCalculateAngleBarLength(){
+    public void shouldCalculateAngleBarLengthCorrectly(){
         int actualValue = installation.calculateAngleBarLength();
         int expectedValue = (int)Math.ceil(20 * 3.5);
         assertEquals(expectedValue, actualValue);
     }
     @Test
-    public void shouldReturnAcCableCrossSection(){
+    public void shouldReturnAcCableCrossSectionCorrectly(){
         double actualValue = installation.getAcCableCrossSection();
         double expectedValue = 10.0;
         assertEquals(expectedValue, actualValue);
     }
     @Test
     public void shouldSetInstallationTypeCorrectly(){
-        installation.setType(1);
+        installation.setType("Mostki trapezowe");
         assertEquals("Mostki trapezowe", installation.getType());
-        installation.setType(3);
+        installation.setType("Dach płaski - śruba dwugwintowa");
         assertEquals("Dach płaski - śruba dwugwintowa", installation.getType());
-        installation.setType(5);
-        assertEquals("Hak vario", installation.getType());
-    }
-    @Test
-    public void shouldThrowIllegalArgumentExceptionWhenUnknownType(){
-        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> installation.setType(0));
-        assertEquals("Nieznany typ instalacji", ex.getMessage());
+        installation.setType("Hak Vario");
+        assertEquals("Hak Vario", installation.getType());
     }
     @Test
     public void shouldReturnInstallationDetails(){
@@ -73,5 +68,4 @@ public class InstallationTest {
         assertTrue(details.contains("Typ instalacji: "));
         assertTrue(details.contains("Moc instalacji: "));
     }
-
 }

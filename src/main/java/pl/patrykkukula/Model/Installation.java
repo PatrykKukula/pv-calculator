@@ -2,7 +2,6 @@ package pl.patrykkukula.Model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.patrykkukula.DataFormatters.InstallationFormatter;
 import pl.patrykkukula.Model.ConstructionModel.Abstract.AbstractConstructionModel;
 
 import java.util.List;
@@ -19,22 +18,22 @@ public class Installation {
     private String orientation;
     private PvModule module;
     private double totalPower;
-    private int dcCable;
-    private int acCable;
+    private int dcCableLength;
+    private int acCableLength;
     private List<Integer> rowsAndModules;
     private int strings;
-    private String surgeArrester;
+    private String surgeArresterType;
     private Inverter inverter;
     public static int count;
 
     public Installation(int acCable, int dcCable, List<Integer> modules, PvModule module, String orientation, int strings, String surgeArrester) {
-        this.acCable = acCable;
-        this.dcCable = dcCable;
+        this.acCableLength = acCable;
+        this.dcCableLength = dcCable;
         this.rowsAndModules = modules;
         this.module = module;
         this.orientation = orientation;
         this.strings = strings;
-        this.surgeArrester = surgeArrester;
+        this.surgeArresterType = surgeArrester;
         setTotalPower();
         count++;
     }
@@ -50,7 +49,9 @@ public class Installation {
                 .sum();
     }
     public String getInstallationDetails() {
-        return InstallationFormatter.format(this);
+        return  "Typ instalacji: " + type + System.lineSeparator() +
+                "Moc instalacji: " + totalPower+ " kW" + System.lineSeparator() +
+                "Liczba modułów: " + getModulesQty() + System.lineSeparator();
     }
     public double calculateProfileLength(){
         int modulesQty = getModulesQty();
@@ -60,18 +61,10 @@ public class Installation {
         } else if (orientation.equals("poziomo")) {
             calculationLength = getModule().getLength();
         }
-        return round((modulesQty* calculationLength * 2 * SURPLUS_FACTOR / CONVERT_UNIT_FROM_KILOS) * 100 / 100); // *2 because it takes 2 profiles for 1 module
-    }
-    public void setType(int constructionType){
-        if (constructionType == 1) this.type = "Mostki trapezowe";
-        else if (constructionType == 2) this.type = "Śruba dwugwintowa";
-        else if (constructionType == 3) this.type = "Dach płaski - śruba dwugwintowa";
-        else if (constructionType == 4) this.type = "Dach płaski - pręt gwintowany";
-        else if (constructionType == 5) this.type = "Hak vario";
-        else throw new IllegalArgumentException("Nieznany typ instalacji");
+        return round((modulesQty * calculationLength * 2 * SURPLUS_FACTOR / CONVERT_UNIT_FROM_KILOS) * 100 / 100); // *2 because it takes 2 profiles for 1 module
     }
     public int calculateEndClamp(){
-        return getRowsAndModules().size()*END_CLAMPS_PER_ROW;
+        return getRowsAndModules().size() * END_CLAMPS_PER_ROW;
     }
     public int calculateTotalEdge() {
         return getRowsAndModules().stream()
@@ -79,30 +72,24 @@ public class Installation {
                 .sum();
     }
     public int calculateAngleBarLength(){
-        return (int) ceil(calculateAngleBarQty() * SINGLE_ANGLE_BAR_LENGTH);
-        // this is general pattern for calculating angle bar lenght based on how many edges are present in installation
+        return (int) ceil(calculateAngleBarQty() * ANGLE_BAR_LENGTH);
+        // this is general pattern for calculating angle bar length based on how many edges are present in installation
     }
     public int calculateAngleBarQty(){
         return getRowsAndModules().stream()
-                .mapToInt(row -> (row+1))// this is general pattern for calculating construction circles based on how many edges are present in installation
+                .mapToInt(row -> (row+1))// this is general pattern for calculating construction triangles based on how many edges are present in installation
                 .sum();
     }
     public double getAcCableCrossSection(){
         double voltageDrop;
         double returnValue = 0;
         for (Double crossSectionValue : crossSectionValues) {
-            voltageDrop = (100 * sqrt(3.0) * getInverter().getCurrent() * acCable * COS_FI) / (COOPER_CONDUCTIVITY * crossSectionValue * THREE_PHASE_VOLTAGE);
+            voltageDrop = (100 * sqrt(3.0) * inverter.getCurrent() * acCableLength * COS_FI) / (COOPER_CONDUCTIVITY * crossSectionValue * THREE_PHASE_VOLTAGE);
             returnValue = crossSectionValue;
-            if (voltageDrop <= 1.0) break; //allowed voltage drop is 1%
+            if (voltageDrop <= 1.0) break; //allowed voltage drop is 1%, and you want to have the lowest possible cross-section value
         }
         return returnValue;
     }
-    private static final List<Double> crossSectionValues = List.of(2.5, 4.0,6.0,10.0,16.0,25.0); // typical cables crossSections available on market
-
-    public <T extends AbstractConstructionModel> void setModel(T model){
-        this.model = model;
-    }
-
-
+    private static final List<Double> crossSectionValues = List.of(2.5, 4.0,6.0,10.0,16.0,25.0); // typical cables crossSections available on market that are enough within this app
 }
 

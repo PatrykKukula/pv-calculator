@@ -5,7 +5,6 @@ import pl.patrykkukula.Model.Installation;
 import static java.lang.Math.ceil;
 import static pl.patrykkukula.Constants.ConstructionConstants.*;
 
-
 @Getter
 public class FlatThreadedRod extends AbstractProfileConstructionModel {
     private int angleBar;

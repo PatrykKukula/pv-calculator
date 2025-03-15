@@ -8,7 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
-public class ElectricListBuilderTest {
+public class ElectricMaterialsBuilderTest {
 
     @Test
     public void shouldBuildCorrectElectricMaterials(){
@@ -17,28 +17,23 @@ public class ElectricListBuilderTest {
                 new PvModule(495,35,1050,2050), "poziomo",2,"T2");
         installation.setInverter(new Inverter(installation));
         InstallationList installationList = new InstallationList(List.of(installation));
-        ElectricListBuilder electricListBuilder = new ElectricListBuilder();
+        ElectricMaterialsBuilder electricListBuilder = new ElectricMaterialsBuilder();
 
         Map<String, Integer> expectedMaterials = getExcpectedMaterials();
-
-
         Map<String, Integer> actualMaterials = electricListBuilder.buildElectricMaterials(installationList);
 
         assertNotNull(actualMaterials);
         assertEquals(expectedMaterials, actualMaterials);
-
     }
     @Test
     public void shouldReturnCorrectDcSwitchboardSize(){
-
-        ElectricListBuilder electricListBuilder = new ElectricListBuilder();
+        ElectricMaterialsBuilder electricListBuilder = new ElectricMaterialsBuilder();
         Installation installation = new Installation();
         installation.setStrings(3);
         int size = electricListBuilder.setDcSwitchboardSize(installation);
 
         assertEquals(18, size);
     }
-
     private static Map<String, Integer> getExcpectedMaterials() {
         Map<String, Integer> expectedMaterials = new LinkedHashMap<>();
         expectedMaterials.put("Falownik fotowoltaiczny 5 kW", 1);

@@ -1,12 +1,9 @@
 package pl.patrykkukula.Model.ConstructionModel.Abstract;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import pl.patrykkukula.Model.Installation;
-
-import java.util.Objects;
+import static java.util.Objects.requireNonNull;
 
 @Getter
-@NoArgsConstructor
 public abstract class AbstractConstructionModel {
     protected Installation installation;
     protected int endClamp;
@@ -15,7 +12,7 @@ public abstract class AbstractConstructionModel {
     protected int slidingKey;
 
     public AbstractConstructionModel(Installation installation) {
-        Objects.requireNonNull(installation, "Instalacja nie może być null");
+        requireNonNull(installation, "Instalacja nie może być nullem");
         this.installation = installation;
         setDetails();
     }
@@ -24,6 +21,7 @@ public abstract class AbstractConstructionModel {
         this.allenScrew = installation.calculateTotalEdge();
         this.slidingKey = allenScrew; // it is always equal
         this.midClamp = allenScrew - endClamp;
+
     }
     protected abstract void setAdditionalDetails();
 }
