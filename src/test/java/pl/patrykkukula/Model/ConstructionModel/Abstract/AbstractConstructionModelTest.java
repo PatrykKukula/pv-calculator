@@ -19,7 +19,6 @@ public class AbstractConstructionModelTest {
             }
         };
     }
-
     @Test
     public void shouldSetBasicDataCorrectly(){
         int expectedValue = 40;
@@ -42,7 +41,7 @@ public class AbstractConstructionModelTest {
             protected void setAdditionalDetails() {
             }
         });
-        assertEquals("Instalacja nie może być null", ex.getMessage());
+        assertEquals("Instalacja nie może być nullem", ex.getMessage());
     }
     @Test
     public void shouldCreateAbstractConstructionModelWithValidInstallation(){

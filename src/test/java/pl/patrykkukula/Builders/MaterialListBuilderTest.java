@@ -12,7 +12,7 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MaterialListBuilderTest {
-    private MaterialListBuilder builder;
+    private ConstructionMaterialsBuilder builder;
     private InstallationList installationList;
     private final TestInstallation testInstallation = new TestInstallation();
     private final Installation installation = testInstallation.createTestInstallation();
@@ -20,16 +20,12 @@ public class MaterialListBuilderTest {
     @BeforeEach
     void setUp() {
         installationList = new InstallationList();
-        builder = new MaterialListBuilder(installationList);
+        builder = new ConstructionMaterialsBuilder(installationList);
     }
 
     @Test
-    public void shouldThrowRuntimeExceptionIfMaterialListIsEmpty() {
-        RuntimeException ex = assertThrows(RuntimeException.class, builder::printMaterialList);
-        assertEquals("Lista instalacji jest pusta", ex.getMessage());
-    }
-    @Test
-    public void shouldCreateMaterialListBuilderWithValidInstallations() {assertEquals(installationList, builder.getInstallationList());
+    public void shouldCreateMaterialListBuilderWithValidInstallations() {
+        assertEquals(installationList, builder.getInstallationList());
     }
     @Test
     public void shouldPrintMaterialListForSingleInstallationCorrectly(){
@@ -44,14 +40,12 @@ public class MaterialListBuilderTest {
         for (String key : actualMaterials.keySet()) {
             assertEquals(0, actualMaterials.get(key) % 3);
         }
-
     }
-
     private Map<String,Integer> setTestMaterialList(){
         Trapeze trapeze = new Trapeze(installation);
         installation.setModel(trapeze);
         installationList.addInstallation(installation);
-        return builder.printMaterialList();
+        return builder.buildConstructionMaterials();
     }
     private Map<String,Integer> setTestMaterialListForMultipleInstallations(){
         Trapeze trapeze = new Trapeze(installation);
@@ -59,6 +53,6 @@ public class MaterialListBuilderTest {
         installationList.addInstallation(installation);
         installationList.addInstallation(installation);
         installationList.addInstallation(installation);
-        return builder.printMaterialList();
+        return builder.buildConstructionMaterials();
     }
 }

@@ -17,11 +17,10 @@ public class TestInstallation {
     private PvModule createTestModule() {
         return new PvModule(480,30,1050,2050);
     }
-    private List<Integer> createTestModules(){
+    private List<Integer> createTestRowsAndModules(){
         return List.of(9,9);
     }
     private Installation createBaseInstallation() {
-        return new Installation(100,10,createTestModules(), createTestModule(), "poziomo", 2, "T2");
+        return new Installation(100,10, createTestRowsAndModules(), createTestModule(), "poziomo", 2, "T2");
     }
-    // profile =
 }

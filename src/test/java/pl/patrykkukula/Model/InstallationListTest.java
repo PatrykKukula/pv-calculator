@@ -1,25 +1,21 @@
 package pl.patrykkukula.Model;
-
 import org.junit.jupiter.api.Test;
-
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
-
 public class InstallationListTest {
 
     @Test
-    public void shouldAddInstallation(){
+    public void shouldAddInstallationToListCorrectly(){
         Installation installation = setTestInstallation();
         InstallationList installationList = new InstallationList(new ArrayList<>());
         installationList.addInstallation(installation);
         assertTrue(installationList.getInstallationList().contains(installation));
     }
     @Test
-    public void shouldPrintAllInstallationWhenNotEmpty(){
+    public void shouldPrintAllInstallationWhenListIsNotEmpty(){
         InstallationList installationList = new InstallationList();
         installationList.addInstallation(setTestInstallation());
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -27,12 +23,12 @@ public class InstallationListTest {
         installationList.getAllInstallations();
         String output = stream.toString().trim();
         assertTrue(output.contains("Liczba instalacji: "));
-        assertTrue(output.contains("Lp. 0"));
-        assertFalse(output.contains("Lp. 1"));
+        assertTrue(output.contains("Lp. 1"));
+        assertFalse(output.contains("Lp. 2"));
         System.setOut(System.out);
     }
     @Test
-    public void shouldBeEmptyWhenCreated(){
+    public void installationListShouldBeEmptyWhenCreated(){
         InstallationList installationList = new InstallationList();
         assertTrue(installationList.getInstallationList().isEmpty());
     }
@@ -45,7 +41,6 @@ public class InstallationListTest {
         String output = stream.toString().trim();
         assertTrue(output.contains("Lista instalacji jest pusta"));
         System.setOut(System.out);
-
     }
     private Installation setTestInstallation() {
         List<Integer> modules = List.of(10);

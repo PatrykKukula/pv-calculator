@@ -18,7 +18,6 @@ public class AbstractProfileConstructionModelTest {
             }
         };
     }
-
     @Test
     public void shouldSetProfileCorrectly(){
         int expectedProfile = 79;

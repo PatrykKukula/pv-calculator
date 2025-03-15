@@ -1,4 +1,4 @@
-package pl.patrykkukula.Utils;
+package pl.patrykkukula.Utils.GeneralUtils;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -15,19 +15,18 @@ public class FileManager {
                 XSSFSheet sheet = workbook.createSheet("Materiały");
                 int rowNum = 1;
                 XSSFRow row = sheet.createRow(0);
-                rowNum = saveMaterialList(constructionMaterials, workbook, sheet, row, rowNum);
-                rowNum = saveMaterialList(electricMaterials, workbook, sheet, row, rowNum);
-
+                rowNum = saveMaterialList(constructionMaterials, sheet, rowNum);
+                rowNum = saveMaterialList(electricMaterials, sheet, rowNum);
                 row = sheet.createRow(rowNum++);
-                saveInstallationList(installationList, workbook, sheet, row, rowNum);
+                saveInstallationList(installationList, sheet, rowNum);
                 for (int i = 0; i<3; i++){
                     sheet.autoSizeColumn(i);
                 }
                 workbook.write(output);
             }
         }
-        private int saveMaterialList(Map<String, Integer> materials, XSSFWorkbook workbook, XSSFSheet sheet, XSSFRow row, int rowNum){
-            row = sheet.createRow(rowNum++);
+        private int saveMaterialList(Map<String, Integer> materials, XSSFSheet sheet, int rowNum){
+            XSSFRow row = sheet.createRow(rowNum++);
             row.createCell(0).setCellValue("Materiał");
             row.createCell(1).setCellValue("Ilość");
             for (Map.Entry<String, Integer> entry : materials.entrySet()) {
@@ -35,11 +34,11 @@ public class FileManager {
                 row.createCell(0).setCellValue(entry.getKey());
                 row.createCell(1).setCellValue(entry.getValue());
             }
-            row = sheet.createRow(rowNum++);
+            rowNum++;
             return rowNum;
         }
-        private void saveInstallationList(InstallationList installationList, XSSFWorkbook workbook, XSSFSheet sheet, XSSFRow row, int rowNum){
-            row = sheet.createRow(rowNum++);
+        private void saveInstallationList(InstallationList installationList, XSSFSheet sheet, int rowNum){
+            XSSFRow row = sheet.createRow(rowNum++);
             row.createCell(0).setCellValue("Liczba instalacji: " + installationList.getInstallationList().size());
             row = sheet.createRow(rowNum++);
             row.createCell(0).setCellValue("Typ");

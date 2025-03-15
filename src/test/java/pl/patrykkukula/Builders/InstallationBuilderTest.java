@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 import pl.patrykkukula.Model.InstallationList;
 import pl.patrykkukula.Model.PvModule;
-import pl.patrykkukula.Utils.ScannerUtil;
+import pl.patrykkukula.Utils.GeneralUtils.ScannerUtil;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mockStatic;
