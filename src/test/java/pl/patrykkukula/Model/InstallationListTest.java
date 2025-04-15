@@ -10,7 +10,7 @@ public class InstallationListTest {
     @Test
     public void shouldAddInstallationToListCorrectly(){
         Installation installation = setTestInstallation();
-        InstallationList installationList = new InstallationList(new ArrayList<>());
+        pl.patrykkukula.Model.InstallationList installationList = new InstallationList(new ArrayList<>());
         installationList.addInstallation(installation);
         assertTrue(installationList.getInstallationList().contains(installation));
     }

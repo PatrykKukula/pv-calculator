@@ -4,45 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e6dab4fd-e979-42d3-8fee-ebb6e4b33f80" name="Changes" comment="Correct readme typos">
-      <change afterPath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Utils/GeneraUtils/ScannerUtilsTest.java" afterDir="false" />
+    <list default="true" id="e6dab4fd-e979-42d3-8fee-ebb6e4b33f80" name="Changes" comment="tests changes after adding factory pattern">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/log4j2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Builders/BuilderUtils/InstallationBuilderUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Utils/MaterialsUtils/InstallationBuilderUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Builders/ElectricListBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Builders/ElectricMaterialsBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Builders/InstallationBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Builders/InstallationBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Builders/MaterialListBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Builders/ConstructionMaterialsBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Builders/PvModuleBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Builders/PvModuleBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Constants/ConstructionConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Constants/ConstructionConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Constants/ElectricConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Constants/ElectricConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/DataFormatters/InstallationFormatter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Menu/MenuHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Menu/MenuHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Menu/MenuOption.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Menu/MenuOption.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/Abstract/AbstractConstructionModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/Abstract/AbstractConstructionModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/Abstract/AbstractNoProfileConstructionModel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/FlatThreadedRod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/FlatThreadedRod.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/Trapeze.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/ConstructionModel/Trapeze.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/Installation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/Installation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/InstallationList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/InstallationList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/Inverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/Inverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/PvModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Model/PvModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Utils/ConstructionMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Utils/MaterialsUtils/ConstructionMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Utils/FileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Utils/GeneralUtils/FileManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Utils/ScannerUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Utils/GeneralUtils/ScannerUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Builders/BuilderUtils/InstallationBuilderUtilsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Utils/MaterialsUtils/InstallationBuilderUtilsTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Builders/ElectricListBuilderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Builders/ElectricMaterialsBuilderTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Builders/InstallationBuilderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Builders/InstallationBuilderTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Builders/MaterialListBuilderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Builders/MaterialListBuilderTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Menu/MenuHandlerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Menu/MenuHandlerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Menu/MenuOptionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Menu/MenuOptionTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Model/ConstructionModel/Abstract/AbstractConstructionModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Model/ConstructionModel/Abstract/AbstractConstructionModelTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Model/ConstructionModel/Abstract/AbstractProfileConstructionModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Model/ConstructionModel/Abstract/AbstractProfileConstructionModelTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Model/ConstructionModel/VarioHookTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Model/ConstructionModel/VarioHookTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Model/InstallationListTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Model/InstallationListTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Model/InstallationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Model/InstallationTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Model/InverterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Model/InverterTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/TestInstallation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/TestInstallation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Utils/ConstructionMapperTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Utils/MaterialsUtils/ConstructionMapperTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Utils/FileManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Utils/GeneraUtils/FileManagerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,6 +40,9 @@
     &quot;accountId&quot;: &quot;f1b2d4f6-aeee-473d-805e-dde50950012a&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -84,76 +54,89 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "JUnit.AbstractConstructionModelTest.executor": "Run",
-    "JUnit.AbstractProfileConstructionModelTest.executor": "Run",
-    "JUnit.ConstructionMapperTest.executor": "Run",
-    "JUnit.DoubleThreadedTest.executor": "Run",
-    "JUnit.ElectricListBuilderTest.executor": "Run",
-    "JUnit.ElectricMaterialsBuilderTest.executor": "Run",
-    "JUnit.FileManagerTest.executor": "Run",
-    "JUnit.FlatDoubleThreadedTest.executor": "Run",
-    "JUnit.FlatThreadedRodTest.executor": "Run",
-    "JUnit.InstallationBuilderTest.executor": "Run",
-    "JUnit.InstallationBuilderUtilsTest.executor": "Run",
-    "JUnit.InstallationBuilderUtilsTest.shouldThrowIllegalArgumentCorrectly.executor": "Run",
-    "JUnit.InstallationBuilderUtilsTest.shouldThrowInputMismatchExceptionCorrectly.executor": "Run",
-    "JUnit.InstallationBuilderUtilsTest.shouldThrowInputMismatchExceptionForInvalidType.executor": "Run",
-    "JUnit.InstallationListTest.executor": "Run",
-    "JUnit.InstallationTest.executor": "Run",
-    "JUnit.InverterTest.executor": "Run",
-    "JUnit.MaterialListBuilderTest.executor": "Run",
-    "JUnit.MenuHandlerTest.executor": "Run",
-    "JUnit.MenuHandlerTest.shouldNotExitWhenUserChoosesToCreateList.executor": "Run",
-    "JUnit.MenuHandlerTest.shouldThrowIllegalArgumentExceptionWhenInvalidInputAction.executor": "Run",
-    "JUnit.MenuOptionTest.executor": "Run",
-    "JUnit.ScannerUtilsTest.executor": "Run",
-    "JUnit.ScannerUtilsTest.shouldThrowNumberFormatExceptionWhenStringIsPassedToReadInt.executor": "Run",
-    "JUnit.TrapezeTest.executor": "Run",
-    "JUnit.VarioHookTest.executor": "Run",
-    "Java Scratch.Scratch.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Projekty/pv-calculator",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AbstractConstructionModelTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AbstractProfileConstructionModelTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ConstructionMapperTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.DoubleThreadedTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ElectricListBuilderTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ElectricMaterialsBuilderTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FileManagerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FlatDoubleThreadedTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FlatThreadedRodTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InstallationBuilderTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InstallationBuilderUtilsTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InstallationBuilderUtilsTest.shouldThrowIllegalArgumentCorrectly.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InstallationBuilderUtilsTest.shouldThrowInputMismatchExceptionCorrectly.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InstallationBuilderUtilsTest.shouldThrowInputMismatchExceptionForInvalidType.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InstallationListTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InstallationTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InverterTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MaterialListBuilderTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MenuHandlerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MenuHandlerTest.shouldNotExitWhenUserChoosesToCreateList.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MenuHandlerTest.shouldThrowIllegalArgumentExceptionWhenInvalidInputAction.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MenuOptionTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ScannerUtilsTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ScannerUtilsTest.shouldThrowNumberFormatExceptionWhenStringIsPassedToReadInt.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TrapezeTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.VarioHookTest.executor&quot;: &quot;Run&quot;,
+    &quot;Java Scratch.Scratch.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Maven/apache-maven-3.9.9&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.19839142&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.annotationProcessors&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "JAVA"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;JAVA&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="pl.patrykkukula.Utils.MaterialsUtils" />
       <recent name="pl.patrykkukula.Builders" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ElectricMaterialsBuilderTest">
-    <configuration name="ElectricMaterialsBuilderTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="pl.patrykkukula.Main" />
       <module name="PV" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="pl.patrykkukula.Builders.*" />
+          <option name="PATTERN" value="pl.patrykkukula.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="pl.patrykkukula.Builders" />
-      <option name="MAIN_CLASS_NAME" value="pl.patrykkukula.Builders.ElectricMaterialsBuilderTest" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ConstructionMapperTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="PV" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="pl.patrykkukula.Utils.MaterialsUtils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="pl.patrykkukula.Utils.MaterialsUtils" />
+      <option name="MAIN_CLASS_NAME" value="pl.patrykkukula.Utils.MaterialsUtils.ConstructionMapperTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -170,22 +153,6 @@
       <option name="PACKAGE_NAME" value="pl.patrykkukula.Utils.MaterialsUtils" />
       <option name="MAIN_CLASS_NAME" value="pl.patrykkukula.Utils.MaterialsUtils.InstallationBuilderUtilsTest" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="InstallationBuilderUtilsTest.shouldThrowIllegalArgumentCorrectly" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="PV" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="pl.patrykkukula.Utils.MaterialsUtils.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="pl.patrykkukula.Utils.MaterialsUtils" />
-      <option name="MAIN_CLASS_NAME" value="pl.patrykkukula.Utils.MaterialsUtils.InstallationBuilderUtilsTest" />
-      <option name="METHOD_NAME" value="shouldThrowIllegalArgumentCorrectly" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -223,11 +190,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ElectricMaterialsBuilderTest" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.ConstructionMapperTest" />
         <item itemvalue="JUnit.MaterialListBuilderTest" />
         <item itemvalue="JUnit.InstallationBuilderUtilsTest" />
         <item itemvalue="JUnit.InstallationBuilderUtilsTest.shouldThrowInputMismatchExceptionCorrectly" />
-        <item itemvalue="JUnit.InstallationBuilderUtilsTest.shouldThrowIllegalArgumentCorrectly" />
       </list>
     </recent_temporary>
   </component>
@@ -274,7 +241,19 @@
       <workItem from="1741885722450" duration="11705000" />
       <workItem from="1741971930756" duration="80000" />
       <workItem from="1741972023505" duration="14351000" />
-      <workItem from="1742031702208" duration="8170000" />
+      <workItem from="1742031702208" duration="8505000" />
+      <workItem from="1742158236127" duration="110000" />
+      <workItem from="1742158351033" duration="213000" />
+      <workItem from="1742158574070" duration="1202000" />
+      <workItem from="1742227039706" duration="689000" />
+      <workItem from="1742227739489" duration="752000" />
+      <workItem from="1742228505548" duration="63000" />
+      <workItem from="1742228574491" duration="2434000" />
+      <workItem from="1743182706437" duration="699000" />
+      <workItem from="1743197536916" duration="75000" />
+      <workItem from="1744571502387" duration="1636000" />
+      <workItem from="1744652674130" duration="5905000" />
+      <workItem from="1744738074972" duration="1087000" />
     </task>
     <task id="LOCAL-00001" summary="Project update">
       <option name="closed" value="true" />
@@ -308,7 +287,31 @@
       <option name="project" value="LOCAL" />
       <updated>1738752197432</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Improved mapping with Factory Method Pattern">
+      <option name="closed" value="true" />
+      <created>1742041928978</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1742041928979</updated>
+    </task>
+    <task id="LOCAL-00006" summary="minor code cleanup">
+      <option name="closed" value="true" />
+      <created>1742042037735</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1742042037735</updated>
+    </task>
+    <task id="LOCAL-00007" summary="tests changes after adding factory pattern">
+      <option name="closed" value="true" />
+      <created>1742042085136</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1742042085136</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -329,7 +332,10 @@
     <MESSAGE value="Project update" />
     <MESSAGE value="Added unit testing" />
     <MESSAGE value="Correct readme typos" />
-    <option name="LAST_COMMIT_MESSAGE" value="Correct readme typos" />
+    <MESSAGE value="Improved mapping with Factory Method Pattern" />
+    <MESSAGE value="minor code cleanup" />
+    <MESSAGE value="tests changes after adding factory pattern" />
+    <option name="LAST_COMMIT_MESSAGE" value="tests changes after adding factory pattern" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
