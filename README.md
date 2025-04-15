@@ -131,7 +131,8 @@ The result is in the folder you chose:
 
 Result inside the file:
 
-![file](https://github.com/user-attachments/assets/4d92f48d-3463-46a5-a999-37c715d331c8)
+![excel](https://github.com/user-attachments/assets/ea4b8fa2-0499-4889-b9c8-723c502b2749)
+
 
 **5. Clear installation list**
 
