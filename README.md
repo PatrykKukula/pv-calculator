@@ -31,15 +31,23 @@ If there are some special requirements you should take note, to consider any spe
 >
 >This project was made to help me speed up some work.
 
-1. Clone the repository
+**To run the app open command line runner and follow the steps:**
+
+**1. Clone the repository**
   ```bash
   git clone https://github.com/PatrykKukula/pv-calculator.git
 ```
 
-2. Open command line runner, navigate to the project folder and execute statement
-  ```
+**2. Create JAR file**
+   ```bash
+   mvn clean install
+   ```
+   
+**3. Run JAR file**
+ ```bash
   java -jar target/pv-calculator-1.0-jar-with-dependencies.jar
 ```
+
 
 ## How to navigate application
 
@@ -48,7 +56,7 @@ If there are some special requirements you should take note, to consider any spe
 >*app is made to be easy to operate, so most of the time you need to provide assigned numeric option, in order to provide input data*
 >
 >*no need for any text typing*
->*if you provide input data that is incorrect, you cannot move on until you select valid numeric value*
+>*if you provide input data that is incorrect you will get the information to correct the data. You cannot move on until you provide valid input*
 
 First you need to choose what to do. Create new list or exit program.
 
@@ -77,10 +85,14 @@ In next step you have menu with options:
   ![Screenshot_1](https://github.com/user-attachments/assets/23e173d0-0add-4fa9-936a-773effceb4d9)
 
 **Let's break down each step.**
-**1. Add new installation.** In this step you need to provide basic information of your need about the installation such as:
+
+**1. Add new installation.** 
+
+In this step you need to provide basic information about the installation such as:
+
 - Surge arrester type (T1 or T1+2)
 - Modules orientation (vertical/horizontal)
-- Type of construction. Currently you have 5 options to choose that covers 95% of builded installations.
+- Type of construction. Currently you have 5 options to choose that are most popular and covers most cases.
 - Length of AC and DC cables route
 - Number of string
 
@@ -95,7 +107,7 @@ You need to type in number of modules that are gonna be in the row, and you can 
 
 ![Screenshot_3](https://github.com/user-attachments/assets/8c347c39-c4c0-487e-9276-2eb37efc5cef)
 
-At this point your installation is added to list, and required materials are stored and ready to be saved. You can add any number of installations.
+At this point your installation is added to list, and required materials are stored and ready to be saved. You can add multiple installations.
 
 **2. Exit to previous menu**
 
@@ -109,15 +121,18 @@ This option let you see already added installations.
 
 **4. Save list to the file**
 
-You need to provide full path in pattern {drive}:/{folderName}
+You need to provide full path in pattern {drive}:/{folderName}/.../{folderName}
+
+And then in the next step you need to provide file name.
 
 The result is in the folder you chose:
 
 ![result](https://github.com/user-attachments/assets/45ef4b5c-0b81-444c-a4a4-e3750cde8b1e)
 
-And inside looks like this:
+Result inside the file:
 
-![file](https://github.com/user-attachments/assets/4d92f48d-3463-46a5-a999-37c715d331c8)
+![excel](https://github.com/user-attachments/assets/ea4b8fa2-0499-4889-b9c8-723c502b2749)
+
 
 **5. Clear installation list**
 
