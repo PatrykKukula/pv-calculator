@@ -16,21 +16,21 @@ public class ElectricMaterialsBuilder {
     public Map<String, Integer> buildElectricMaterials(InstallationList installationList) {
         Map<String, Integer> electricMaterials = new LinkedHashMap<>();
             for (Installation installation : installationList.getInstallationList()) {
-                addMaterial(electricMaterials, "Falownik fotowoltaiczny " + getInverterPower(installation) + " kW", 1);
-                addMaterial(electricMaterials,"Kabel AC 5x" + installation.getAcCableCrossSection() + " mm2", installation.getAcCableLength());
-                if (installation.getTotalPower() >= 10) addMaterial(electricMaterials,"Kabel DC 6 mm2", installation.getDcCableLength());
+                addMaterial(electricMaterials, "Falownik fotowoltaiczny " + getInverterPower(installation) + " kW [szt.]" , 1);
+                addMaterial(electricMaterials,"Kabel AC 5x" + installation.getAcCableCrossSection() + " mm2 [m.]", installation.getAcCableLength());
+                if (installation.getTotalPower() >= 10) addMaterial(electricMaterials,"Kabel DC 6 mm2 [m.]", installation.getDcCableLength());
                 else {
                     addMaterial(electricMaterials,"Kabel DC 4 mm2", installation.getDcCableLength());
                 }
-                addMaterial(electricMaterials,"Zabezpieczenie nadprądowe typ B" + setCurrentForBreaker(installation), 1);
-                addMaterial(electricMaterials,"Zabezpieczenie nadprądowe typ C" + setCurrentForBreaker(installation), 1);
-                addMaterial(electricMaterials,"Wyłącznik RCD " + setCurrentForBreaker(installation) + "/0,1A", 1);
-                addMaterial(electricMaterials,"Ogranicznik przepieć AC 4P " + installation.getSurgeArresterType(), 1);
-                addMaterial(electricMaterials,"Ogranicznik przepięć DC typ " + installation.getSurgeArresterType(), installation.getStrings());
-                addMaterial(electricMaterials,"Rozłącznik bezpiecznikowy DC 2p", installation.getStrings());
-                addMaterial(electricMaterials,"Wkładka bezpiecznikowa gG 15A", installation.getStrings() * FUSE_PER_DC_DISCONNECTOR);
-                addMaterial(electricMaterials,"Rozdzielnica AC 12p", 1);
-                addMaterial(electricMaterials,"Rozdzielnica DC " + setDcSwitchboardSize(installation) + "p", 1);
+                addMaterial(electricMaterials,"Zabezpieczenie nadprądowe typ B " + setCurrentForBreaker(installation) + " [szt.]", 1);
+                addMaterial(electricMaterials,"Zabezpieczenie nadprądowe typ C " + setCurrentForBreaker(installation) + " [szt.]", 1);
+                addMaterial(electricMaterials,"Wyłącznik RCD [szt.]" + setCurrentForBreaker(installation) + "/0,1A", 1);
+                addMaterial(electricMaterials,"Ogranicznik przepieć AC 4P " + installation.getSurgeArresterType() +" [szt.]", 1);
+                addMaterial(electricMaterials,"Ogranicznik przepięć DC typ " + installation.getSurgeArresterType()+ " [szt.]", installation.getStrings());
+                addMaterial(electricMaterials,"Rozłącznik bezpiecznikowy DC 2p [szt.]", installation.getStrings());
+                addMaterial(electricMaterials,"Wkładka bezpiecznikowa gG 15A [szt.]", installation.getStrings() * FUSE_PER_DC_DISCONNECTOR);
+                addMaterial(electricMaterials,"Rozdzielnica AC 12p [szt.]", 1);
+                addMaterial(electricMaterials,"Rozdzielnica DC [szt.]" + setDcSwitchboardSize(installation) + "p", 1);
             }
         return electricMaterials;
     }

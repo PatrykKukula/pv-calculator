@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e6dab4fd-e979-42d3-8fee-ebb6e4b33f80" name="Changes" comment="tests changes after adding factory pattern">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/log4j2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="e6dab4fd-e979-42d3-8fee-ebb6e4b33f80" name="Changes" comment="configuration">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Model/InstallationListTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pl/patrykkukula/Model/InstallationListTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Builders/ElectricMaterialsBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Builders/ElectricMaterialsBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Utils/MaterialsUtils/ConstructionMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/patrykkukula/Utils/MaterialsUtils/ConstructionMapper.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -254,6 +253,8 @@
       <workItem from="1744571502387" duration="1636000" />
       <workItem from="1744652674130" duration="5905000" />
       <workItem from="1744738074972" duration="1087000" />
+      <workItem from="1744739902015" duration="516000" />
+      <workItem from="1744742205988" duration="796000" />
     </task>
     <task id="LOCAL-00001" summary="Project update">
       <option name="closed" value="true" />
