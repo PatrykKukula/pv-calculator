@@ -21,6 +21,12 @@ If there are some special requirements you should take note, to consider any spe
 - JUnit5
 - Mockito
 
+## Prerequisites
+To run the app you need to have installed on your machine:
+- Java https://www.oracle.com/pl/java/technologies/downloads/
+- Maven https://maven.apache.org/download.cgi
+- Git https://git-scm.com/downloads
+
 ## How to run
 
 >*note*
