@@ -45,6 +45,9 @@ To run the app you need to have installed on your machine:
 ```
 
 **2. Create JAR file**
+
+Navigate to the source folder with cloned repository and type in cmd:
+
    ```bash
    mvn clean install
    ```
