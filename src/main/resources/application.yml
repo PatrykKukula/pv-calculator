@@ -1,0 +1,29 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: Photovoltaic-materials-calculator
+  config:
+    activate:
+      on-profile: default
+  datasource:
+    url: jdbc:postgresql://localhost:5432/PvCalculator
+    username: postgres
+    password: ${DATASOURCE_PASSWORD}
+    driver: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    defer-datasource-initialization: true
+    logging:
+      pattern:
+        console: "%green(%d{HH:mm:ss}) %blue(%-5level) %red([%thread]) %yellow(%logger{15}) - %msg%n"
+    sql:
+      init:
+        mode: always
+
+
