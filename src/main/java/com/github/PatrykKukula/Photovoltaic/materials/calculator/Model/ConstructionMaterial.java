@@ -9,19 +9,16 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Entity
-@Builder @AllArgsConstructor
+@AllArgsConstructor @Builder
 @NoArgsConstructor
 @Data
-public class MaterialQuantity {
+public class ConstructionMaterial {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long quantityId;
-
+    private Long materialId;
     @Column(nullable = false)
-    private int quantity;
-    @ManyToOne
-    @JoinColumn(name = "material_id")
-    private Material material;
-    @ManyToMany(mappedBy = "materials")
-    private List<Installation> installations;
+    private String name;
+    @Column(nullable = false)
+    @OneToMany(mappedBy = "constructionMaterial")
+    private List<InstallationMaterial> quantities;
 }

@@ -6,11 +6,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @Builder
-@NoArgsConstructor  @AllArgsConstructor
+@NoArgsConstructor @AllArgsConstructor
 @Data
 public class UserEntity {
     @Id
@@ -22,4 +23,14 @@ public class UserEntity {
     private String password;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Project> projects;
+    @Column(nullable = false)
+    private LocalDateTime createdAt;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Role> roles;
+
+    @PrePersist
+    public void setCreatedAt(){
+        this.createdAt = LocalDateTime.now();
+    }
 }

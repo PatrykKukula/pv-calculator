@@ -7,6 +7,6 @@ import jakarta.annotation.security.RolesAllowed;
 
 @Route("projects")
 @PageTitle("Projects")
-@RolesAllowed("USER")
+@RolesAllowed({"USER", "ADMIN"})
 public class ProjectsView extends VerticalLayout {
 }
