@@ -1,6 +1,7 @@
 package com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilder.Construction;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ConstructionType;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ModuleOrientation;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Project.ProjectDto;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.*;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Service.MaterialService;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,12 +20,12 @@ public class ConstructionMaterialCalculatorTest {
     @Mock
     private MaterialService materialService;
     private Installation installation;
-    private Project project;
+    private ProjectDto projectDto;
     private ConstructionMaterialCalculator constructionMaterialCalculator;
 
     @BeforeEach
     public void setUp() {
-        project = Project.builder()
+        projectDto = ProjectDto.builder()
                 .title("project")
                 .investor("investor")
                 .country("country")
@@ -38,11 +39,11 @@ public class ConstructionMaterialCalculatorTest {
         installation = Installation.builder()
                 .installationType(ConstructionType.TRAPEZE)
                 .moduleOrientation(ModuleOrientation.VERTICAL)
-                .project(project)
+                .project(new Project())
                 .materials(Collections.emptyList())
                 .rows(List.of(Row.builder().rowNumber(1L).moduleQuantity(10L).build()))
                 .build();
-        constructionMaterialCalculator = new ConstructionMaterialCalculator(materialService, installation, project);
+        constructionMaterialCalculator = new ConstructionMaterialCalculator(materialService, installation, projectDto);
     }
 
     @Test

@@ -17,7 +17,7 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
-    @Column(nullable = false, length = 32)
+    @Column(nullable = false, length = 64, unique = true)
     private String username;
     @Column(nullable = false)
     private String password;
@@ -25,8 +25,12 @@ public class UserEntity {
     private List<Project> projects;
     @Column(nullable = false)
     private LocalDateTime createdAt;
-
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "roles_and_users",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
     private List<Role> roles;
 
     @PrePersist

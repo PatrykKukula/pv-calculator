@@ -15,4 +15,5 @@ public class ConstructionMaterialConstants {
     public static final int HEXAGON_SCREW_PER_EDGE = 5;
     public static final int HEXAGON_NUT_FOR_DOUBLE_THREADED_FLAT = 5;
     public static final int HEXAGON_NUT_FOR_THREADED_ROD = 9;
+    public static final String VALID_FRAME = "30, 35, 40";
 }

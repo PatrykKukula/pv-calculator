@@ -5,8 +5,9 @@ import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Project.Pro
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.Project;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.UserEntity;
 
-public class ProjectMapper {
+import java.time.format.DateTimeFormatter;
 
+public class ProjectMapper {
     public static Project mapProjectDtoToProject(ProjectDto projectDto){
         return Project.builder()
                 .title(projectDto.getTitle())
@@ -22,6 +23,22 @@ public class ProjectMapper {
     }
     public static ProjectDto mapProjectToProjectDto(Project project){
         return ProjectDto.builder()
+                .projectId(project.getProjectId())
+                .title(project.getTitle())
+                .investor(project.getInvestor() != null ? project.getInvestor() : "")
+                .country(project.getCountry() != null ? project.getCountry() : "")
+                .city(project.getCity() != null ? project.getCity() : "")
+                .voivodeship(project.getVoivodeship() != null ? project.getVoivodeship() : "")
+                .modulePower(project.getModulePower())
+                .moduleLength(project.getModuleLength())
+                .moduleWidth(project.getModuleWidth())
+                .moduleFrame(project.getModuleFrame())
+                .createdAt(project.getCreatedAt().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")))
+                .installations(0)
+                .build();
+    }
+    public static ProjectUpdateDto mapProjectToProjectUpdateDto(Project project){
+        return ProjectUpdateDto.builder()
                 .title(project.getTitle())
                 .investor(project.getInvestor() != null ? project.getInvestor() : "")
                 .country(project.getCountry() != null ? project.getCountry() : "")
@@ -34,15 +51,15 @@ public class ProjectMapper {
                 .build();
     }
     public static Project mapProjectUpdateDtoToProject(ProjectUpdateDto projectUpdateDto, Project project){
-        if (projectUpdateDto.getTitle() != null) project.setTitle(projectUpdateDto.getTitle());
-        if (projectUpdateDto.getInvestor() != null) project.setInvestor(projectUpdateDto.getInvestor());
-        if (projectUpdateDto.getVoivodeship() != null) project.setVoivodeship(projectUpdateDto.getVoivodeship());
-        if (projectUpdateDto.getCity() != null) project.setCity(projectUpdateDto.getCity());
-        if (projectUpdateDto.getCountry() != null) project.setCountry(projectUpdateDto.getCountry());
-        if (projectUpdateDto.getModulePower() != null) project.setModulePower(projectUpdateDto.getModulePower());
-        if (projectUpdateDto.getModuleLength() != null) project.setModuleLength(projectUpdateDto.getModuleLength());
-        if (projectUpdateDto.getModuleWidth() != null) project.setModuleWidth(projectUpdateDto.getModuleWidth());
-        if (projectUpdateDto.getModuleFrame() != null) project.setModuleFrame(projectUpdateDto.getModuleFrame());
+        project.setTitle(projectUpdateDto.getTitle());
+        project.setInvestor(projectUpdateDto.getInvestor());
+        project.setVoivodeship(projectUpdateDto.getVoivodeship());
+        project.setCity(projectUpdateDto.getCity());
+        project.setCountry(projectUpdateDto.getCountry());
+        project.setModulePower(projectUpdateDto.getModulePower());
+        project.setModuleLength(projectUpdateDto.getModuleLength());
+        project.setModuleWidth(projectUpdateDto.getModuleWidth());
+        project.setModuleFrame(projectUpdateDto.getModuleFrame());
         return project;
     }
 }

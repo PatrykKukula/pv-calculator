@@ -3,6 +3,9 @@ server:
 spring:
   application:
     name: Photovoltaic-materials-calculator
+  sql:
+    init:
+      mode: always
   config:
     activate:
       on-profile: default
@@ -22,8 +25,8 @@ spring:
     logging:
       pattern:
         console: "%green(%d{HH:mm:ss}) %blue(%-5level) %red([%thread]) %yellow(%logger{15}) - %msg%n"
-    sql:
-      init:
-        mode: always
-
+vaadin:
+  ai:
+    copilot:
+      enabled: false
 

@@ -6,14 +6,13 @@ import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Project.Pro
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Exception.InvalidOwnershipException;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Exception.ResourceNotFoundException;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Mapper.ProjectMapper;
-import com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilder.MaterialBuilderFactory;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilder.Construction.ConstructionMaterialBuilder;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilder.MaterialBuilderFactory;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.InstallationMaterial;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.Project;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.UserEntity;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Repository.InstallationMaterialRepository;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Repository.ProjectRepository;
-import com.github.PatrykKukula.Photovoltaic.materials.calculator.Security.UserDetailsServiceImpl;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -36,10 +35,10 @@ import static com.github.PatrykKukula.Photovoltaic.materials.calculator.Utils.Se
 @RequiredArgsConstructor
 public class ProjectService {
     private final ProjectRepository projectRepository;
-    private final MaterialService materialService;
     private final InstallationMaterialRepository installationMaterialRepository;
     private final UserEntityService userService;
     private final MaterialBuilderFactory builderFactory;
+    private final int CONVERT_W_TO_KW = 1000;
 
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public void createProject(ProjectDto projectDto){
@@ -59,7 +58,16 @@ public class ProjectService {
        Sort sort = Sort.by(Sort.Direction.fromString(sortDirection),"createdAt");
        Pageable pageable = PageRequest.of(projectRequestDto.getPageNo(), projectRequestDto.getPageSize(), sort);
 
-       return projectRepository.findAllProjectsByUsername(user.getUsername(), pageable).map(ProjectMapper::mapProjectToProjectDto);
+       return projectRequestDto.getTitle() == null ? projectRepository.findAllProjectsByUsername(user.getUsername(), pageable).map(ProjectMapper::mapProjectToProjectDto) :
+               projectRepository.findAllProjectsByUsernameAndTitle(user.getUsername(), projectRequestDto.getTitle(), pageable).map(ProjectMapper::mapProjectToProjectDto);
+    }
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    public ProjectDto findProjectById(Long projectId){
+        return ProjectMapper.mapProjectToProjectDto(fetchProjectById(projectId));
+    }
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    public ProjectUpdateDto findProjectToUpdateById(Long projectId){
+        return ProjectMapper.mapProjectToProjectUpdateDto(fetchProjectById(projectId));
     }
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public void removeProject(Long projectId){
@@ -67,7 +75,7 @@ public class ProjectService {
 
         UserEntity user = userService.loadCurrentUser();
 
-        Project project = findProjectById(projectId);
+        Project project = fetchProjectById(projectId);
 
         validateProjectOwner(user, project, "remove");
 
@@ -81,14 +89,15 @@ public class ProjectService {
 
         UserEntity user = userService.loadCurrentUser();
 
-        Project project = findProjectById(projectId);
+        Project project = fetchProjectById(projectId);
+        ProjectDto projectDto = ProjectMapper.mapProjectToProjectDto(project);
 
         validateProjectOwner(user, project, "update");
         Project updatedProject = mapProjectUpdateDtoToProject(projectUpdateDto, project);
 
         if (projectUpdateDto.getModuleFrame() != null || projectUpdateDto.getModuleWidth() != null || projectUpdateDto.getModuleLength() != null){
             project.getInstallations().forEach(installation -> {
-            ConstructionMaterialBuilder builder = builderFactory.createConstructionBuilder(installation, project);
+            ConstructionMaterialBuilder builder = builderFactory.createConstructionBuilder(installation, projectDto);
 
             List<InstallationMaterial> materials = builder.createInstallationConstructionMaterials();
             installationMaterialRepository.removeAllForInstallation(installation.getInstallationId());
@@ -99,7 +108,16 @@ public class ProjectService {
         projectRepository.save(updatedProject);
         log.info("Project with ID:{} updated successfully", projectId);
     }
-    private Project findProjectById(Long projectId){
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    public Integer getInstallationCountForProject(Long projectId){
+        return projectRepository.getInstallationNumber(projectId);
+    }
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    public Double getTotalPowerForProject(Long projectId){
+        Long modulePower = projectRepository.getModulePowerByProjectId(projectId);
+        return (double)projectRepository.getAllModulesByProjectId(projectId) * modulePower / CONVERT_W_TO_KW;
+    }
+    private Project fetchProjectById(Long projectId){
         return projectRepository.findByProjectIdWithUserAndInstallations(projectId).orElseThrow(() -> new ResourceNotFoundException("Project", projectId));
     }
     private void validateProjectOwner(UserEntity user, Project project, String action){
@@ -109,5 +127,4 @@ public class ProjectService {
             throw new InvalidOwnershipException("Project", user.getUsername());
         }
     }
-
 }

@@ -3,6 +3,7 @@ package com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Installati
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ConstructionType;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ModuleOrientation;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.Row;
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,4 +18,8 @@ public class InstallationUpdateDto {
     private ConstructionType installationType;
     private ModuleOrientation moduleOrientation;
     private List<Row> rows;
+    @Min(value = 1, message = "AC cable cannot be less then 1")
+    private Integer acCableLength;
+    @Min(value = 1, message = "DC cable cannot be less then 1")
+    private Integer dcCableLength;
 }

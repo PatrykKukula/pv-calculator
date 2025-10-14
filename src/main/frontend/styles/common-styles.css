@@ -1,0 +1,26 @@
+.main-layout {
+    width: 50%;
+    length: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+}
+.box {
+    align-self: center;
+    padding: 72px 192px;
+    font-size:  36px;
+    box-shadow: 5px 10px 10px 8px #888888;
+    box-sizing: border-box;
+    width: 700px;
+    height: 200px;
+    text-align: center;
+    cursor: pointer;
+}
+.box:hover {
+    font-weight: bold;
+    width: 740px;
+    height: 260px;
+    color: darkblue;
+}

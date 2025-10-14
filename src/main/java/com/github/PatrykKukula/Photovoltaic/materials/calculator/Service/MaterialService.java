@@ -2,6 +2,7 @@ package com.github.PatrykKukula.Photovoltaic.materials.calculator.Service;
 
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.ConstructionMaterial;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.ElectricalMaterial;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.Installation;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.InstallationMaterial;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Repository.ConstructionMaterialRepository;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Repository.ElectricalMaterialRepository;
@@ -16,10 +17,12 @@ public class MaterialService {
     private final ElectricalMaterialRepository electricalMaterialRepository;
 
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
-    public InstallationMaterial createConstructionMaterial(String materialName, Long quantity){
+    public InstallationMaterial createConstructionMaterial(String materialName, Long quantity, Installation installation){
         return InstallationMaterial.builder()
                 .constructionMaterial((fetchConstructionMaterial(materialName)))
-                .quantity(quantity).build();
+                .quantity(quantity)
+                .installation(installation)
+                .build();
     }
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public InstallationMaterial createElectricalMaterial(String materialName, Long quantity){

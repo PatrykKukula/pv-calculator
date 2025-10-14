@@ -4,10 +4,11 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Builder
-@AllArgsConstructor
+@AllArgsConstructor @NoArgsConstructor
 @Data
 public class Row {
     @Id
@@ -18,7 +19,6 @@ public class Row {
     private Long rowNumber;
     @Column(nullable = false)
     private Long moduleQuantity;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "installationId", nullable = false)
     private Installation installation;

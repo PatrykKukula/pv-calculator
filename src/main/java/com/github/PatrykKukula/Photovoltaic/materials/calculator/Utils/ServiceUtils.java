@@ -7,6 +7,6 @@ public class ServiceUtils {
         return (sortDirection.equals("DESC")) ? "DESC" : "ASC";
     }
     public static void validateId(Long id){
-        if (id == null || id<1) throw new InvalidIdException();
+        if (id == null || id<1) throw new InvalidIdException(id);
     }
 }

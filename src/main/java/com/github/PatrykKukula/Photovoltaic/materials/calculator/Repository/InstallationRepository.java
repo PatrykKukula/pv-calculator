@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface InstallationRepository extends JpaRepository<Installation, Long> {
-    @Query("SELECT i FROM Installation i JOIN i.project p WHERE p.projectId = :projectId")
+    @Query("SELECT DISTINCT i FROM Installation i JOIN i.project p JOIN FETCH i.rows WHERE p.projectId = :projectId")
     Page<Installation> findAllInstallationsByProjectId(@Param(value = "projectId") Long projectId, Pageable pageable);
 }

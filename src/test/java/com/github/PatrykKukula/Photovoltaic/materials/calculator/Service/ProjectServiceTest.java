@@ -131,10 +131,23 @@ public class ProjectServiceTest {
         verifyNoInteractions(projectRepository);
     }
     @Test
-    @DisplayName("Should find all projects correctly")
-    public void shouldFindAllProjectsCorrectly(){
+    @DisplayName("Should find all projects correctly with no title param")
+    public void shouldFindAllProjectsCorrectlyWithNoTitleParam(){
+        projectRequestDto.setTitle(null);
         when(userService.loadCurrentUser()).thenReturn(user);
         when(projectRepository.findAllProjectsByUsername(anyString(), any(Pageable.class))).thenReturn(new PageImpl<>(List.of(project)));
+
+        Page<ProjectDto> projects = projectService.findAllProjects(projectRequestDto);
+
+        assertEquals(1, projects.getTotalElements());
+        assertEquals(1, projects.getTotalPages());
+        assertEquals("project", projects.getContent().getFirst().getTitle());
+    }
+    @Test
+    @DisplayName("Should find all projects correctly with title param")
+    public void shouldFindAllProjectsCorrectlyWithTitleParam(){
+        when(userService.loadCurrentUser()).thenReturn(user);
+        when(projectRepository.findAllProjectsByUsernameAndTitle(anyString(), anyString(), any(Pageable.class))).thenReturn(new PageImpl<>(List.of(project)));
 
         Page<ProjectDto> projects = projectService.findAllProjects(projectRequestDto);
 

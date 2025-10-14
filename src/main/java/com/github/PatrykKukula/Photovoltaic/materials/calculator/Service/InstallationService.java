@@ -2,13 +2,16 @@ package com.github.PatrykKukula.Photovoltaic.materials.calculator.Service;
 
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Installation.InstallationDto;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Installation.InstallationUpdateDto;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Project.ProjectDto;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Exception.InvalidRowQuantityException;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Exception.ResourceNotFoundException;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Mapper.InstallationMapper;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilder.Construction.ConstructionMaterialBuilder;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilder.Construction.ConstructionMaterialCalculator;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.*;
-import com.github.PatrykKukula.Photovoltaic.materials.calculator.Repository.*;
-import com.github.PatrykKukula.Photovoltaic.materials.calculator.Security.UserDetailsServiceImpl;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Repository.InstallationMaterialRepository;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Repository.InstallationRepository;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Repository.ProjectRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +21,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
+
 import static com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.PagingConstants.PAGE_NO;
 import static com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.PagingConstants.PAGE_SIZE;
 import static com.github.PatrykKukula.Photovoltaic.materials.calculator.Utils.ServiceUtils.validateId;
@@ -29,26 +34,31 @@ import static com.github.PatrykKukula.Photovoltaic.materials.calculator.Utils.Se
 public class InstallationService {
     private final InstallationRepository installationRepository;
     private final InstallationMaterialRepository installationMaterialRepository;
+    private final ProjectRepository projectRepository;
     private final MaterialService constructionMaterialService;
     private final UserEntityService userService;
 
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN)")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @Transactional
-    public boolean createInstallation(InstallationDto installationDto, Project project){
+    public Installation createInstallation(InstallationDto installationDto, ProjectDto projectDto){
         Installation installation = InstallationMapper.mapInstallationDtoToInstallation(installationDto);
-
+        validateRowsQuantity(installation.getRows());
         UserEntity user = userService.loadCurrentUser();
 
-        ConstructionMaterialCalculator constructionMaterialCalculator = new ConstructionMaterialCalculator(constructionMaterialService, installation, project);
-        ConstructionMaterialBuilder builder = new ConstructionMaterialBuilder(installation, constructionMaterialService, constructionMaterialCalculator, project);
+        ConstructionMaterialCalculator constructionMaterialCalculator = new ConstructionMaterialCalculator(constructionMaterialService, installation, projectDto);
+        ConstructionMaterialBuilder builder = new ConstructionMaterialBuilder(installation, constructionMaterialService, constructionMaterialCalculator, projectDto);
 
         List<InstallationMaterial> materials = builder.createInstallationConstructionMaterials();
 
         installation.setMaterials(materials);
 
+        Project project = projectRepository.findById(projectDto.getProjectId()).orElseThrow(() -> new ResourceNotFoundException("Project", projectDto.getProjectId()));
+        installation.setProject(project);
+
         Installation createdInstallation = installationRepository.save(installation);
         log.info("New installation with ID:{} created by user: {}", createdInstallation.getInstallationId(), user.getUsername());
-        return true;
+
+        return createdInstallation;
     }
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public void removeInstallation(Long installationId){
@@ -61,7 +71,7 @@ public class InstallationService {
     }
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @Transactional
-    public void updateInstallation(Long installationId, InstallationUpdateDto installationUpdateDto, Project project){
+    public Installation updateInstallation(Long installationId, InstallationUpdateDto installationUpdateDto, ProjectDto project){
         validateId(installationId);
 
         Installation installation = installationRepository.findById(installationId).orElseThrow(() -> new ResourceNotFoundException("Installation", installationId));
@@ -76,10 +86,12 @@ public class InstallationService {
 
         installation.setMaterials(materials);
 
-        installationRepository.save(updatedInstallation);
+        Installation savedInstallation = installationRepository.save(updatedInstallation);
         log.info("Installation with ID:{} updated successfully", installationId);
+
+        return savedInstallation;
     }
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN)")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public Page<InstallationDto> findAllInstallationsForProject(Long projectId){
         validateId(projectId);
 
@@ -90,5 +102,12 @@ public class InstallationService {
         Pageable pageable = PageRequest.of(PAGE_NO, PAGE_SIZE, sort);
 
         return installationRepository.findAllInstallationsByProjectId(projectId, pageable).map(InstallationMapper::mapInstallationToInstallationDto);
+    }
+    private void validateRowsQuantity(List<Row> rows){
+        for (Row row : rows){
+            if (row.getModuleQuantity() < 5 ) {
+               throw new InvalidRowQuantityException(row.getModuleQuantity());
+            }
+        }
     }
 }
