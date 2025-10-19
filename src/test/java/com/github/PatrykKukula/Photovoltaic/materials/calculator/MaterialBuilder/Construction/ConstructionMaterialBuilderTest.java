@@ -2,6 +2,7 @@ package com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilde
 
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ConstructionType;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ModuleOrientation;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Project.ProjectDto;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.Installation;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.InstallationMaterial;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.Project;
@@ -29,10 +30,22 @@ public class ConstructionMaterialBuilderTest {
     private ConstructionMaterialBuilder constructionMaterialBuilder;
     private Installation installation;
     private Project project;
+    private ProjectDto projectDto;
 
     @BeforeEach
     public void setUp(){
         project = Project.builder()
+                .title("project")
+                .investor("investor")
+                .country("country")
+                .voivodeship("voivodeship")
+                .city("city")
+                .modulePower(500)
+                .moduleFrame(30)
+                .moduleLength(2000)
+                .moduleWidth(1000)
+                .build();
+        projectDto = ProjectDto.builder()
                 .title("project")
                 .investor("investor")
                 .country("country")
@@ -50,7 +63,7 @@ public class ConstructionMaterialBuilderTest {
                 .materials(Collections.emptyList())
                 .rows(List.of(Row.builder().rowNumber(1L).moduleQuantity(10L).build()))
                 .build();
-        constructionMaterialBuilder = new ConstructionMaterialBuilder(installation, materialService, constructionMaterialCalculator, project);
+        constructionMaterialBuilder = new ConstructionMaterialBuilder(installation, materialService, constructionMaterialCalculator, projectDto);
         mockCommonMaterials();
     }
     @Test
@@ -64,10 +77,10 @@ public class ConstructionMaterialBuilderTest {
         assertEquals(6, materials.size());
         verify(constructionMaterialCalculator, times(1)).setTrapeze();
         verify(constructionMaterialCalculator, times(1)).setScrewsForTrapeze(anyLong());
-        verify(materialService,times(1)).createConstructionMaterial(eq("End clamp 30 mm"), anyLong());
-        verify(materialService,times(1)).createConstructionMaterial(eq("Mid clamp"), anyLong());
-        verify(materialService,times(1)).createConstructionMaterial(eq("Allen screw 20 mm"), anyLong());
-        verify(materialService,times(1)).createConstructionMaterial(eq("Sliding key"), anyLong());
+        verify(materialService,times(1)).createConstructionMaterial(eq("End clamp 30 mm"), anyLong(), eq(installation));
+        verify(materialService,times(1)).createConstructionMaterial(eq("Mid clamp"), anyLong(), eq(installation));
+        verify(materialService,times(1)).createConstructionMaterial(eq("Allen screw 20 mm"), anyLong(), eq(installation));
+        verify(materialService,times(1)).createConstructionMaterial(eq("Sliding key"), anyLong(), eq(installation));
     }
     @Test
     @DisplayName("Should build vario hook installation with expected materials")
@@ -86,10 +99,10 @@ public class ConstructionMaterialBuilderTest {
         verify(constructionMaterialCalculator, times(1)).setProfile();
         verify(constructionMaterialCalculator, times(1)).setHexagonScrew(anyLong());
         verify(constructionMaterialCalculator, times(1)).setHexagonNut(anyLong());
-        verify(materialService,times(1)).createConstructionMaterial(eq("End clamp 30 mm"), anyLong());
-        verify(materialService,times(1)).createConstructionMaterial(eq("Mid clamp"), anyLong());
-        verify(materialService,times(1)).createConstructionMaterial(eq("Allen screw 20 mm"), anyLong());
-        verify(materialService,times(1)).createConstructionMaterial(eq("Sliding key"), anyLong());
+        verify(materialService,times(1)).createConstructionMaterial(eq("End clamp 30 mm"), anyLong(), eq(installation));
+        verify(materialService,times(1)).createConstructionMaterial(eq("Mid clamp"), anyLong(), eq(installation));
+        verify(materialService,times(1)).createConstructionMaterial(eq("Allen screw 20 mm"), anyLong(), eq(installation));
+        verify(materialService,times(1)).createConstructionMaterial(eq("Sliding key"), anyLong(), eq(installation));
     }
     @Test
     @DisplayName("Should build double threaded screw oblique installation with expected materials")
@@ -108,10 +121,10 @@ public class ConstructionMaterialBuilderTest {
         verify(constructionMaterialCalculator, times(1)).setProfile();
         verify(constructionMaterialCalculator, times(1)).setHexagonScrew(anyLong());
         verify(constructionMaterialCalculator, times(1)).setHexagonNut(anyLong());
-        verify(materialService,times(1)).createConstructionMaterial(eq("End clamp 30 mm"), anyLong());
-        verify(materialService,times(1)).createConstructionMaterial(eq("Mid clamp"), anyLong());
-        verify(materialService,times(1)).createConstructionMaterial(eq("Allen screw 20 mm"), anyLong());
-        verify(materialService,times(1)).createConstructionMaterial(eq("Sliding key"), anyLong());
+        verify(materialService,times(1)).createConstructionMaterial(eq("End clamp 30 mm"), anyLong(), eq(installation));
+        verify(materialService,times(1)).createConstructionMaterial(eq("Mid clamp"), anyLong(), eq(installation));
+        verify(materialService,times(1)).createConstructionMaterial(eq("Allen screw 20 mm"), anyLong(), eq(installation));
+        verify(materialService,times(1)).createConstructionMaterial(eq("Sliding key"), anyLong(), eq(installation));
     }
     @Test
     @DisplayName("Should build double threaded screw flat installation with expected materials")
@@ -132,10 +145,10 @@ public class ConstructionMaterialBuilderTest {
         verify(constructionMaterialCalculator, times(1)).setHexagonScrew(anyLong());
         verify(constructionMaterialCalculator, times(1)).setHexagonNut(anyLong());
         verify(constructionMaterialCalculator, times(1)).setAngleBar();
-        verify(materialService,times(1)).createConstructionMaterial(eq("End clamp 30 mm"), anyLong());
-        verify(materialService,times(1)).createConstructionMaterial(eq("Mid clamp"), anyLong());
-        verify(materialService,times(1)).createConstructionMaterial(eq("Allen screw 20 mm"), anyLong());
-        verify(materialService,times(1)).createConstructionMaterial(eq("Sliding key"), anyLong());
+        verify(materialService,times(1)).createConstructionMaterial(eq("End clamp 30 mm"), anyLong(), eq(installation));
+        verify(materialService,times(1)).createConstructionMaterial(eq("Mid clamp"), anyLong(), eq(installation));
+        verify(materialService,times(1)).createConstructionMaterial(eq("Allen screw 20 mm"), anyLong(), eq(installation));
+        verify(materialService,times(1)).createConstructionMaterial(eq("Sliding key"), anyLong(), eq(installation));
     }
     @Test
     @DisplayName("Should build threaded rod flat installation with expected materials")
@@ -160,16 +173,16 @@ public class ConstructionMaterialBuilderTest {
         verify(constructionMaterialCalculator, times(1)).setHexagonScrew(anyLong());
         verify(constructionMaterialCalculator, times(1)).setHexagonNut(anyLong());
         verify(constructionMaterialCalculator, times(1)).setAngleBar();
-        verify(materialService,times(1)).createConstructionMaterial(eq("End clamp 30 mm"), anyLong());
-        verify(materialService,times(1)).createConstructionMaterial(eq("Mid clamp"), anyLong());
-        verify(materialService,times(1)).createConstructionMaterial(eq("Allen screw 20 mm"), anyLong());
-        verify(materialService,times(1)).createConstructionMaterial(eq("Sliding key"), anyLong());
+        verify(materialService,times(1)).createConstructionMaterial(eq("End clamp 30 mm"), anyLong(), eq(installation));
+        verify(materialService,times(1)).createConstructionMaterial(eq("Mid clamp"), anyLong(), eq(installation));
+        verify(materialService,times(1)).createConstructionMaterial(eq("Allen screw 20 mm"), anyLong(), eq(installation));
+        verify(materialService,times(1)).createConstructionMaterial(eq("Sliding key"), anyLong(), eq(installation));
     }
     private void mockCommonMaterials(){
-        when(materialService.createConstructionMaterial(eq("End clamp 30 mm"), anyLong())).thenReturn(InstallationMaterial.builder().quantity(10L).build());
-        when(materialService.createConstructionMaterial(eq("Mid clamp"), anyLong())).thenReturn(InstallationMaterial.builder().quantity(10L).build());
-        when(materialService.createConstructionMaterial(eq("Allen screw 20 mm"), anyLong())).thenReturn(InstallationMaterial.builder().quantity(10L).build());
-        when(materialService.createConstructionMaterial(eq("Sliding key"), anyLong())).thenReturn(InstallationMaterial.builder().quantity(10L).build());
+        when(materialService.createConstructionMaterial(eq("End clamp 30 mm"), anyLong(), eq(installation))).thenReturn(InstallationMaterial.builder().quantity(10L).build());
+        when(materialService.createConstructionMaterial(eq("Mid clamp"), anyLong(), eq(installation))).thenReturn(InstallationMaterial.builder().quantity(10L).build());
+        when(materialService.createConstructionMaterial(eq("Allen screw 20 mm"), anyLong(), eq(installation))).thenReturn(InstallationMaterial.builder().quantity(10L).build());
+        when(materialService.createConstructionMaterial(eq("Sliding key"), anyLong(), eq(installation))).thenReturn(InstallationMaterial.builder().quantity(10L).build());
     }
     private void mockProfileBasedMaterials(){
         when(constructionMaterialCalculator.setProfile()).thenReturn(InstallationMaterial.builder().quantity(10L).build());

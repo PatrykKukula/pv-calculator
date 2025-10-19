@@ -7,12 +7,11 @@ import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Project.Pro
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Project.ProjectUpdateDto;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Exception.InvalidIdException;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Exception.InvalidOwnershipException;
-import com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilder.MaterialBuilderFactory;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilder.Construction.ConstructionMaterialBuilder;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilder.MaterialBuilderFactory;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.*;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Repository.InstallationMaterialRepository;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Repository.ProjectRepository;
-import com.github.PatrykKukula.Photovoltaic.materials.calculator.Security.UserDetailsServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,7 +26,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -85,6 +84,7 @@ public class ProjectServiceTest {
                 .moduleLength(2000)
                 .moduleWidth(1000)
                 .user(user)
+                .createdAt(LocalDateTime.now())
                 .build();
         projectRequestDto = ProjectRequestDto.builder()
                 .title("project")
@@ -98,6 +98,10 @@ public class ProjectServiceTest {
                 .city("updated city")
                 .voivodeship("updated voivodeship")
                 .investor("updated investor")
+                .modulePower(600)
+                .moduleWidth(1100)
+                .moduleLength(2100)
+                .moduleFrame(35)
                 .build();
     }
     @Test
@@ -158,6 +162,7 @@ public class ProjectServiceTest {
     @Test
     @DisplayName("Should return empty page when find all projects and no projects found")
     public void shouldReturnEmptyPageWhenFindAllUsersAndNoProjectsFound(){
+        projectRequestDto.setTitle(null);
         when(userService.loadCurrentUser()).thenReturn(user);
         when(projectRepository.findAllProjectsByUsername(anyString(), any(Pageable.class))).thenReturn(Page.empty());
 
@@ -187,7 +192,8 @@ public class ProjectServiceTest {
     @DisplayName("Should throw InvalidIdException when id is null")
     public void shouldThrowInvalidIdExceptionWhenIdIsNull(){
         InvalidIdException ex = assertThrows(InvalidIdException.class, () -> projectService.removeProject(null));
-        assertEquals("ID cannot be less than 1", ex.getMessage());
+        assertEquals("ID cannot be less than 1 but was: null", ex.getMessage());
+        assertEquals("Invalid ID", ex.getUserMessage());
     }
     @Test
     @DisplayName("Should throw InvalidOwnershipException when attempt to take action on other user project")
@@ -200,8 +206,12 @@ public class ProjectServiceTest {
         assertTrue(ex.getMessage().contains("doesn't belong to current user"));
     }
     @Test
-    @DisplayName("Should update project correctly")
-    public void shouldUpdateProjectCorrectly(){
+    @DisplayName("Should update project correctly when modules are not updated")
+    public void shouldUpdateProjectCorrectlyWhenModulesAreNotUpdated(){
+        projectUpdateDto.setModuleFrame(30);
+        projectUpdateDto.setModuleLength(2000);
+        projectUpdateDto.setModuleWidth(1000);
+        project.setInstallations(List.of(setUpInstallation()));
         when(userService.loadCurrentUser()).thenReturn(user);
         when(projectRepository.findByProjectIdWithUserAndInstallations(anyLong())).thenReturn(Optional.of(project));
 
@@ -215,36 +225,55 @@ public class ProjectServiceTest {
         assertEquals("updated city", updatedProject.getCity());
         assertEquals("updated voivodeship", updatedProject.getVoivodeship());
         assertEquals("updated investor", updatedProject.getInvestor());
-        assertEquals(500, updatedProject.getModulePower());
-        assertEquals(1000, updatedProject.getModuleWidth());
-        assertEquals(2000, updatedProject.getModuleLength());
-        assertEquals(30, updatedProject.getModuleFrame());
+        verifyNoInteractions(builderFactory);
     }
     @Test
-    @DisplayName("Should update materials when updateProject and module frame is updated")
-    public void shouldUpdateMaterialsWhenUpdateProjectAndModuleFrameIsUpdated(){
-        projectUpdateDto.setModuleFrame(35);
+    @DisplayName("Should update materials when updateProject and module size is updated")
+    public void shouldUpdateMaterialsWhenUpdateProjectAndModuleSizeIsUpdated(){
         project.setInstallations(List.of(setUpInstallation()));
         when(userService.loadCurrentUser()).thenReturn(user);
         when(projectRepository.findByProjectIdWithUserAndInstallations(anyLong())).thenReturn(Optional.of(project));
-        when(constructionMaterialBuilder.createInstallationConstructionMaterials()).thenReturn(Collections.emptyList());
         when(builderFactory.createConstructionBuilder(any(), any())).thenReturn(constructionMaterialBuilder);
-        when(constructionMaterialBuilder.createInstallationConstructionMaterials()).thenReturn(List.of(new InstallationMaterial()));
-        
+        when(constructionMaterialBuilder.createInstallationConstructionMaterials())
+                .thenReturn(List.of(InstallationMaterial.builder().constructionMaterial(ConstructionMaterial.builder().name("End clamp 35mm").build()).build()));
+
         ArgumentCaptor<Project> captor = ArgumentCaptor.forClass(Project.class);
         projectService.updateProject(1L, projectUpdateDto);
         verify(projectRepository).save(captor.capture());
         Project updatedProject = captor.getValue();
 
-        verify(installationMaterialRepository, times(1)).removeAllForInstallation(anyLong());
         assertEquals(35, updatedProject.getModuleFrame());
+        assertEquals(1100, updatedProject.getModuleWidth());
+        assertEquals(2100, updatedProject.getModuleLength());
+    }
+    @Test
+    @DisplayName("Should get Installation count for Project correctly")
+    public void shouldGetInstallationCountForProjectCorrectly(){
+        when(projectRepository.getInstallationNumber(anyLong())).thenReturn(1);
+
+        Integer count = projectService.getInstallationCountForProject(1L);
+
+        assertEquals(1, count);
+    }
+    @Test
+    @DisplayName("Should get total power for Project correctly")
+    public void shouldGetTotalPowerForProjectCorrectly(){
+        when(projectRepository.getModulePowerByProjectId(anyLong())).thenReturn(500L);
+        when(projectRepository.getAllModulesByProjectId(1L)).thenReturn(21L);
+
+        Double totalPower = projectService.getTotalPowerForProject(1L);
+
+        assertEquals(10.5, totalPower);
     }
     private Installation setUpInstallation(){
+        List<InstallationMaterial> materials = new ArrayList<>();
+        materials.add(InstallationMaterial.builder().constructionMaterial(ConstructionMaterial.builder().name("End clamp 40mm").build()).build());
         return Installation.builder()
                 .installationId(1L)
                 .installationType(ConstructionType.TRAPEZE)
                 .moduleOrientation(ModuleOrientation.VERTICAL)
                 .rows(List.of(Row.builder().rowId(1L).rowNumber(1L).moduleQuantity(10L).build()))
+                .materials(materials)
                 .build();
     }
 

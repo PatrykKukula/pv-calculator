@@ -30,7 +30,8 @@ public class ServiceUtilsTest {
     @DisplayName("Should throw InvalidIdException when validateId with null input")
     public void shouldThrowInvalidIdExceptionWhenValidateIdWithNullInput(){
         InvalidIdException ex = assertThrows(InvalidIdException.class, () -> ServiceUtils.validateId(null));
-        assertEquals("ID cannot be less than 1", ex.getMessage());
+        assertEquals("Invalid ID", ex.getUserMessage());
+        assertEquals("ID cannot be less than 1 but was: null", ex.getMessage());
     }
     @Test
     @DisplayName("Should throw InvalidIdException when validateId with null input")

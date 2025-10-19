@@ -35,9 +35,13 @@ public class Installation {
     @OneToMany(mappedBy = "installation", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Row> rows;
     @Column(nullable = false)
+    private boolean lightingProtection;
+    @Column(nullable = false)
     private Integer acCableLength;
     @Column(nullable = false)
     private Integer dcCableLength;
+    @Column(nullable = false)
+    private Integer lgyCableLength;
 
     @PrePersist
     private void setCreatedAt(){

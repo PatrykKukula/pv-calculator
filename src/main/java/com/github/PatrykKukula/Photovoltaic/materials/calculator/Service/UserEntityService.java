@@ -15,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -34,14 +35,16 @@ public class UserEntityService {
 
     public UserEntity loadCurrentUser(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth == null) throw new AuthenticationCredentialsNotFoundException("Log in to proceed");
+        if (auth == null) {
+            throw new AuthenticationCredentialsNotFoundException("Log in to proceed");
+        }
         if (!auth.isAuthenticated() || auth instanceof AnonymousAuthenticationToken) {
             throw new AuthenticationCredentialsNotFoundException("Log in to proceed");
         }
         Object principal = auth.getPrincipal();
         if (principal instanceof UserDetails user){
             String username = user.getUsername();
-            return userRepository.findByUsernameWithRoles(username).orElseThrow(() -> new AuthenticationCredentialsNotFoundException("Log in to proceed"));
+            return userRepository.findByUsernameWithRoles(username).orElseThrow(() -> new UsernameNotFoundException("Invalid login or password"));
         }
         else {
             throw new AuthenticationCredentialsNotFoundException("Log in to proceed");

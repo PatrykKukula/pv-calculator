@@ -15,21 +15,29 @@ import java.util.List;
 @AllArgsConstructor @Builder
 @NoArgsConstructor
 @Data
-public class InstallationDto {
+public class InstallationDto implements InstallationInterface {
     /*
          VALUES ARE BIT BELOW LOWEST AND HIGHEST POSSIBLE VALUES ON MARKET FOR GIVEN PARAMETER
      */
+    private Long projectId;
+    private Long installationId;
     @NotEmpty(message = "Address cannot be empty")
     private String address;
     @NotNull(message = "Pick installation type")
-    private ConstructionType installationType;
+    private ConstructionType constructionType;
     @NotNull(message = "Pick module orientation")
     private ModuleOrientation moduleOrientation;
     private List<RowDto> rows;
-    @NotNull(message = "AC cable cannot by empty")
+    @NotNull(message = "Choose whether object has lighting protection installation")
+    private boolean lightingProtection;
+    @NotNull(message = "Specify length from inverter to electric switchboard")
     @Min(value = 1, message = "AC cable cannot be less then 1")
     private Integer acCableLength;
-    @NotNull(message = "DC cable cannot by empty")
+    @NotNull(message = "Specify length from inverter to the first row of modules")
     @Min(value = 1, message = "DC cable cannot be less then 1")
     private Integer dcCableLength;
+    @NotNull(message = "Specify length from inverter to the first row of modules")
+    @Min(value = 1, message = "LgY cable cannot be less then 1")
+    private Integer lgyCableLength;
+
 }

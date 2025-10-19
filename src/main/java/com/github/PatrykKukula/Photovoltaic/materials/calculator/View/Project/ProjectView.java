@@ -7,7 +7,10 @@ import com.github.PatrykKukula.Photovoltaic.materials.calculator.Service.Install
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Service.ProjectService;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Service.UserEntityService;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.View.Components.PageButtons;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.View.Components.SingleInstallationLayout;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.View.Installation.AddInstallationView;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.View.Installation.InstallationUpdateView;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.View.Installation.InstallationView;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -42,7 +45,6 @@ public class ProjectView extends VerticalLayout implements HasUrlParameter<Long>
     private final UserEntityService userEntityService;
     private final VerticalLayout installationsLayout = new VerticalLayout();
     private Page<InstallationDto> installations;
-    private final int CONVERT_W_TO_KW = 1000;
 
     @Override
     public void setParameter(BeforeEvent event, Long projectId) {
@@ -86,33 +88,14 @@ public class ProjectView extends VerticalLayout implements HasUrlParameter<Long>
         return () -> {
             installationsLayout.removeAll();
             for (InstallationDto installation : installations){
-                VerticalLayout singleInstallationLayout = singleInstallationLayout(installation);
+                VerticalLayout singleInstallationLayout = new SingleInstallationLayout(installationService, installation, project);
+                singleInstallationLayout.addClickListener(e -> UI.getCurrent().navigate(InstallationView.class, installation.getInstallationId()));
+                singleInstallationLayout.getStyle().set("cursor", "pointer");
                 installationsLayout.add(singleInstallationLayout);
             }
         };
     }
-    private VerticalLayout singleInstallationLayout(InstallationDto installation){
-        VerticalLayout layout = new VerticalLayout();
 
-        Icon close = VaadinIcon.CLOSE.create();
-
-        Div address = propertyDiv("Address: ", installation.getAddress());
-        Div installationType = propertyDiv("Type: ", installation.getInstallationType().toString());
-        Div installationPower = propertyDiv("Power: ", getInstallationPower(installation));
-        Div modules = propertyDiv("Modules: ", getModules(installation));
-
-        HorizontalLayout upper = new HorizontalLayout(address, close);
-
-        layout.add(upper, installationType, installationPower, modules);
-        layout.getStyle().set("align-items", "center").set("border", "2px solid green").set("box-shadow", "5px 5px 5px green");
-        return layout;
-    }
-    private Div propertyDiv(String header, String value){
-        Span headerSpan = new Span(header);
-        headerSpan.getStyle().set("font-weight", "bold");
-        Div div = new Div(headerSpan, new Span(value));
-        return div;
-    }
     private Div buttonsDiv(){
         Div div = new Div();
         Button editButton = editButton();
@@ -187,13 +170,6 @@ public class ProjectView extends VerticalLayout implements HasUrlParameter<Long>
         header.getStyle().set("font-size", "24px").set("font-family", "georgia").set("margin-top", "30px");
         return header;
     }
-    private String getInstallationPower(InstallationDto installation){
-        return installation.getRows().stream()
-                .mapToDouble(inst -> (double) inst.getModuleQuantity() * project.getModulePower()).sum() / CONVERT_W_TO_KW + " kW";
-    }
-    private String getModules(InstallationDto installation){
-        return String.valueOf(installation.getRows().stream().mapToLong(RowDto::getModuleQuantity).sum());
-    }
     private Button editButton(){
         Button button = new Button("Edit project ", VaadinIcon.EDIT.create());
         button.addClickListener(e -> UI.getCurrent().navigate(ProjectUpdateView.class, project.getProjectId()));
@@ -212,7 +188,6 @@ public class ProjectView extends VerticalLayout implements HasUrlParameter<Long>
                 Notification.show("An error has occurred %s".formatted(ex.getMessage()), 7000, Notification.Position.MIDDLE);
             }
         });
-
         return button;
     }
     private Button addInstalationButton(){

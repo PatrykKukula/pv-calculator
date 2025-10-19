@@ -93,18 +93,20 @@ public class ProjectService {
         ProjectDto projectDto = ProjectMapper.mapProjectToProjectDto(project);
 
         validateProjectOwner(user, project, "update");
-        Project updatedProject = mapProjectUpdateDtoToProject(projectUpdateDto, project);
 
-        if (projectUpdateDto.getModuleFrame() != null || projectUpdateDto.getModuleWidth() != null || projectUpdateDto.getModuleLength() != null){
+        if (projectUpdateDto.getModuleFrame() != project.getModuleFrame() || projectUpdateDto.getModuleWidth() != project.getModuleWidth() || projectUpdateDto.getModuleLength() != project.getModuleLength()){
             project.getInstallations().forEach(installation -> {
-            ConstructionMaterialBuilder builder = builderFactory.createConstructionBuilder(installation, projectDto);
+                ConstructionMaterialBuilder builder = builderFactory.createConstructionBuilder(installation, projectDto);
 
-            List<InstallationMaterial> materials = builder.createInstallationConstructionMaterials();
-            installationMaterialRepository.removeAllForInstallation(installation.getInstallationId());
+                List<InstallationMaterial> materials = builder.createInstallationConstructionMaterials();
 
-            installation.setMaterials(materials);
+                installation.getMaterials().clear();
+                installation.getMaterials().addAll(materials);
             });
         }
+
+        Project updatedProject = mapProjectUpdateDtoToProject(projectUpdateDto, project);
+
         projectRepository.save(updatedProject);
         log.info("Project with ID:{} updated successfully", projectId);
     }

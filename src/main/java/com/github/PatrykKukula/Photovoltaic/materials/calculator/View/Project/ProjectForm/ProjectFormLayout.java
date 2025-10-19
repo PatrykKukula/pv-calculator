@@ -1,12 +1,10 @@
 package com.github.PatrykKukula.Photovoltaic.materials.calculator.View.Project.ProjectForm;
 
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ConstructionMaterialConstants;
-import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Project.ProjectDto;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Project.ProjectInterface;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Project.ProjectUpdateDto;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Service.ProjectService;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.View.MainView;
-import com.github.PatrykKukula.Photovoltaic.materials.calculator.View.Project.ProjectsView;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -25,7 +23,6 @@ public class  ProjectFormLayout<T extends ProjectInterface> extends VerticalLayo
     private final ProjectService projectService;
     private final BeanValidationBinder<ProjectInterface> binder = new BeanValidationBinder<>(ProjectInterface.class);
     private final ProjectInterface projectDto;
-    private ProjectUpdateDto project;
     private final Long projectId;
     private final ProjectFormStrategy<?> strategy;
     private final ProjectFormStrategyFactory projectFormStrategyFactory;

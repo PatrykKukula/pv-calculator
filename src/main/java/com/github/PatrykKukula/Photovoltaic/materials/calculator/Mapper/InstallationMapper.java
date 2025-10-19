@@ -9,35 +9,69 @@ import java.util.List;
 public class InstallationMapper {
     public static Installation mapInstallationDtoToInstallation(InstallationDto installationDto){
         Installation installation = Installation.builder()
-                .installationType(installationDto.getInstallationType())
+                .installationType(installationDto.getConstructionType())
                 .moduleOrientation(installationDto.getModuleOrientation())
                 .acCableLength(installationDto.getAcCableLength())
                 .dcCableLength(installationDto.getDcCableLength())
                 .address(installationDto.getAddress())
+                .lgyCableLength(installationDto.getLgyCableLength())
+                .lightingProtection(installationDto.isLightingProtection())
                 .build();
-        List<Row> rows = installationDto.getRows().stream().map(row -> Row.builder().rowNumber(row.getRowNumber())
-                .moduleQuantity(row.getModuleQuantity()).installation(installation).build()).toList();
+        List<Row> rows = mapRowDtoToRow(installationDto, installation);
         installation.setRows(rows);
         return installation;
     }
     public static InstallationDto mapInstallationToInstallationDto(Installation installation){
         List<RowDto> rows = installation.getRows().stream().map(row -> new RowDto(row.getRowNumber(), row.getModuleQuantity())).toList();
         return InstallationDto.builder()
-                .installationType(installation.getInstallationType())
+                .projectId(installation.getProject().getProjectId())
+                .installationId(installation.getInstallationId())
+                .constructionType(installation.getInstallationType())
                 .moduleOrientation(installation.getModuleOrientation())
                 .rows(rows)
                 .acCableLength(installation.getAcCableLength())
                 .dcCableLength(installation.getDcCableLength())
                 .address(installation.getAddress())
+                .lgyCableLength(installation.getLgyCableLength())
+                .lightingProtection(installation.isLightingProtection())
                 .build();
     }
     public static Installation mapInstallationUpdateDtoToInstallation(InstallationUpdateDto installationUpdateDto, Installation installation){
-        if(installationUpdateDto.getInstallationType() != null) installation.setInstallationType(installationUpdateDto.getInstallationType());
-        if (installationUpdateDto.getModuleOrientation() != null) installation.setModuleOrientation(installationUpdateDto.getModuleOrientation());
-        if (installationUpdateDto.getRows() != null) installation.setRows(installationUpdateDto.getRows());
-        if (installationUpdateDto.getAcCableLength() != null) installation.setAcCableLength(installationUpdateDto.getAcCableLength());
-        if (installationUpdateDto.getDcCableLength() != null) installation.setDcCableLength(installation.getDcCableLength());
+        installation.setInstallationType(installationUpdateDto.getConstructionType());
+        installation.setModuleOrientation(installationUpdateDto.getModuleOrientation());
+        installation.setAcCableLength(installationUpdateDto.getAcCableLength());
+        installation.setDcCableLength(installation.getDcCableLength());
+        installation.setAddress(installationUpdateDto.getAddress());
+        installation.setLgyCableLength(installationUpdateDto.getLgyCableLength());
+        installation.setLightingProtection(installationUpdateDto.isLightingProtection());
+        List<Row> rows = mapRowDtoToRowUpdate(installationUpdateDto, installation);
+        installation.getRows().clear();
+        installation.getRows().addAll(rows);
         return installation;
+    }
+    public static InstallationUpdateDto mapInstallationToInstallationUpdateDto(Installation installation){
+        InstallationUpdateDto installationUpdateDto = InstallationUpdateDto.builder()
+                .projectId(installation.getProject().getProjectId())
+                .address(installation.getAddress())
+                .installationId(installation.getInstallationId())
+                .moduleOrientation(installation.getModuleOrientation())
+                .constructionType(installation.getInstallationType())
+                .acCableLength(installation.getAcCableLength())
+                .dcCableLength(installation.getDcCableLength())
+                .lgyCableLength(installation.getLgyCableLength())
+                .build();
+
+        List<RowDto> rows = installation.getRows().stream().map(row -> new RowDto(row.getRowNumber(), row.getModuleQuantity())).toList();
+        installationUpdateDto.setRows(rows);
+        return installationUpdateDto;
+    }
+    private static List<Row> mapRowDtoToRow(InstallationDto installationDto, Installation installation){
+        return installationDto.getRows().stream().map(row -> Row.builder().rowNumber(row.getRowNumber())
+                .moduleQuantity(row.getModuleQuantity()).installation(installation).build()).toList();
+    }
+    private static List<Row> mapRowDtoToRowUpdate(InstallationUpdateDto installationDto, Installation installation){
+        return  installationDto.getRows().stream().map(row -> Row.builder().rowNumber(row.getRowNumber())
+                .moduleQuantity(row.getModuleQuantity()).installation(installation).build()).toList();
     }
 
 }

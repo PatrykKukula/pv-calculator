@@ -61,6 +61,7 @@ public class InstallationService {
         return createdInstallation;
     }
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    @Transactional
     public void removeInstallation(Long installationId){
         validateId(installationId);
 
@@ -74,7 +75,7 @@ public class InstallationService {
     public Installation updateInstallation(Long installationId, InstallationUpdateDto installationUpdateDto, ProjectDto project){
         validateId(installationId);
 
-        Installation installation = installationRepository.findById(installationId).orElseThrow(() -> new ResourceNotFoundException("Installation", installationId));
+        Installation installation = installationRepository.findByIdWithRowsAndProject(installationId).orElseThrow(() -> new ResourceNotFoundException("Installation", installationId));
         Installation updatedInstallation = InstallationMapper.mapInstallationUpdateDtoToInstallation(installationUpdateDto, installation);
 
         ConstructionMaterialCalculator constructionMaterialCalculator = new ConstructionMaterialCalculator(constructionMaterialService, updatedInstallation, project);
@@ -82,9 +83,9 @@ public class InstallationService {
 
         List<InstallationMaterial> materials = builder.createInstallationConstructionMaterials();
 
-        installationMaterialRepository.removeAllForInstallation(installation.getInstallationId());
 
-        installation.setMaterials(materials);
+        installation.getMaterials().clear();
+        installation.getMaterials().addAll(materials);
 
         Installation savedInstallation = installationRepository.save(updatedInstallation);
         log.info("Installation with ID:{} updated successfully", installationId);
@@ -102,6 +103,16 @@ public class InstallationService {
         Pageable pageable = PageRequest.of(PAGE_NO, PAGE_SIZE, sort);
 
         return installationRepository.findAllInstallationsByProjectId(projectId, pageable).map(InstallationMapper::mapInstallationToInstallationDto);
+    }
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    public InstallationDto findInstallationById(Long installationId){
+        Installation installation = installationRepository.findByIdWithRowsAndProject(installationId).orElseThrow(() -> new ResourceNotFoundException("Installation", installationId));
+        return InstallationMapper.mapInstallationToInstallationDto(installation);
+    }
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    public InstallationUpdateDto findInstallationUpdateById(Long installationId){
+        Installation installation = installationRepository.findByIdWithRowsAndProject(installationId).orElseThrow(() -> new ResourceNotFoundException("Installation", installationId));
+        return InstallationMapper.mapInstallationToInstallationUpdateDto(installation);
     }
     private void validateRowsQuantity(List<Row> rows){
         for (Row row : rows){
