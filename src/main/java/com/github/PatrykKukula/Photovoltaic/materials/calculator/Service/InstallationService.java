@@ -8,6 +8,7 @@ import com.github.PatrykKukula.Photovoltaic.materials.calculator.Exception.Resou
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Mapper.InstallationMapper;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilder.Construction.ConstructionMaterialBuilder;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilder.Construction.ConstructionMaterialCalculator;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilder.MaterialBuilderFactory;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.*;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Repository.InstallationMaterialRepository;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Repository.InstallationRepository;
@@ -34,6 +35,7 @@ import static com.github.PatrykKukula.Photovoltaic.materials.calculator.Utils.Se
 public class InstallationService {
     private final InstallationRepository installationRepository;
     private final InstallationMaterialRepository installationMaterialRepository;
+    private final MaterialBuilderFactory factory;
     private final ProjectRepository projectRepository;
     private final MaterialService constructionMaterialService;
     private final UserEntityService userService;
@@ -45,8 +47,7 @@ public class InstallationService {
         validateRowsQuantity(installation.getRows());
         UserEntity user = userService.loadCurrentUser();
 
-        ConstructionMaterialCalculator constructionMaterialCalculator = new ConstructionMaterialCalculator(constructionMaterialService, installation, projectDto);
-        ConstructionMaterialBuilder builder = new ConstructionMaterialBuilder(installation, constructionMaterialService, constructionMaterialCalculator, projectDto);
+        ConstructionMaterialBuilder builder = factory.createConstructionBuilder(installation, projectDto);
 
         List<InstallationMaterial> materials = builder.createInstallationConstructionMaterials();
 
@@ -78,11 +79,8 @@ public class InstallationService {
         Installation installation = installationRepository.findByIdWithRowsAndProject(installationId).orElseThrow(() -> new ResourceNotFoundException("Installation", installationId));
         Installation updatedInstallation = InstallationMapper.mapInstallationUpdateDtoToInstallation(installationUpdateDto, installation);
 
-        ConstructionMaterialCalculator constructionMaterialCalculator = new ConstructionMaterialCalculator(constructionMaterialService, updatedInstallation, project);
-        ConstructionMaterialBuilder builder = new ConstructionMaterialBuilder(updatedInstallation, constructionMaterialService, constructionMaterialCalculator, project);
-
+        ConstructionMaterialBuilder builder = factory.createConstructionBuilder(installation, project);
         List<InstallationMaterial> materials = builder.createInstallationConstructionMaterials();
-
 
         installation.getMaterials().clear();
         installation.getMaterials().addAll(materials);
