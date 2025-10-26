@@ -1,4 +1,4 @@
-package com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilder.Construction;
+package com.github.PatrykKukula.Photovoltaic.materials.calculator.InstallationMaterialAssembler.Construction;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ConstructionType;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Project.ProjectDto;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.Installation;
@@ -14,9 +14,9 @@ import java.util.function.Function;
 import static com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ConstructionMaterialConstants.ALLEN_SCREW_LENGTH_MOD;
 
 @Slf4j
-public class ConstructionMaterialBuilder {
+public class ConstructionMaterialAssembler {
     private final MaterialService constructionMaterialService;
-    private final ConstructionMaterialCalculator constructionMaterialCalculator;
+    private final ConstructionMaterialFactory constructionMaterialCalculator;
     private final Map<ConstructionType, Function<Installation, List<InstallationMaterial>>> constructionMap;
     private final Installation installation;
     private final ProjectDto project;
@@ -28,8 +28,8 @@ public class ConstructionMaterialBuilder {
      * @param constructionMaterialCalculator - construction material calculator
      * @param project - ProjectDto that installation belongs to. It is needed due to the information about the modules
      */
-    public ConstructionMaterialBuilder(Installation installation, MaterialService constructionMaterialService,
-                                       ConstructionMaterialCalculator constructionMaterialCalculator, ProjectDto project){
+    public ConstructionMaterialAssembler(Installation installation, MaterialService constructionMaterialService,
+                                         ConstructionMaterialFactory constructionMaterialCalculator, ProjectDto project){
         this.constructionMaterialService = constructionMaterialService;
         this.constructionMaterialCalculator = constructionMaterialCalculator;
         this.project = project;

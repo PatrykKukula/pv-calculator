@@ -2,6 +2,7 @@ package com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilde
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ConstructionType;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ModuleOrientation;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Project.ProjectDto;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.InstallationMaterialAssembler.Construction.ConstructionMaterialFactory;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.*;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Service.MaterialService;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,12 +17,12 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class ConstructionMaterialCalculatorTest {
+public class ConstructionMaterialFactoryTest {
     @Mock
     private MaterialService materialService;
     private Installation installation;
     private ProjectDto projectDto;
-    private ConstructionMaterialCalculator constructionMaterialCalculator;
+    private ConstructionMaterialFactory constructionMaterialCalculator;
 
     @BeforeEach
     public void setUp() {
@@ -43,7 +44,7 @@ public class ConstructionMaterialCalculatorTest {
                 .materials(Collections.emptyList())
                 .rows(List.of(Row.builder().rowNumber(1L).moduleQuantity(10L).build()))
                 .build();
-        constructionMaterialCalculator = new ConstructionMaterialCalculator(materialService, installation, projectDto);
+        constructionMaterialCalculator = new ConstructionMaterialFactory(materialService, installation, projectDto);
     }
 
     @Test

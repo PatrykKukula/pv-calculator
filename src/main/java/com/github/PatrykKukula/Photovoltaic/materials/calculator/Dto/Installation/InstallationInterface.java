@@ -2,6 +2,7 @@ package com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Installati
 
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ConstructionType;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ModuleOrientation;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.PhaseNumber;
 
 import java.util.List;
 
@@ -10,10 +11,12 @@ public interface InstallationInterface {
     String getAddress();
     ConstructionType getConstructionType();
     ModuleOrientation getModuleOrientation();
+    Long getStrings();
     List<RowDto> getRows();
     boolean isLightingProtection();
     Integer getAcCableLength();
     Integer getDcCableLength();
     Integer getLgyCableLength();
     void setRows(List<RowDto> rows);
+    PhaseNumber getPhaseNumber();
 }

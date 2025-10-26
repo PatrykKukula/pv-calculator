@@ -8,11 +8,12 @@ import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Installatio
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Project.ProjectDto;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Exception.InvalidIdException;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Exception.InvalidRowQuantityException;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Exception.PowerOutOfBoundsException;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Exception.ResourceNotFoundException;
-import com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilder.Construction.ConstructionMaterialBuilder;
-import com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilder.MaterialBuilderFactory;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.InstallationMaterialAssembler.Construction.ConstructionMaterialAssembler;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.InstallationMaterialAssembler.Electrical.ElectricalMaterialAssembler;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.InstallationMaterialAssembler.MaterialBuilderFactory;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.*;
-import com.github.PatrykKukula.Photovoltaic.materials.calculator.Repository.InstallationMaterialRepository;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Repository.InstallationRepository;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Repository.ProjectRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -41,17 +42,15 @@ public class InstallationServiceTest {
     @Mock
     private InstallationRepository installationRepository;
     @Mock
-    private InstallationMaterialRepository installationMaterialRepository;
-    @Mock
-    private MaterialService  materialService;
-    @Mock
     private UserEntityService userEntityService;
     @Mock
     private ProjectRepository projectRepository;
     @Mock
     private MaterialBuilderFactory factory;
     @Mock
-    private ConstructionMaterialBuilder constructionMaterialBuilder;
+    private ConstructionMaterialAssembler constructionMaterialAssembler;
+    @Mock
+    private ElectricalMaterialAssembler electricalMaterialAssembler;
     @InjectMocks
     private InstallationService installationService;
     private InstallationDto installationDto;
@@ -62,18 +61,25 @@ public class InstallationServiceTest {
     private RowDto rowDto;
     private List<RowDto> rows = new ArrayList<>();
     private UserEntity user;
-    private InstallationMaterial installationMaterial;
-    private List<InstallationMaterial> materials = new ArrayList<>();
+    private InstallationMaterial constructionMaterial;
+    private InstallationMaterial electricalMaterial;
+    private List<InstallationMaterial> constructionMaterials = new ArrayList<>();
+    private List<InstallationMaterial> electricalMaterials = new ArrayList<>();
 
     @BeforeEach
     public void setUp(){
         rowDto = new RowDto(1L, 10L);
         rows.add(rowDto);
-        installationMaterial = InstallationMaterial.builder()
+        constructionMaterial = InstallationMaterial.builder()
                 .quantity(10L)
                 .constructionMaterial(ConstructionMaterial.builder().name("construction material").materialId(1L).build())
                 .build();
-        materials.add(installationMaterial);
+        constructionMaterials.add(constructionMaterial);
+        electricalMaterial = InstallationMaterial.builder()
+                .quantity(1L)
+                .electricalMaterial(ElectricalMaterial.builder().name("electrical material").materialId(2L).build())
+                .build();
+        electricalMaterials.add(electricalMaterial);
         installationDto = InstallationDto.builder()
                 .projectId(1L)
                 .installationId(1L)
@@ -136,8 +142,10 @@ public class InstallationServiceTest {
     @DisplayName("Should create installation correctly")
     public void shouldCreateInstallationCorrectly(){
         when(userEntityService.loadCurrentUser()).thenReturn(user);
-        when(factory.createConstructionBuilder(any(Installation.class), any(ProjectDto.class))).thenReturn(constructionMaterialBuilder);
-        when(constructionMaterialBuilder.createInstallationConstructionMaterials()).thenReturn(materials);
+        when(factory.createConstructionAssembler(any(Installation.class), any(ProjectDto.class))).thenReturn(constructionMaterialAssembler);
+        when(constructionMaterialAssembler.createInstallationConstructionMaterials()).thenReturn(constructionMaterials);
+        when(factory.createElectricalAssembler(any(Installation.class), anyLong())).thenReturn(electricalMaterialAssembler);
+        when(electricalMaterialAssembler.createInstallationElectricalMaterials()).thenReturn(electricalMaterials);
         when(projectRepository.findById(anyLong())).thenReturn(Optional.of(project));
         when(installationRepository.save(any(Installation.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
@@ -145,8 +153,9 @@ public class InstallationServiceTest {
 
         assertEquals(1, installation.getRows().size());
         assertEquals("address", installation.getAddress());
-        assertEquals(1, installation.getMaterials().size());
+        assertEquals(2, installation.getMaterials().size());
         assertEquals("construction material", installation.getMaterials().getFirst().getConstructionMaterial().getName());
+        assertEquals("electrical material", installation.getMaterials().get(1).getElectricalMaterial().getName());
         assertEquals(1, installation.getProject().getProjectId());
     }
     @Test
@@ -158,11 +167,27 @@ public class InstallationServiceTest {
         assertEquals("Each row should have at least 5 modules", ex.getUserMessage());
     }
     @Test
+    @DisplayName("Should throw PowerOutOfBoundsException when create installation and power is too high")
+    public void shouldThrowPowerOutOfBoundsExceptionWhenCreateInstallationAndPowerIsTooHigh(){
+       projectDto.setModulePower(800);
+       installationDto.setRows(List.of(
+                new RowDto(1L, 22L),
+                new RowDto(2L, 22L),
+                new RowDto(3L, 22L)
+        ));
+        when(userEntityService.loadCurrentUser()).thenReturn(user);
+
+        PowerOutOfBoundsException ex = assertThrows(PowerOutOfBoundsException.class, () -> installationService.createInstallation(installationDto, projectDto));
+        assertEquals("Total power cannot exceed 49.995 kW and is: 52.8", ex.getUserMessage());
+    }
+    @Test
     @DisplayName("Should throw ResourceNotFoundException when create Installation and Project not found")
     public void shouldThrowResourceNotFoundExceptionWhenCreateInstallationAndProjectNotFound(){
         when(userEntityService.loadCurrentUser()).thenReturn(user);
-        when(factory.createConstructionBuilder(any(Installation.class), any(ProjectDto.class))).thenReturn(constructionMaterialBuilder);
-        when(constructionMaterialBuilder.createInstallationConstructionMaterials()).thenReturn(materials);
+        when(factory.createConstructionAssembler(any(Installation.class), any(ProjectDto.class))).thenReturn(constructionMaterialAssembler);
+        when(constructionMaterialAssembler.createInstallationConstructionMaterials()).thenReturn(constructionMaterials);
+        when(factory.createElectricalAssembler(any(Installation.class), anyLong())).thenReturn(electricalMaterialAssembler);
+        when(electricalMaterialAssembler.createInstallationElectricalMaterials()).thenReturn(electricalMaterials);
         when(projectRepository.findById(anyLong())).thenReturn(Optional.empty());
 
 
@@ -189,19 +214,24 @@ public class InstallationServiceTest {
     @Test
     @DisplayName("Should update Installation correctly")
     public void shouldUpdateInstallationCorrectly(){
+        when(userEntityService.loadCurrentUser()).thenReturn(user);
         when(installationRepository.findByIdWithRowsAndProject(anyLong())).thenReturn(Optional.of(installation));
-        when(factory.createConstructionBuilder(any(Installation.class), any(ProjectDto.class))).thenReturn(constructionMaterialBuilder);
-        when(constructionMaterialBuilder.createInstallationConstructionMaterials()).thenReturn(materials);
+        when(factory.createConstructionAssembler(any(Installation.class), any(ProjectDto.class))).thenReturn(constructionMaterialAssembler);
+        when(constructionMaterialAssembler.createInstallationConstructionMaterials()).thenReturn(constructionMaterials);
+        when(factory.createElectricalAssembler(any(Installation.class), anyLong())).thenReturn(electricalMaterialAssembler);
+        when(electricalMaterialAssembler.createInstallationElectricalMaterials()).thenReturn(electricalMaterials);
         when(installationRepository.save(any(Installation.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
         Installation updatedInstallation = installationService.updateInstallation(1L, installationUpdateDto, projectDto);
 
-        assertEquals(1, updatedInstallation.getMaterials().size());
-        assertEquals("construction material", updatedInstallation.getMaterials().getFirst().getConstructionMaterial().getName());
+        assertEquals(2, updatedInstallation.getMaterials().size());
+        verify(constructionMaterialAssembler, times(1)).createInstallationConstructionMaterials();
+        verify(electricalMaterialAssembler, times(1)).createInstallationElectricalMaterials();
     }
     @Test
     @DisplayName("Should throw resource not found exception when update Installation and Installation not found")
     public void shouldThrowResourceNotFoundExceptionWhenUpdateInstallationAndInstallationNotFound(){
+        when(userEntityService.loadCurrentUser()).thenReturn(user);
         when(installationRepository.findByIdWithRowsAndProject(anyLong())).thenReturn(Optional.empty());
 
         ResourceNotFoundException ex = assertThrows(ResourceNotFoundException.class, () -> installationService.updateInstallation(1L, installationUpdateDto,  projectDto));

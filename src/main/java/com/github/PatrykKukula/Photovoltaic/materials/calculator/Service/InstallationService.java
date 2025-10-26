@@ -1,14 +1,16 @@
 package com.github.PatrykKukula.Photovoltaic.materials.calculator.Service;
 
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Installation.InstallationDto;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Installation.InstallationInterface;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Installation.InstallationUpdateDto;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Project.ProjectDto;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Exception.InvalidRowQuantityException;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Exception.PowerOutOfBoundsException;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Exception.ResourceNotFoundException;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.InstallationMaterialAssembler.Electrical.ElectricalMaterialAssembler;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Mapper.InstallationMapper;
-import com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilder.Construction.ConstructionMaterialBuilder;
-import com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilder.Construction.ConstructionMaterialCalculator;
-import com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilder.MaterialBuilderFactory;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.InstallationMaterialAssembler.Construction.ConstructionMaterialAssembler;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.InstallationMaterialAssembler.MaterialBuilderFactory;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.*;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Repository.InstallationMaterialRepository;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Repository.InstallationRepository;
@@ -25,6 +27,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ElectricalMaterialConstants.CONVERT_W_TO_KW;
 import static com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.PagingConstants.PAGE_NO;
 import static com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.PagingConstants.PAGE_SIZE;
 import static com.github.PatrykKukula.Photovoltaic.materials.calculator.Utils.ServiceUtils.validateId;
@@ -34,10 +37,8 @@ import static com.github.PatrykKukula.Photovoltaic.materials.calculator.Utils.Se
 @RequiredArgsConstructor
 public class InstallationService {
     private final InstallationRepository installationRepository;
-    private final InstallationMaterialRepository installationMaterialRepository;
     private final MaterialBuilderFactory factory;
     private final ProjectRepository projectRepository;
-    private final MaterialService constructionMaterialService;
     private final UserEntityService userService;
 
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
@@ -46,12 +47,9 @@ public class InstallationService {
         Installation installation = InstallationMapper.mapInstallationDtoToInstallation(installationDto);
         validateRowsQuantity(installation.getRows());
         UserEntity user = userService.loadCurrentUser();
+        validateTotalPower(installationDto, projectDto.getModulePower().longValue(), user.getUsername());
 
-        ConstructionMaterialBuilder builder = factory.createConstructionBuilder(installation, projectDto);
-
-        List<InstallationMaterial> materials = builder.createInstallationConstructionMaterials();
-
-        installation.setMaterials(materials);
+        setMaterials(installation, projectDto);
 
         Project project = projectRepository.findById(projectDto.getProjectId()).orElseThrow(() -> new ResourceNotFoundException("Project", projectDto.getProjectId()));
         installation.setProject(project);
@@ -75,15 +73,13 @@ public class InstallationService {
     @Transactional
     public Installation updateInstallation(Long installationId, InstallationUpdateDto installationUpdateDto, ProjectDto project){
         validateId(installationId);
+        UserEntity user = userService.loadCurrentUser();
+        validateTotalPower(installationUpdateDto, project.getModulePower().longValue(), user.getUsername());
 
         Installation installation = installationRepository.findByIdWithRowsAndProject(installationId).orElseThrow(() -> new ResourceNotFoundException("Installation", installationId));
         Installation updatedInstallation = InstallationMapper.mapInstallationUpdateDtoToInstallation(installationUpdateDto, installation);
 
-        ConstructionMaterialBuilder builder = factory.createConstructionBuilder(installation, project);
-        List<InstallationMaterial> materials = builder.createInstallationConstructionMaterials();
-
-        installation.getMaterials().clear();
-        installation.getMaterials().addAll(materials);
+        setMaterials(installation, project);
 
         Installation savedInstallation = installationRepository.save(updatedInstallation);
         log.info("Installation with ID:{} updated successfully", installationId);
@@ -112,11 +108,28 @@ public class InstallationService {
         Installation installation = installationRepository.findByIdWithRowsAndProject(installationId).orElseThrow(() -> new ResourceNotFoundException("Installation", installationId));
         return InstallationMapper.mapInstallationToInstallationUpdateDto(installation);
     }
+    private void setMaterials(Installation installation, ProjectDto projectDto){
+        ConstructionMaterialAssembler constructionAssembler = factory.createConstructionAssembler(installation, projectDto);
+        List<InstallationMaterial> constructionMaterials = constructionAssembler.createInstallationConstructionMaterials();
+
+        ElectricalMaterialAssembler electricalAssembler = factory.createElectricalAssembler(installation, projectDto.getModulePower().longValue());
+        List<InstallationMaterial> electricalMaterials = electricalAssembler.createInstallationElectricalMaterials();
+
+        installation.getMaterials().clear();
+        installation.getMaterials().addAll(constructionMaterials);
+        installation.getMaterials().addAll(electricalMaterials);
+    }
     private void validateRowsQuantity(List<Row> rows){
         for (Row row : rows){
             if (row.getModuleQuantity() < 5 ) {
                throw new InvalidRowQuantityException(row.getModuleQuantity());
             }
+        }
+    }
+    private void validateTotalPower(InstallationInterface installationDto, Long modulePower, String username){
+        double totalPower = (installationDto.getRows().stream().mapToDouble(row -> row.getModuleQuantity() * modulePower).sum() / CONVERT_W_TO_KW);
+        if (totalPower > 49.995){
+            throw new PowerOutOfBoundsException(String.valueOf(totalPower), username);
         }
     }
 }

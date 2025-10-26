@@ -5,9 +5,10 @@ import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Project.Pro
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Project.ProjectUpdateDto;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Exception.InvalidOwnershipException;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Exception.ResourceNotFoundException;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.InstallationMaterialAssembler.Electrical.ElectricalMaterialAssembler;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Mapper.ProjectMapper;
-import com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilder.Construction.ConstructionMaterialBuilder;
-import com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilder.MaterialBuilderFactory;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.InstallationMaterialAssembler.Construction.ConstructionMaterialAssembler;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.InstallationMaterialAssembler.MaterialBuilderFactory;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.InstallationMaterial;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.Project;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.UserEntity;
@@ -94,16 +95,8 @@ public class ProjectService {
 
         validateProjectOwner(user, project, "update");
 
-        if (projectUpdateDto.getModuleFrame() != project.getModuleFrame() || projectUpdateDto.getModuleWidth() != project.getModuleWidth() || projectUpdateDto.getModuleLength() != project.getModuleLength()){
-            project.getInstallations().forEach(installation -> {
-                ConstructionMaterialBuilder builder = builderFactory.createConstructionBuilder(installation, projectDto);
-
-                List<InstallationMaterial> materials = builder.createInstallationConstructionMaterials();
-
-                installation.getMaterials().clear();
-                installation.getMaterials().addAll(materials);
-            });
-        }
+        setConstructionMaterials(projectUpdateDto, project, projectDto);
+        setElectricalMaterials(projectUpdateDto, project);
 
         Project updatedProject = mapProjectUpdateDtoToProject(projectUpdateDto, project);
 
@@ -118,6 +111,28 @@ public class ProjectService {
     public Double getTotalPowerForProject(Long projectId){
         Long modulePower = projectRepository.getModulePowerByProjectId(projectId);
         return (double)projectRepository.getAllModulesByProjectId(projectId) * modulePower / CONVERT_W_TO_KW;
+    }
+    private void setConstructionMaterials(ProjectUpdateDto projectUpdateDto, Project project, ProjectDto projectDto){
+        if (projectUpdateDto.getModuleFrame() != project.getModuleFrame() || projectUpdateDto.getModuleWidth() != project.getModuleWidth() || projectUpdateDto.getModuleLength() != project.getModuleLength()){
+            project.getInstallations().forEach(installation -> {
+                ConstructionMaterialAssembler assembler = builderFactory.createConstructionAssembler(installation, projectDto);
+                List<InstallationMaterial> constructionMaterials = assembler.createInstallationConstructionMaterials();
+
+                installation.getMaterials().removeIf(material -> material.getConstructionMaterial() != null);
+                installation.getMaterials().addAll(constructionMaterials);
+            });
+        }
+    }
+    private void setElectricalMaterials(ProjectUpdateDto projectUpdateDto, Project project){
+       if (projectUpdateDto.getModulePower() != project.getModulePower()){
+           project.getInstallations().forEach(installation -> {
+               ElectricalMaterialAssembler assembler = builderFactory.createElectricalAssembler(installation, projectUpdateDto.getModulePower().longValue());
+               List<InstallationMaterial> electricalMaterials = assembler.createInstallationElectricalMaterials();
+
+               installation.getMaterials().removeIf(material -> material.getElectricalMaterial() != null);
+               installation.getMaterials().addAll(electricalMaterials);
+           });
+       }
     }
     private Project fetchProjectById(Long projectId){
         return projectRepository.findByProjectIdWithUserAndInstallations(projectId).orElseThrow(() -> new ResourceNotFoundException("Project", projectId));

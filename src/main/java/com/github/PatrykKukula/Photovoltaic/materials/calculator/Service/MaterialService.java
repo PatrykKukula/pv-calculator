@@ -31,10 +31,12 @@ public class MaterialService {
                 .build();
     }
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
-    public InstallationMaterial createElectricalMaterial(String materialName, Long quantity){
+    public InstallationMaterial createElectricalMaterial(String materialName, Long quantity, Installation installation){
         return InstallationMaterial.builder()
                 .electricalMaterial(fetchElectricalMaterial(materialName))
-                .quantity(quantity).build();
+                .quantity(quantity)
+                .installation(installation)
+                .build();
     }
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public List<InstallationMaterialDto> fetchConstructionMaterialsForInstallation(Long installationId){

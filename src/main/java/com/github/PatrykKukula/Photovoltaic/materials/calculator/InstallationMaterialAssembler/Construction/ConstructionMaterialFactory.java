@@ -1,4 +1,4 @@
-package com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilder.Construction;
+package com.github.PatrykKukula.Photovoltaic.materials.calculator.InstallationMaterialAssembler.Construction;
 
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ModuleOrientation;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Project.ProjectDto;
@@ -11,12 +11,12 @@ import lombok.extern.slf4j.Slf4j;
 import static com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ConstructionMaterialConstants.*;
 
 @Slf4j
-public class ConstructionMaterialCalculator {
+public class ConstructionMaterialFactory {
     private final MaterialService constructionMaterialService;
     private final Installation installation;
     private final ProjectDto project;
 
-    public ConstructionMaterialCalculator(MaterialService constructionMaterialService, Installation installation, ProjectDto project){
+    public ConstructionMaterialFactory(MaterialService constructionMaterialService, Installation installation, ProjectDto project){
         this.constructionMaterialService = constructionMaterialService;
         this.installation = installation;
         this.project = project;

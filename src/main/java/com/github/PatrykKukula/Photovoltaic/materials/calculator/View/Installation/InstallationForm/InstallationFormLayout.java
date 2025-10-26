@@ -2,6 +2,7 @@ package com.github.PatrykKukula.Photovoltaic.materials.calculator.View.Installat
 
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ConstructionType;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ModuleOrientation;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.PhaseNumber;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Installation.InstallationInterface;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Installation.RowDto;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Project.ProjectDto;
@@ -38,7 +39,7 @@ public class InstallationFormLayout<T extends InstallationInterface> extends Ver
     private final BeanValidationBinder<T> binder;
     private final InstallationFormStrategyFactory factory;
     private final ProjectDto projectDto;
-    private Integer rowSpanIndex = 8;
+    private Integer rowSpanIndex = 9;
     private Long rowNo = 1L;
 
     public InstallationFormLayout(T installationInterface, InstallationService installationService, ProjectDto projectDto, Long projectId){
@@ -57,6 +58,7 @@ public class InstallationFormLayout<T extends InstallationInterface> extends Ver
         TextField addressField = addressField();
         ComboBox<ConstructionType> constructionTypeComboBox = installationTypeComboBox();
         ComboBox<ModuleOrientation> moduleOrientationComboBox = moduleOrientationComboBox();
+        ComboBox<PhaseNumber> phaseNumberComboBox = phaseNumbernComboBox();
         ComboBox<Boolean> lightingProtectionComboBox = lightingProtectionComboBox();
         IntegerField acCableField = acCableField();
         IntegerField dcCableField = dcCableField();
@@ -65,7 +67,7 @@ public class InstallationFormLayout<T extends InstallationInterface> extends Ver
         Button saveButton = saveInstallationButton(installationInterface.getInstallationId(), projectId);
 
         binder.setBean(installationInterface);
-        add(header, addressField, constructionTypeComboBox, moduleOrientationComboBox, lightingProtectionComboBox, acCableField, dcCableField, lgyCableField, saveButton
+        add(header, addressField, constructionTypeComboBox, moduleOrientationComboBox, phaseNumberComboBox, lightingProtectionComboBox, acCableField, dcCableField, lgyCableField, saveButton
                 ,cancelButton(projectId));
         setExistingRows(installationInterface.getRows());
         addComponentAtIndex(rowSpanIndex, addRowSpan);
@@ -197,6 +199,16 @@ public class InstallationFormLayout<T extends InstallationInterface> extends Ver
                 .bind("moduleOrientation");
         return comboBox;
     }
+    private ComboBox<PhaseNumber> phaseNumbernComboBox(){
+        ComboBox<PhaseNumber> comboBox = new ComboBox<>("Phase number:");
+        comboBox.getStyle().set("width", "40%");
+        comboBox.setItems(PhaseNumber.values());
+        comboBox.setItemLabelGenerator(item -> item.name().toLowerCase());
+        binder.forField(comboBox)
+                .withValidator(new BeanValidator(strategy.getDtoClass(), "phaseNumber"))
+                .bind("phaseNumber");
+        return comboBox;
+    }
     private ComboBox<Boolean> lightingProtectionComboBox(){
         ComboBox<Boolean> comboBox = new ComboBox<>("Lighting protection in object");
         comboBox.getStyle().set("width", "40%");
@@ -216,24 +228,27 @@ public class InstallationFormLayout<T extends InstallationInterface> extends Ver
         return textField;
     }
     private IntegerField acCableField(){
-        IntegerField acCableField = integerField("AC cable length (from inverter to AC switchboard");
+        IntegerField acCableField = integerField("AC cable length");
         binder.forField(acCableField)
                 .withValidator(new BeanValidator(strategy.getDtoClass(), "acCableLength"))
                 .bind("acCableLength");
+        acCableField.setHelperText("from inverter to AC switchboard");
         return acCableField;
     }
     private IntegerField dcCableField(){
-        IntegerField dcCableField = integerField("DC cable length (from inverter to first row of modules)");
+        IntegerField dcCableField = integerField("DC cable length");
         binder.forField(dcCableField)
                 .withValidator(new BeanValidator(strategy.getDtoClass(), "dcCableLength"))
                 .bind("dcCableLength");
+        dcCableField.setHelperText("from inverter to first row of modules");
         return dcCableField;
     }
     private IntegerField lgyCableField(){
-        IntegerField lgyCableField = integerField("LgY cable length (from inverter to first row of modules");
+        IntegerField lgyCableField = integerField("LgY cable length");
         binder.forField(lgyCableField)
                 .withValidator(new BeanValidator(strategy.getDtoClass(), "lgyCableLength"))
                 .bind("lgyCableLength");
+        lgyCableField.setHelperText("from inverter to first row of modules");
         return lgyCableField;
     }
     private IntegerField rowField(){

@@ -3,6 +3,8 @@ package com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilde
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ConstructionType;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ModuleOrientation;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Project.ProjectDto;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.InstallationMaterialAssembler.Construction.ConstructionMaterialAssembler;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.InstallationMaterialAssembler.Construction.ConstructionMaterialFactory;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.Installation;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.InstallationMaterial;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.Project;
@@ -22,12 +24,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class ConstructionMaterialBuilderTest {
+public class ConstructionMaterialAssemblerTest {
     @Mock
     private MaterialService materialService;
     @Mock
-    private ConstructionMaterialCalculator constructionMaterialCalculator;
-    private ConstructionMaterialBuilder constructionMaterialBuilder;
+    private ConstructionMaterialFactory constructionMaterialCalculator;
+    private ConstructionMaterialAssembler constructionMaterialBuilder;
     private Installation installation;
     private Project project;
     private ProjectDto projectDto;
@@ -63,7 +65,7 @@ public class ConstructionMaterialBuilderTest {
                 .materials(Collections.emptyList())
                 .rows(List.of(Row.builder().rowNumber(1L).moduleQuantity(10L).build()))
                 .build();
-        constructionMaterialBuilder = new ConstructionMaterialBuilder(installation, materialService, constructionMaterialCalculator, projectDto);
+        constructionMaterialBuilder = new ConstructionMaterialAssembler(installation, materialService, constructionMaterialCalculator, projectDto);
         mockCommonMaterials();
     }
     @Test

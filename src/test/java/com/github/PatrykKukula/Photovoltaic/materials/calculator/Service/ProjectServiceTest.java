@@ -7,10 +7,10 @@ import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Project.Pro
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Project.ProjectUpdateDto;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Exception.InvalidIdException;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Exception.InvalidOwnershipException;
-import com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilder.Construction.ConstructionMaterialBuilder;
-import com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilder.MaterialBuilderFactory;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.InstallationMaterialAssembler.Construction.ConstructionMaterialAssembler;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.InstallationMaterialAssembler.Electrical.ElectricalMaterialAssembler;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.InstallationMaterialAssembler.MaterialBuilderFactory;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.*;
-import com.github.PatrykKukula.Photovoltaic.materials.calculator.Repository.InstallationMaterialRepository;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Repository.ProjectRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -38,13 +38,13 @@ public class ProjectServiceTest {
     @Mock
     private ProjectRepository projectRepository;
     @Mock
-    private InstallationMaterialRepository installationMaterialRepository;
-    @Mock
     private UserEntityService userService;
     @Mock
     private MaterialBuilderFactory builderFactory;
     @Mock
-    private ConstructionMaterialBuilder constructionMaterialBuilder;
+    private ConstructionMaterialAssembler constructionMaterialBuilder;
+    @Mock
+    private ElectricalMaterialAssembler electricalMaterialAssembler;
     @InjectMocks
     private ProjectService projectService;
 
@@ -98,10 +98,10 @@ public class ProjectServiceTest {
                 .city("updated city")
                 .voivodeship("updated voivodeship")
                 .investor("updated investor")
-                .modulePower(600)
-                .moduleWidth(1100)
-                .moduleLength(2100)
-                .moduleFrame(35)
+                .modulePower(500)
+                .moduleWidth(1000)
+                .moduleLength(2000)
+                .moduleFrame(30)
                 .build();
     }
     @Test
@@ -231,9 +231,12 @@ public class ProjectServiceTest {
     @DisplayName("Should update materials when updateProject and module size is updated")
     public void shouldUpdateMaterialsWhenUpdateProjectAndModuleSizeIsUpdated(){
         project.setInstallations(List.of(setUpInstallation()));
+        projectUpdateDto.setModuleFrame(35);
+        projectUpdateDto.setModuleWidth(1100);
+        projectUpdateDto.setModuleLength(2100);
         when(userService.loadCurrentUser()).thenReturn(user);
         when(projectRepository.findByProjectIdWithUserAndInstallations(anyLong())).thenReturn(Optional.of(project));
-        when(builderFactory.createConstructionBuilder(any(), any())).thenReturn(constructionMaterialBuilder);
+        when(builderFactory.createConstructionAssembler(any(), any())).thenReturn(constructionMaterialBuilder);
         when(constructionMaterialBuilder.createInstallationConstructionMaterials())
                 .thenReturn(List.of(InstallationMaterial.builder().constructionMaterial(ConstructionMaterial.builder().name("End clamp 35mm").build()).build()));
 
@@ -245,6 +248,26 @@ public class ProjectServiceTest {
         assertEquals(35, updatedProject.getModuleFrame());
         assertEquals(1100, updatedProject.getModuleWidth());
         assertEquals(2100, updatedProject.getModuleLength());
+        verifyNoInteractions(electricalMaterialAssembler);
+    }
+    @Test
+    @DisplayName("Should update materials when updateProject and module power is updated")
+    public void shouldUpdateMaterialsWhenUpdateProjectAndModulePowerIsUpdated(){
+        project.setInstallations(List.of(setUpInstallation()));
+        projectUpdateDto.setModulePower(600);
+        when(userService.loadCurrentUser()).thenReturn(user);
+        when(projectRepository.findByProjectIdWithUserAndInstallations(anyLong())).thenReturn(Optional.of(project));
+        when(builderFactory.createElectricalAssembler(any(), any())).thenReturn(electricalMaterialAssembler);
+        when(electricalMaterialAssembler.createInstallationElectricalMaterials())
+                .thenReturn(List.of(InstallationMaterial.builder().electricalMaterial(ElectricalMaterial.builder().name("electrical material").build()).build()));
+
+        ArgumentCaptor<Project> captor = ArgumentCaptor.forClass(Project.class);
+        projectService.updateProject(1L, projectUpdateDto);
+        verify(projectRepository).save(captor.capture());
+        Project updatedProject = captor.getValue();
+
+        assertEquals(600, updatedProject.getModulePower());
+        verifyNoInteractions(constructionMaterialBuilder);
     }
     @Test
     @DisplayName("Should get Installation count for Project correctly")

@@ -4,6 +4,8 @@ import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Installatio
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Installation.RowDto;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.Installation;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.Row;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class InstallationMapper {
@@ -16,6 +18,9 @@ public class InstallationMapper {
                 .address(installationDto.getAddress())
                 .lgyCableLength(installationDto.getLgyCableLength())
                 .lightingProtection(installationDto.isLightingProtection())
+                .phaseNumber(installationDto.getPhaseNumber())
+                .strings(installationDto.getStrings())
+                .materials(new ArrayList<>())
                 .build();
         List<Row> rows = mapRowDtoToRow(installationDto, installation);
         installation.setRows(rows);
@@ -34,6 +39,8 @@ public class InstallationMapper {
                 .address(installation.getAddress())
                 .lgyCableLength(installation.getLgyCableLength())
                 .lightingProtection(installation.isLightingProtection())
+                .phaseNumber(installation.getPhaseNumber())
+                .strings(installation.getStrings())
                 .build();
     }
     public static Installation mapInstallationUpdateDtoToInstallation(InstallationUpdateDto installationUpdateDto, Installation installation){
@@ -44,6 +51,8 @@ public class InstallationMapper {
         installation.setAddress(installationUpdateDto.getAddress());
         installation.setLgyCableLength(installationUpdateDto.getLgyCableLength());
         installation.setLightingProtection(installationUpdateDto.isLightingProtection());
+        installation.setPhaseNumber(installationUpdateDto.getPhaseNumber());
+        installation.setStrings(installationUpdateDto.getStrings());
         List<Row> rows = mapRowDtoToRowUpdate(installationUpdateDto, installation);
         installation.getRows().clear();
         installation.getRows().addAll(rows);
@@ -59,6 +68,8 @@ public class InstallationMapper {
                 .acCableLength(installation.getAcCableLength())
                 .dcCableLength(installation.getDcCableLength())
                 .lgyCableLength(installation.getLgyCableLength())
+                .phaseNumber(installation.getPhaseNumber())
+                .strings(installation.getStrings())
                 .build();
 
         List<RowDto> rows = installation.getRows().stream().map(row -> new RowDto(row.getRowNumber(), row.getModuleQuantity())).toList();

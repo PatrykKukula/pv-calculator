@@ -2,6 +2,7 @@ package com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Installati
 
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ConstructionType;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ModuleOrientation;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.PhaseNumber;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -24,6 +25,10 @@ public class InstallationUpdateDto implements InstallationInterface {
     private ConstructionType constructionType;
     @NotNull(message = "Pick module orientation")
     private ModuleOrientation moduleOrientation;
+    @NotNull(message = "Pick phase number")
+    private PhaseNumber phaseNumber;
+    @NotNull(message = "Specify number of DC strings")
+    private Long strings;
     private List<RowDto> rows;
     @NotNull(message = "Choose whether object has lighting protection installation")
     private boolean lightingProtection;

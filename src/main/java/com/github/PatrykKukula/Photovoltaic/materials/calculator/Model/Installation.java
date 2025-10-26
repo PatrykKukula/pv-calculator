@@ -2,6 +2,7 @@ package com.github.PatrykKukula.Photovoltaic.materials.calculator.Model;
 
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ConstructionType;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ModuleOrientation;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.PhaseNumber;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,6 +26,11 @@ public class Installation {
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
     private ModuleOrientation moduleOrientation;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private PhaseNumber phaseNumber;
+    @Column(nullable = false)
+    private Long strings;
     @Column(nullable = false)
     private LocalDateTime createdAt;
     @ManyToOne(fetch = FetchType.LAZY)

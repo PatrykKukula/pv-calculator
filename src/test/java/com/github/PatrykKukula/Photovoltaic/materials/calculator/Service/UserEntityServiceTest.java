@@ -8,7 +8,10 @@ import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.UserEntit
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Repository.RoleRepository;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Repository.UserEntityRepository;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Utils.UserValidator;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
@@ -28,7 +31,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
