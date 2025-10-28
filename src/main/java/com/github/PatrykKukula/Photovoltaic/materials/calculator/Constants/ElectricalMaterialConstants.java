@@ -10,4 +10,6 @@ public class ElectricalMaterialConstants {
     public static final int COOPER_CONDUCTIVITY = 58;
     public static final Integer POLES_PER_STRING = 5;
     public static final Integer CONVERT_W_TO_KW = 1000;
+    public static final String ALLOWED_3_PHASED_POWER = "49.995";
+    public static final String ALLOWED_1_PHASED_POWER = "3.6";
 }

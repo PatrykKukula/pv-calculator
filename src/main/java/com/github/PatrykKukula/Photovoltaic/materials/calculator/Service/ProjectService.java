@@ -26,6 +26,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ElectricalMaterialConstants.CONVERT_W_TO_KW;
 import static com.github.PatrykKukula.Photovoltaic.materials.calculator.Mapper.ProjectMapper.mapProjectDtoToProject;
 import static com.github.PatrykKukula.Photovoltaic.materials.calculator.Mapper.ProjectMapper.mapProjectUpdateDtoToProject;
 import static com.github.PatrykKukula.Photovoltaic.materials.calculator.Utils.ServiceUtils.validateId;
@@ -39,7 +40,6 @@ public class ProjectService {
     private final InstallationMaterialRepository installationMaterialRepository;
     private final UserEntityService userService;
     private final MaterialBuilderFactory builderFactory;
-    private final int CONVERT_W_TO_KW = 1000;
 
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public void createProject(ProjectDto projectDto){

@@ -21,6 +21,7 @@ public class InstallationMapper {
                 .phaseNumber(installationDto.getPhaseNumber())
                 .strings(installationDto.getStrings())
                 .materials(new ArrayList<>())
+                .rows(new ArrayList<>())
                 .build();
         List<Row> rows = mapRowDtoToRow(installationDto, installation);
         installation.setRows(rows);

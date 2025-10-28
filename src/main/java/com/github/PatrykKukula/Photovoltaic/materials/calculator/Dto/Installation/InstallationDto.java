@@ -31,7 +31,7 @@ public class InstallationDto implements InstallationInterface {
     @NotNull(message = "Pick phase number")
     private PhaseNumber phaseNumber;
     @NotNull(message = "Specify number of DC strings")
-    private Long strings;
+    private Integer strings;
     private List<RowDto> rows;
     @NotNull(message = "Choose whether object has lighting protection installation")
     private boolean lightingProtection;

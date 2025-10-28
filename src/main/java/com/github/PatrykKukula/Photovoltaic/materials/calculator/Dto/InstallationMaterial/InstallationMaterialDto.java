@@ -10,4 +10,5 @@ import lombok.Data;
 public class InstallationMaterialDto {
     private String name;
     private Long quantity;
+    private String unit;
 }

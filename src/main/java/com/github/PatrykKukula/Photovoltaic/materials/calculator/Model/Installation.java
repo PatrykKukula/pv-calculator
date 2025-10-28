@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -30,7 +31,7 @@ public class Installation {
     @Enumerated(EnumType.STRING)
     private PhaseNumber phaseNumber;
     @Column(nullable = false)
-    private Long strings;
+    private Integer strings;
     @Column(nullable = false)
     private LocalDateTime createdAt;
     @ManyToOne(fetch = FetchType.LAZY)

@@ -7,7 +7,7 @@ import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Installatio
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Installation.RowDto;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Project.ProjectDto;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Service.InstallationService;
-import com.github.PatrykKukula.Photovoltaic.materials.calculator.View.Project.ProjectView;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.View.Installation.InstallationView;
 import com.vaadin.flow.component.ItemLabelGenerator;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -39,7 +39,7 @@ public class InstallationFormLayout<T extends InstallationInterface> extends Ver
     private final BeanValidationBinder<T> binder;
     private final InstallationFormStrategyFactory factory;
     private final ProjectDto projectDto;
-    private Integer rowSpanIndex = 9;
+    private Integer rowSpanIndex = 10;
     private Long rowNo = 1L;
 
     public InstallationFormLayout(T installationInterface, InstallationService installationService, ProjectDto projectDto, Long projectId){
@@ -63,12 +63,13 @@ public class InstallationFormLayout<T extends InstallationInterface> extends Ver
         IntegerField acCableField = acCableField();
         IntegerField dcCableField = dcCableField();
         IntegerField lgyCableField = lgyCableField();
+        IntegerField stringsField = stringsField();
         Span addRowSpan = addRowSpan(null);
-        Button saveButton = saveInstallationButton(installationInterface.getInstallationId(), projectId);
+        Button saveButton = saveInstallationButton(installationInterface.getInstallationId());
 
         binder.setBean(installationInterface);
-        add(header, addressField, constructionTypeComboBox, moduleOrientationComboBox, phaseNumberComboBox, lightingProtectionComboBox, acCableField, dcCableField, lgyCableField, saveButton
-                ,cancelButton(projectId));
+        add(header, addressField, constructionTypeComboBox, moduleOrientationComboBox, phaseNumberComboBox, lightingProtectionComboBox,
+                acCableField, dcCableField, lgyCableField, stringsField, saveButton, cancelButton(installationInterface.getInstallationId()));
         setExistingRows(installationInterface.getRows());
         addComponentAtIndex(rowSpanIndex, addRowSpan);
 
@@ -78,13 +79,13 @@ public class InstallationFormLayout<T extends InstallationInterface> extends Ver
      * each field, or as a notification.
      * @return Button to save installation
      */
-    private Button saveInstallationButton(Long installationId, Long projectId){
+    private Button saveInstallationButton(Long installationId){
         Button button = new Button("Save installation");
         button.addClickListener(e -> {
             if (validateForm()){
                 InstallationInterface dto = prepareInstallation();
                 strategy.save(installationService, dto, projectDto, installationId);
-                UI.getCurrent().navigate(ProjectView.class, projectId);
+                UI.getCurrent().navigate(InstallationView.class, installationId);
             }
             else {
                 binder.validate();
@@ -132,8 +133,17 @@ public class InstallationFormLayout<T extends InstallationInterface> extends Ver
             rowSpanIndex++;
         } else {
             for (RowDto row : rows) {
-                Span span = addRowSpan(row);
-                add(span);
+                IntegerField rowField = rowField();
+                if (row.getRowNumber() == 1) {
+                    rowField.setValue(row.getModuleQuantity().intValue());
+                    addComponentAtIndex(rowSpanIndex, rowField);
+                    rowSpanIndex++;
+                }
+                else {
+                    rowField.getStyle().set("width", "100%");
+                    rowField.setValue(row.getModuleQuantity().intValue());
+                    addRowLayout(rowField);
+                }
             }
         }
     }
@@ -144,28 +154,21 @@ public class InstallationFormLayout<T extends InstallationInterface> extends Ver
             IntegerField moduleQuantity = rowField();
             if (row != null) moduleQuantity.setValue(row.getModuleQuantity().intValue());
             moduleQuantity.getStyle().set("width", "100%");
-            Span moduleQuantitySpan = new Span(moduleQuantity);
-
-            HorizontalLayout rowLayout = new HorizontalLayout(moduleQuantity);
-
-            Icon removeRow = removeRowIcon(rowLayout, moduleQuantity);
-            rowLayout.add(removeRow);
-            rowLayout.setAlignItems(Alignment.CENTER);
-            rowLayout.setJustifyContentMode(JustifyContentMode.BETWEEN);
-            rowLayout.setWidth("40%");
-            addComponentAtIndex(rowSpanIndex, rowLayout);
-
-//            moduleQuantitySpan.add(removeRow);
-//            moduleQuantitySpan.getStyle()
-//                    .set("display", "flex")
-//                    .set("align-items", "center")
-//                    .set("justify-content", "space-between")
-//                    .set("width", "40%")
-//                    .set("gap", "8px").set("padding", "0").set("margin", "0").set("border", "1px solid black");
-//            addComponentAtIndex(rowSpanIndex, moduleQuantitySpan);
-            rowSpanIndex++;
+            addRowLayout(moduleQuantity);
         });
         return span;
+    }
+    private void addRowLayout(IntegerField moduleQuantity){
+        HorizontalLayout rowLayout = new HorizontalLayout(moduleQuantity);
+
+        Icon removeRow = removeRowIcon(rowLayout, moduleQuantity);
+        rowLayout.add(removeRow);
+        rowLayout.setAlignItems(Alignment.CENTER);
+        rowLayout.setJustifyContentMode(JustifyContentMode.BETWEEN);
+        rowLayout.setWidth("40%");
+        addComponentAtIndex(rowSpanIndex, rowLayout);
+
+        rowSpanIndex++;
     }
     private Icon removeRowIcon(HorizontalLayout layout, IntegerField rowField){
         Icon removeRow = VaadinIcon.MINUS.create();
@@ -220,7 +223,7 @@ public class InstallationFormLayout<T extends InstallationInterface> extends Ver
         return comboBox;
     }
     private TextField addressField(){
-        TextField textField = new TextField("address");
+        TextField textField = new TextField("Address");
         binder.forField(textField)
                 .withValidator(new BeanValidator(strategy.getDtoClass(), "address"))
                 .bind("address");
@@ -251,6 +254,13 @@ public class InstallationFormLayout<T extends InstallationInterface> extends Ver
         lgyCableField.setHelperText("from inverter to first row of modules");
         return lgyCableField;
     }
+    private IntegerField stringsField(){
+        IntegerField stringsField = integerField("Number of strings");
+        binder.forField(stringsField)
+                .withValidator(new BeanValidator(strategy.getDtoClass(), "strings"))
+                .bind("strings");
+        return stringsField;
+    }
     private IntegerField rowField(){
         IntegerField integerField = integerField("Row %s - Module quantity".formatted(rowNo));
         integerField.getElement().setAttribute("row-number", String.valueOf(rowNo-1));
@@ -272,10 +282,10 @@ public class InstallationFormLayout<T extends InstallationInterface> extends Ver
         integerField.getStyle().set("width", "40%");
         return integerField;
     }
-    private Button cancelButton(Long projectId){
+    private Button cancelButton(Long installationId){
         Button button = new Button("Cancel");
         button.addClickListener(e -> {
-            UI.getCurrent().navigate(ProjectView.class, projectId);
+            UI.getCurrent().navigate(InstallationView.class, installationId);
         });
         return button;
     }

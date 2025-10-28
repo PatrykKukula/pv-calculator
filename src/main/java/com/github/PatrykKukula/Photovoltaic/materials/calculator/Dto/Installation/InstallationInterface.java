@@ -11,7 +11,7 @@ public interface InstallationInterface {
     String getAddress();
     ConstructionType getConstructionType();
     ModuleOrientation getModuleOrientation();
-    Long getStrings();
+    Integer getStrings();
     List<RowDto> getRows();
     boolean isLightingProtection();
     Integer getAcCableLength();

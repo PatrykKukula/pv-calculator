@@ -72,7 +72,7 @@ public class ConstructionMaterialAssembler {
             materials.add(varioHook);
             materials.add(constructionMaterialCalculator.setScrewsForVarioHook(varioHook.getQuantity()));
             materials.add(hexagonScrew);
-            materials.add(constructionMaterialCalculator.setHexagonNut(hexagonScrew.getQuantity()));
+            materials.add(constructionMaterialCalculator.setHexagonNut(profile.getQuantity()));
             return materials;
         };
     }

@@ -42,6 +42,10 @@ public class MaterialService {
     public List<InstallationMaterialDto> fetchConstructionMaterialsForInstallation(Long installationId){
         return materialRepository.fetchConstructionMaterialsForInstallation(installationId).stream().map(InstallationMaterialMapper::mapInstallationMaterialToInstallationMaterialDto).toList();
     }
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    public List<InstallationMaterialDto> fetchElectricalMaterialsForInstallation(Long installationId){
+        return materialRepository.fetchElectricalMaterialsForInstallation(installationId).stream().map(InstallationMaterialMapper::mapInstallationMaterialToInstallationMaterialDto).toList();
+    }
     private ConstructionMaterial fetchConstructionMaterial(String name){
         return constructionMaterialRepository.fetchConstructionMaterialByName(name)
                 .orElseThrow(() -> new RuntimeException("Material %s not found. Please contact administrator - this shouldn't happen".formatted(name)));

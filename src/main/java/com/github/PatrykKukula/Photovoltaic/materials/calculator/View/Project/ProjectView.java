@@ -88,7 +88,7 @@ public class ProjectView extends VerticalLayout implements HasUrlParameter<Long>
         return () -> {
             installationsLayout.removeAll();
             for (InstallationDto installation : installations){
-                VerticalLayout singleInstallationLayout = new SingleInstallationLayout(installationService, installation, project);
+                VerticalLayout singleInstallationLayout = new SingleInstallationLayout(installationService, installation, project, false);
                 singleInstallationLayout.addClickListener(e -> UI.getCurrent().navigate(InstallationView.class, installation.getInstallationId()));
                 singleInstallationLayout.getStyle().set("cursor", "pointer");
                 installationsLayout.add(singleInstallationLayout);
@@ -147,7 +147,7 @@ public class ProjectView extends VerticalLayout implements HasUrlParameter<Long>
     private HorizontalLayout moduleData(){
         HorizontalLayout moduleData = new HorizontalLayout(moduleDataTitles(), moduleDataValues());
         moduleData.getStyle().set("width", "100%").set("padding", "5px 10px").set("line-height", "300%").set("font-size", "16px")
-                .set("font-family", "georgia").set("justify-content", "center");
+                .set("font-family", "georgia");
         return moduleData;
     }
     private Div projectTitle(){
@@ -161,8 +161,8 @@ public class ProjectView extends VerticalLayout implements HasUrlParameter<Long>
         return header;
     }
     private Div moduleDataHeader(){
-        Div header = new Div("Module data");
-        header.getStyle().set("font-size", "24px").set("font-family", "georgia").set("margin-left", "auto");
+        Div header = new Div("Module details");
+        header.getStyle().set("font-size", "24px").set("font-family", "georgia").set("align-self", "center");
         return header;
     }
     private Div installationsHeader(){

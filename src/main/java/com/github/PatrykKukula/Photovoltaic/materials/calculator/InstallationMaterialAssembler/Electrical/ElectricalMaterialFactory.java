@@ -24,10 +24,12 @@ public class ElectricalMaterialFactory {
     private final NavigableMap<Double, String> overcurrentProtectionCurrentMapSinglePhased = new TreeMap<>();
     private final NavigableMap<Double, Integer> inverterMapThreePhased = new TreeMap<>();
     private final NavigableMap<Double, Double> inverterMapSinglePhased = new TreeMap<>();
-    private final NavigableMap<Integer, Integer> differentialProtectionMap = new TreeMap<>();
+    private final NavigableMap<Double, Integer> differentialProtectionMap = new TreeMap<>();
     private final NavigableMap <Integer, Integer> dcSwitchboardMap = new TreeMap<>();
     private final List<Double> crossSectionValues = List.of(2.5, 4.0,6.0,10.0,16.0,25.0);
     private int overcurrentProtectionCurrent;
+    private Double inverterPower;
+
 
     public ElectricalMaterialFactory(MaterialService materialService, Installation installation, Long modulePower){
         this.materialService = materialService;
@@ -37,6 +39,7 @@ public class ElectricalMaterialFactory {
         fillInverterMap();
         fillDifferentialProtectionMap();
         fillDcSwitchboardMap();
+        setInverterPower();
     }
     public InstallationMaterial createPhotovoltaicModule(){
         return materialService.createElectricalMaterial("Photovoltaic module", calculateModuleQuantity(), installation);
@@ -45,7 +48,8 @@ public class ElectricalMaterialFactory {
         return installation.getPhaseNumber() == THREE_PHASE ? createThreePhasedInverter() :createSinglePhasedInverter();
     }
     public InstallationMaterial createDcSwitchboard(){
-        Integer poles = dcSwitchboardMap.floorEntry(((Long) (installation.getStrings() * POLES_PER_STRING)).intValue()).getValue();
+        Integer poles = dcSwitchboardMap.ceilingEntry(((installation.getStrings() * POLES_PER_STRING))).getValue();
+        log.info("DC switchboard poles:{} ", poles);
         return materialService.createElectricalMaterial("DC switchboard %sP".formatted(poles), 1L, installation);
     }
     public InstallationMaterial createAcSwitchboard(){
@@ -60,20 +64,20 @@ public class ElectricalMaterialFactory {
     }
     public InstallationMaterial createDcCable(){
         int crossSection = calculateTotalPower() <= 10 ? 4 : 6;
-        return materialService.createElectricalMaterial("DC cable %smm2".formatted(crossSection), installation.getDcCableLength().longValue(), installation);
+        return materialService.createElectricalMaterial("DC cable %s mm2".formatted(crossSection), installation.getDcCableLength().longValue(), installation);
     }
     public InstallationMaterial createDcFuse(){
         long quantity = installation.getStrings() * DC_FUSE_PER_HOLDER;
         return materialService.createElectricalMaterial("DC fuse 15A", quantity, installation);
     }
     public InstallationMaterial createDcFuseHolder(){
-        Long quantity = installation.getStrings();
-        return materialService.createElectricalMaterial("DC fuse holder 2p", quantity, installation);
+        Integer quantity = installation.getStrings();
+        return materialService.createElectricalMaterial("DC fuse holder 2p", quantity.longValue(), installation);
     }
     public InstallationMaterial createDcSurgeArresters(){
         String type = installation.isLightingProtection() ? "T1+2" : "T2";
-        Long quantity = installation.getStrings();
-        return materialService.createElectricalMaterial("Surge arrester DC 3P %s".formatted(type), quantity, installation);
+        Integer quantity = installation.getStrings();
+        return materialService.createElectricalMaterial("Surge arrester DC 3P %s".formatted(type), quantity.longValue(), installation);
     }
     public InstallationMaterial createAcSurgeArrester(){
         String type = installation.isLightingProtection() ? "T1+2" : "T2";
@@ -87,7 +91,8 @@ public class ElectricalMaterialFactory {
     public InstallationMaterial createDifferentialCircuitBreaker(){
         String phase = installation.getPhaseNumber() == THREE_PHASE ? "4P" : "2P";
         setCurrent();
-        Integer current = differentialProtectionMap.floorEntry(overcurrentProtectionCurrent).getValue();
+        Integer current = differentialProtectionMap.ceilingEntry(inverterPower).getValue();
+        log.info("Differential current value:{} ", current);
         return materialService.createElectricalMaterial("Differential circuit breaker %s %s/0,1A".formatted(phase, current), 1L, installation);
     }
     public InstallationMaterial createOvercurrentCircuitBreakerC(){
@@ -102,15 +107,23 @@ public class ElectricalMaterialFactory {
     }
     private InstallationMaterial createThreePhasedInverter(){
         Integer inverterPower = inverterMapThreePhased.ceilingEntry(calculateTotalPower()).getValue();
-        return materialService.createElectricalMaterial("3 phased inverter %s kW".formatted(inverterPower), 1L, installation);
+        log.info("3 Phased inverter power:{} ", inverterPower);
+        return materialService.createElectricalMaterial("3 Phased inverter %s kW".formatted(inverterPower), 1L, installation);
     }
     private InstallationMaterial createSinglePhasedInverter(){
         Double inverterPower = inverterMapSinglePhased.ceilingEntry(calculateTotalPower()).getValue();
-        String formattedPower = String.format("%.2f", inverterPower);
-        return materialService.createElectricalMaterial("1 phased inverter %s kW".formatted(formattedPower), 1L, installation);
+        String formattedPower = String.format("%.2f", inverterPower).replace(',', '.');
+        log.info("1 Phased inverter power:{} ",formattedPower);
+        return materialService.createElectricalMaterial("1 Phased inverter %s kW".formatted(formattedPower), 1L, installation);
     }
     private Long calculateModuleQuantity(){
         return installation.getRows().stream().mapToLong(Row::getModuleQuantity).sum();
+    }
+    private void setInverterPower(){
+        if (installation.getPhaseNumber() == THREE_PHASE) {
+            inverterPower = (double)inverterMapThreePhased.ceilingEntry(calculateTotalPower()).getValue();
+        }
+        else inverterPower = inverterMapSinglePhased.ceilingEntry(calculateTotalPower()).getValue();
     }
     private Double calculateTotalPower(){
         return installation.getRows().stream().mapToDouble(row -> (double)(row.getModuleQuantity() * modulePower)).sum() / CONVERT_W_TO_KW;
@@ -126,7 +139,7 @@ public class ElectricalMaterialFactory {
             crossSection = crossSectionValue;
             if (voltageDrop <= 1.0) break; //allowed voltage drop is 1%, and you want to have the lowest possible cross-section value
         }
-        return "AC cable 5x" + crossSection + "mm2";
+        return "AC cable 5x" + crossSection + " mm2";
     }
     /*
      Get cable with the least possible cross-section while achieving voltage drop below 1 % that is common standard
@@ -139,7 +152,7 @@ public class ElectricalMaterialFactory {
             crossSection = crossSectionValue;
             if (voltageDrop <= 1.0) break; //allowed voltage drop is 1%, and you want to have the lowest possible cross-section value
         }
-        return "AC cable 3x" + crossSection + "mm2";
+        return "AC cable 3x" + crossSection + " mm2";
     }
     private void setCurrent(){
         if (installation.getPhaseNumber() == THREE_PHASE){
@@ -148,6 +161,7 @@ public class ElectricalMaterialFactory {
         else {
             overcurrentProtectionCurrent = Integer.parseInt(overcurrentProtectionCurrentMapSinglePhased.ceilingEntry(inverterMapSinglePhased.ceilingEntry(calculateTotalPower()).getValue()).getValue());
         }
+        log.info("Overcurrent protection value:{} ", overcurrentProtectionCurrent);
     }
     private void fillProtectionCurrentMap(){
         overcurrentProtectionCurrentMapThreePhased.put(3, "6");
@@ -189,16 +203,17 @@ public class ElectricalMaterialFactory {
         inverterMapSinglePhased.put(3.6, 3.6);
     }
     private void fillDifferentialProtectionMap(){
-        differentialProtectionMap.put(10, 20);
-        differentialProtectionMap.put(20, 40);
-        differentialProtectionMap.put(25, 50);
-        differentialProtectionMap.put(40, 80);
-        differentialProtectionMap.put(50, 100);
+        differentialProtectionMap.put(10.0, 20);
+        differentialProtectionMap.put(20.0, 40);
+        differentialProtectionMap.put(25.0, 50);
+        differentialProtectionMap.put(40.0, 80);
+        differentialProtectionMap.put(50.0, 100);
     }
     private void fillDcSwitchboardMap(){
         dcSwitchboardMap.put(7, 8);
         dcSwitchboardMap.put(9, 12);
         dcSwitchboardMap.put(13, 24);
         dcSwitchboardMap.put(25, 36);
+        dcSwitchboardMap.put(37, 48);
     }
 }
