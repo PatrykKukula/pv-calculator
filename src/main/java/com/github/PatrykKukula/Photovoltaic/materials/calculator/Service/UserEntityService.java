@@ -9,11 +9,14 @@ import com.github.PatrykKukula.Photovoltaic.materials.calculator.Repository.User
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Utils.UserValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.security.authentication.*;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,6 +24,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
+import static com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.CacheConstants.USER_VAADIN;
 
 @Slf4j
 @Service
@@ -50,6 +55,11 @@ public class UserEntityService {
             throw new AuthenticationCredentialsNotFoundException("Log in to proceed");
         }
     }
+    @Cacheable(
+            value = USER_VAADIN,
+            key = "T(org.springframework.security.core.context.SecurityContextHolder).getContext().getAuthentication() != null ? T(org.springframework.security.core.context.SecurityContextHolder).getContext().getAuthentication().getName() : 'ANON'",
+            unless = "#result == null"
+    )
     public Optional<UserEntity> loadCurrentUserForVaadin(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth == null) return Optional.empty();

@@ -4,6 +4,7 @@ import com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.Phase
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Installation.InstallationDto;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Installation.InstallationInterface;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Installation.InstallationUpdateDto;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Installation.InstallationsRequestDto;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Project.ProjectDto;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Exception.InvalidRowQuantityException;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Exception.PowerOutOfBoundsException;
@@ -15,10 +16,15 @@ import com.github.PatrykKukula.Photovoltaic.materials.calculator.Mapper.Installa
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.*;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Repository.InstallationRepository;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Repository.ProjectRepository;
-import com.vaadin.flow.component.notification.Notification;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -28,6 +34,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.CacheConstants.*;
 import static com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ElectricalMaterialConstants.*;
 import static com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.PagingConstants.PAGE_NO;
 import static com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.PagingConstants.PAGE_SIZE;
@@ -41,23 +48,30 @@ public class InstallationService {
     private final MaterialBuilderFactory factory;
     private final ProjectRepository projectRepository;
     private final UserEntityService userService;
+    private final CacheManager cacheManager;
 
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @Transactional
+    @Caching(
+            evict = {
+                    @CacheEvict(value = PROJECT_POWER, key = "#a1.projectId"),
+                    @CacheEvict(value = INSTALLATION_COUNT, key = "#a1.projectId")
+            }
+    )
     public Installation createInstallation(InstallationDto installationDto, ProjectDto projectDto){
         Installation installation = InstallationMapper.mapInstallationDtoToInstallation(installationDto);
         validateRowsQuantity(installation.getRows());
         UserEntity user = userService.loadCurrentUser();
         validateTotalPower(installationDto, projectDto.getModulePower().longValue(), user.getUsername());
-         setMaterials(installation, projectDto);
+        setMaterials(installation, projectDto);
 
-         Project project = projectRepository.findById(projectDto.getProjectId()).orElseThrow(() -> new ResourceNotFoundException("Project", projectDto.getProjectId()));
-         installation.setProject(project);
+        Project project = projectRepository.findById(projectDto.getProjectId()).orElseThrow(() -> new ResourceNotFoundException("Project", projectDto.getProjectId()));
+        installation.setProject(project);
 
-         Installation createdInstallation = installationRepository.save(installation);
-         log.info("New installation with ID:{} created by user: {}", createdInstallation.getInstallationId(), user.getUsername());
+        Installation createdInstallation = installationRepository.save(installation);
+        log.info("New installation with ID:{} created by user: {}", createdInstallation.getInstallationId(), user.getUsername());
 
-         return createdInstallation;
+        return createdInstallation;
     }
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @Transactional
@@ -67,10 +81,20 @@ public class InstallationService {
         Installation installation = installationRepository.findById(installationId).orElseThrow(() -> new ResourceNotFoundException("Installation", installationId));
 
         installationRepository.delete(installation);
+
+        Cache installationCache = cacheManager.getCache(INSTALLATION_CACHE);
+        if (installationCache != null) installationCache.evictIfPresent(installationId);
+
         log.info("Installation with ID:{} removed successfully", installationId);
     }
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @Transactional
+    @Caching(
+            evict = {
+                    @CacheEvict(cacheNames = PROJECT_POWER, key = "#a1.projectId"),
+                    @CacheEvict(cacheNames = {CONSTRUCTION_MATERIALS, ELECTRICAL_MATERIALS}, key = "#installationId")
+            }
+    )
     public Installation updateInstallation(Long installationId, InstallationUpdateDto installationUpdateDto, ProjectDto project){
         validateId(installationId);
         UserEntity user = userService.loadCurrentUser();
@@ -84,21 +108,25 @@ public class InstallationService {
         Installation savedInstallation = installationRepository.save(updatedInstallation);
         log.info("Installation with ID:{} updated successfully", installationId);
 
+        Cache cache = cacheManager.getCache(INSTALLATION_CACHE);
+        if (cache != null) cache.put(installationId, InstallationMapper.mapInstallationToInstallationDto(savedInstallation));
+
         return savedInstallation;
     }
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
-    public Page<InstallationDto> findAllInstallationsForProject(Long projectId){
+    public Page<InstallationDto> findAllInstallationsForProject(Long projectId, InstallationsRequestDto requestDto){
         validateId(projectId);
 
         UserEntity user = userService.loadCurrentUser();
         log.info("Invoking findAllInstallationsForProject by user:{}. ID validated successfully.", user.getUsername());
 
         Sort sort = Sort.by(Sort.Direction.DESC, "createdAt");
-        Pageable pageable = PageRequest.of(PAGE_NO, PAGE_SIZE, sort);
+        Pageable pageable = PageRequest.of(requestDto.getPageNo(), requestDto.getPageSize(), sort);
 
         return installationRepository.findAllInstallationsByProjectId(projectId, pageable).map(InstallationMapper::mapInstallationToInstallationDto);
     }
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    @Cacheable(INSTALLATION_CACHE)
     public InstallationDto findInstallationById(Long installationId){
         Installation installation = installationRepository.findByIdWithRowsAndProject(installationId).orElseThrow(() -> new ResourceNotFoundException("Installation", installationId));
         return InstallationMapper.mapInstallationToInstallationDto(installation);

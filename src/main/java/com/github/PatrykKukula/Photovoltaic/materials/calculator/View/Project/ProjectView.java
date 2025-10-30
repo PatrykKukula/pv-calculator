@@ -1,22 +1,20 @@
 package com.github.PatrykKukula.Photovoltaic.materials.calculator.View.Project;
 
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Installation.InstallationDto;
-import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Installation.RowDto;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Installation.InstallationsRequestDto;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Project.ProjectDto;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.UserEntity;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Service.InstallationService;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Service.ProjectService;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Service.UserEntityService;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.View.Components.PageButtons;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.View.Components.SingleInstallationLayout;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.View.Installation.AddInstallationView;
-import com.github.PatrykKukula.Photovoltaic.materials.calculator.View.Installation.InstallationUpdateView;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.View.Installation.InstallationView;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.Span;
-import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -30,6 +28,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
+import java.util.Optional;
+
+import static com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.PagingConstants.*;
 import static com.github.PatrykKukula.Photovoltaic.materials.calculator.View.Components.ProjectCommonComponents.titlesDiv;
 import static com.github.PatrykKukula.Photovoltaic.materials.calculator.View.Components.ProjectCommonComponents.valuesDiv;
 
@@ -45,6 +47,7 @@ public class ProjectView extends VerticalLayout implements HasUrlParameter<Long>
     private final UserEntityService userEntityService;
     private final VerticalLayout installationsLayout = new VerticalLayout();
     private Page<InstallationDto> installations;
+    private PageButtons<InstallationDto> pageButtons;
 
     @Override
     public void setParameter(BeforeEvent event, Long projectId) {
@@ -53,10 +56,9 @@ public class ProjectView extends VerticalLayout implements HasUrlParameter<Long>
 
             project = projectService.findProjectById(projectId);
 
-            installations = installationService.findAllInstallationsForProject(projectId);
+            installations = installationService.findAllInstallationsForProject(projectId, InstallationsRequestDto.builder().pageNo(PAGE_NO).pageSize(PAGE_SIZE).sortDirection(SORT_DESC).build());
+            pageButtons = new PageButtons<>(installations, renderInstallations());
             renderInstallations().run();
-
-            PageButtons<InstallationDto> pageButtons = new PageButtons<>(installations, renderInstallations());
 
             VerticalLayout left = new VerticalLayout(projectDetailsHeader(), projectDetailsLayout());
             VerticalLayout right = new VerticalLayout(moduleDataHeader(), moduleData());
@@ -86,6 +88,7 @@ public class ProjectView extends VerticalLayout implements HasUrlParameter<Long>
     }
     private Runnable renderInstallations(){
         return () -> {
+            List<InstallationDto> installations = installationService.findAllInstallationsForProject(project.getProjectId(), new InstallationsRequestDto(SORT_ASC, pageButtons.getCurrentPage(), PAGE_SIZE)).getContent();
             installationsLayout.removeAll();
             for (InstallationDto installation : installations){
                 VerticalLayout singleInstallationLayout = new SingleInstallationLayout(installationService, installation, project, false);
@@ -181,8 +184,11 @@ public class ProjectView extends VerticalLayout implements HasUrlParameter<Long>
         button.addThemeVariants(ButtonVariant.LUMO_ERROR);
         button.addClickListener(e -> {
             try{
-                projectService.removeProject(project.getProjectId());
-                UI.getCurrent().navigate(ProjectsView.class, userEntityService.loadCurrentUser().getUserId());
+                Optional<UserEntity> user = userEntityService.loadCurrentUserForVaadin();
+                if (user.isPresent()) {
+                    projectService.removeProject(project.getProjectId());
+                    UI.getCurrent().navigate(ProjectsView.class, user.get().getUserId());
+                }
             }
             catch (Exception ex){
                 Notification.show("An error has occurred %s".formatted(ex.getMessage()), 7000, Notification.Position.MIDDLE);

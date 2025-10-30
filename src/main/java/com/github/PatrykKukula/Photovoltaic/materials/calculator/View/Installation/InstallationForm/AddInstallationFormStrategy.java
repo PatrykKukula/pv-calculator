@@ -5,6 +5,9 @@ import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Installatio
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Project.ProjectDto;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.Installation;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Service.InstallationService;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.View.Installation.InstallationView;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.View.Project.ProjectsView;
+import com.vaadin.flow.component.UI;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -18,9 +21,14 @@ public class AddInstallationFormStrategy implements InstallationFormStrategy<Ins
     public void save(InstallationService installationService, InstallationInterface installationInterface, ProjectDto projectDto, Long installationId) {
         Installation savedInstallation = installationService.createInstallation((InstallationDto) installationInterface, projectDto);
         log.info("Installation saved successfully:{} ", savedInstallation);
+        UI.getCurrent().navigate(InstallationView.class, savedInstallation.getInstallationId());
     }
     @Override
     public Class<InstallationDto> getDtoClass() {
         return InstallationDto.class;
+    }
+    @Override
+    public void cancel(Long id) {
+        UI.getCurrent().navigate(ProjectsView.class, id);
     }
 }

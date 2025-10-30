@@ -8,4 +8,5 @@ public interface InstallationFormStrategy<T extends InstallationInterface> {
     String getTitle();
     void save(InstallationService installationService, InstallationInterface installationInterface, ProjectDto projectDto, Long installationId);
     Class<T> getDtoClass();
+    void cancel(Long id);
 }

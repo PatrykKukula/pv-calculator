@@ -42,7 +42,6 @@ public class ProjectsView extends VerticalLayout implements HasUrlParameter<Long
 
         pageButtons = new PageButtons<>(projects, renderPage());
 
-
         renderPage().run();
 
         add(projectsLayout, pageButtons);

@@ -26,7 +26,6 @@ public class PageButtons<T> extends HorizontalLayout {
         setUpNextButton();
         setUpPreviousButton();
         setUpPagesSpan();
-        log.info("Items size:{} ", items.getContent().size());
 
         add(pagesSpan);
     }

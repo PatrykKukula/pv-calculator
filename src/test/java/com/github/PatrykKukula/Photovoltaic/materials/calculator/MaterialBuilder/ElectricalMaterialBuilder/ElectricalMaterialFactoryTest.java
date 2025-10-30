@@ -47,7 +47,7 @@ public class ElectricalMaterialFactoryTest {
                 .installationType(ConstructionType.TRAPEZE)
                 .moduleOrientation(ModuleOrientation.VERTICAL)
                 .phaseNumber(PhaseNumber.THREE_PHASE)
-                .strings(2L)
+                .strings(2)
                 .createdAt(LocalDateTime.of(2000, 1, 1, 12, 0))
                 .rows(rows)
                 .lightingProtection(true)

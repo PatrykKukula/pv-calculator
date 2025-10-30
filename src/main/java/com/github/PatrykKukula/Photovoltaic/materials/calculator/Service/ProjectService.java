@@ -5,18 +5,21 @@ import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Project.Pro
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Project.ProjectUpdateDto;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Exception.InvalidOwnershipException;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Exception.ResourceNotFoundException;
-import com.github.PatrykKukula.Photovoltaic.materials.calculator.InstallationMaterialAssembler.Electrical.ElectricalMaterialAssembler;
-import com.github.PatrykKukula.Photovoltaic.materials.calculator.Mapper.ProjectMapper;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.InstallationMaterialAssembler.Construction.ConstructionMaterialAssembler;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.InstallationMaterialAssembler.Electrical.ElectricalMaterialAssembler;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.InstallationMaterialAssembler.MaterialBuilderFactory;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Mapper.InstallationMaterialMapper;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Mapper.ProjectMapper;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.InstallationMaterial;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.Project;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.UserEntity;
-import com.github.PatrykKukula.Photovoltaic.materials.calculator.Repository.InstallationMaterialRepository;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Repository.ProjectRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -26,6 +29,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.CacheConstants.*;
 import static com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ElectricalMaterialConstants.CONVERT_W_TO_KW;
 import static com.github.PatrykKukula.Photovoltaic.materials.calculator.Mapper.ProjectMapper.mapProjectDtoToProject;
 import static com.github.PatrykKukula.Photovoltaic.materials.calculator.Mapper.ProjectMapper.mapProjectUpdateDtoToProject;
@@ -37,9 +41,9 @@ import static com.github.PatrykKukula.Photovoltaic.materials.calculator.Utils.Se
 @RequiredArgsConstructor
 public class ProjectService {
     private final ProjectRepository projectRepository;
-    private final InstallationMaterialRepository installationMaterialRepository;
     private final UserEntityService userService;
     private final MaterialBuilderFactory builderFactory;
+    private final CacheManager cacheManager;
 
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public void createProject(ProjectDto projectDto){
@@ -53,16 +57,18 @@ public class ProjectService {
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public Page<ProjectDto> findAllProjects(ProjectRequestDto projectRequestDto){
        UserEntity user = userService.loadCurrentUser();
-       log.info("findAllProjects invoked by user:{} ", user.getUsername());
 
-       String sortDirection = validateSortDirection(projectRequestDto.getSortDirection());
-       Sort sort = Sort.by(Sort.Direction.fromString(sortDirection),"createdAt");
-       Pageable pageable = PageRequest.of(projectRequestDto.getPageNo(), projectRequestDto.getPageSize(), sort);
+        String sortDirection = validateSortDirection(projectRequestDto.getSortDirection());
+        Sort sort = Sort.by(Sort.Direction.fromString(sortDirection),"createdAt");
+        Pageable pageable = PageRequest.of(projectRequestDto.getPageNo(), projectRequestDto.getPageSize(), sort);
 
-       return projectRequestDto.getTitle() == null ? projectRepository.findAllProjectsByUsername(user.getUsername(), pageable).map(ProjectMapper::mapProjectToProjectDto) :
-               projectRepository.findAllProjectsByUsernameAndTitle(user.getUsername(), projectRequestDto.getTitle(), pageable).map(ProjectMapper::mapProjectToProjectDto);
+        Page<ProjectDto> projects = projectRequestDto.getTitle() == null ? projectRepository.findAllProjectsByUsername(user.getUsername(), pageable).map(ProjectMapper::mapProjectToProjectDto) :
+                projectRepository.findAllProjectsByUsernameAndTitle(user.getUsername(), projectRequestDto.getTitle(), pageable).map(ProjectMapper::mapProjectToProjectDto);
+
+        return projects;
     }
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @Cacheable(PROJECT_CACHE)
     public ProjectDto findProjectById(Long projectId){
         return ProjectMapper.mapProjectToProjectDto(fetchProjectById(projectId));
     }
@@ -81,6 +87,10 @@ public class ProjectService {
         validateProjectOwner(user, project, "remove");
 
         projectRepository.delete(project);
+
+        Cache projectCache = cacheManager.getCache(PROJECT_CACHE);
+        if (projectCache != null) projectCache.evictIfPresent(projectId);
+
         log.info("Project with ID:{} removed successfully", projectId);
     }
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
@@ -101,13 +111,19 @@ public class ProjectService {
         Project updatedProject = mapProjectUpdateDtoToProject(projectUpdateDto, project);
 
         projectRepository.save(updatedProject);
+
+        Cache projectCache = cacheManager.getCache(PROJECT_CACHE);
+        if (projectCache != null) projectCache.put(projectId, ProjectMapper.mapProjectToProjectDto(updatedProject));
+
         log.info("Project with ID:{} updated successfully", projectId);
     }
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @Cacheable(INSTALLATION_COUNT)
     public Integer getInstallationCountForProject(Long projectId){
         return projectRepository.getInstallationNumber(projectId);
     }
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @Cacheable(PROJECT_POWER)
     public Double getTotalPowerForProject(Long projectId){
         Long modulePower = projectRepository.getModulePowerByProjectId(projectId);
         return (double)projectRepository.getAllModulesByProjectId(projectId) * modulePower / CONVERT_W_TO_KW;
@@ -120,6 +136,9 @@ public class ProjectService {
 
                 installation.getMaterials().removeIf(material -> material.getConstructionMaterial() != null);
                 installation.getMaterials().addAll(constructionMaterials);
+
+                Cache cache = cacheManager.getCache(CONSTRUCTION_MATERIALS);
+                if (cache != null) cache.put(installation.getInstallationId(), constructionMaterials.stream().map(InstallationMaterialMapper::mapInstallationMaterialToInstallationMaterialDto));
             });
         }
     }
@@ -131,6 +150,9 @@ public class ProjectService {
 
                installation.getMaterials().removeIf(material -> material.getElectricalMaterial() != null);
                installation.getMaterials().addAll(electricalMaterials);
+
+               Cache cache = cacheManager.getCache(ELECTRICAL_MATERIALS);
+               if (cache != null) cache.put(installation.getInstallationId(), electricalMaterials.stream().map(InstallationMaterialMapper::mapInstallationMaterialToInstallationMaterialDto));
            });
        }
     }

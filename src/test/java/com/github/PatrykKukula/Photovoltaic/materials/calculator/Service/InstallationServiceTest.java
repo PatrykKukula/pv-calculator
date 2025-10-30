@@ -4,6 +4,7 @@ import com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.Const
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ModuleOrientation;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Installation.InstallationDto;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Installation.InstallationUpdateDto;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Installation.InstallationsRequestDto;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Installation.RowDto;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Project.ProjectDto;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Exception.InvalidIdException;
@@ -23,6 +24,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.cache.CacheManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -51,6 +53,8 @@ public class InstallationServiceTest {
     private ConstructionMaterialAssembler constructionMaterialAssembler;
     @Mock
     private ElectricalMaterialAssembler electricalMaterialAssembler;
+    @Mock
+    private CacheManager cacheManager;
     @InjectMocks
     private InstallationService installationService;
     private InstallationDto installationDto;
@@ -221,6 +225,7 @@ public class InstallationServiceTest {
         when(factory.createElectricalAssembler(any(Installation.class), anyLong())).thenReturn(electricalMaterialAssembler);
         when(electricalMaterialAssembler.createInstallationElectricalMaterials()).thenReturn(electricalMaterials);
         when(installationRepository.save(any(Installation.class))).thenAnswer(invocation -> invocation.getArgument(0));
+    
 
         Installation updatedInstallation = installationService.updateInstallation(1L, installationUpdateDto, projectDto);
 
@@ -244,7 +249,7 @@ public class InstallationServiceTest {
         when(installationRepository.findAllInstallationsByProjectId(anyLong(), any(Pageable.class)))
                 .thenReturn(new PageImpl<>(List.of(installation)));
 
-        Page<InstallationDto> installations = installationService.findAllInstallationsForProject(1L);
+        Page<InstallationDto> installations = installationService.findAllInstallationsForProject(1L, new InstallationsRequestDto("ASC", 0, 10));
 
         assertEquals(1, installations.getTotalElements());
         assertEquals(1, installations.getTotalPages());
@@ -257,7 +262,7 @@ public class InstallationServiceTest {
         when(installationRepository.findAllInstallationsByProjectId(anyLong(), any(Pageable.class)))
                 .thenReturn(Page.empty());
 
-        Page<InstallationDto> installations = installationService.findAllInstallationsForProject(1L);
+        Page<InstallationDto> installations = installationService.findAllInstallationsForProject(1L, new InstallationsRequestDto("ASC", 0, 10));
 
         assertEquals(0, installations.getTotalElements());
     }

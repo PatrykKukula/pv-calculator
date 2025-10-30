@@ -3,6 +3,7 @@ package com.github.PatrykKukula.Photovoltaic.materials.calculator.View.Installat
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ConstructionType;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ModuleOrientation;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.PhaseNumber;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Installation.InstallationDto;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Installation.InstallationInterface;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Installation.RowDto;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Project.ProjectDto;
@@ -66,10 +67,11 @@ public class InstallationFormLayout<T extends InstallationInterface> extends Ver
         IntegerField stringsField = stringsField();
         Span addRowSpan = addRowSpan(null);
         Button saveButton = saveInstallationButton(installationInterface.getInstallationId());
+        Button cancelButton = cancelButton(strategy.getDtoClass() == InstallationDto.class ? projectId : installationInterface.getInstallationId());
 
         binder.setBean(installationInterface);
         add(header, addressField, constructionTypeComboBox, moduleOrientationComboBox, phaseNumberComboBox, lightingProtectionComboBox,
-                acCableField, dcCableField, lgyCableField, stringsField, saveButton, cancelButton(installationInterface.getInstallationId()));
+                acCableField, dcCableField, lgyCableField, stringsField, saveButton, cancelButton);
         setExistingRows(installationInterface.getRows());
         addComponentAtIndex(rowSpanIndex, addRowSpan);
 
@@ -85,7 +87,6 @@ public class InstallationFormLayout<T extends InstallationInterface> extends Ver
             if (validateForm()){
                 InstallationInterface dto = prepareInstallation();
                 strategy.save(installationService, dto, projectDto, installationId);
-                UI.getCurrent().navigate(InstallationView.class, installationId);
             }
             else {
                 binder.validate();
@@ -282,10 +283,10 @@ public class InstallationFormLayout<T extends InstallationInterface> extends Ver
         integerField.getStyle().set("width", "40%");
         return integerField;
     }
-    private Button cancelButton(Long installationId){
+    private Button cancelButton(Long id){
         Button button = new Button("Cancel");
         button.addClickListener(e -> {
-            UI.getCurrent().navigate(InstallationView.class, installationId);
+            strategy.cancel(id);
         });
         return button;
     }
