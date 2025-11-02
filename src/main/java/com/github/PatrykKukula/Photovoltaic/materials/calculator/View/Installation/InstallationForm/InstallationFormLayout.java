@@ -26,6 +26,7 @@ import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.validator.BeanValidator;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,7 +87,11 @@ public class InstallationFormLayout<T extends InstallationInterface> extends Ver
         button.addClickListener(e -> {
             if (validateForm()){
                 InstallationInterface dto = prepareInstallation();
-                strategy.save(installationService, dto, projectDto, installationId);
+                try {
+                    strategy.save(installationService, dto, projectDto, installationId);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
             else {
                 binder.validate();

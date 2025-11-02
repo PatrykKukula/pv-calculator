@@ -68,6 +68,7 @@ public class ConstructionMaterialFactoryTest {
     @Test
     @DisplayName("Should set profile joiner correctly")
     public void shouldSetProfileJoinerCorrectly(){
+        installation.setInstallationType(ConstructionType.VARIO_HOOK);
         when(materialService.createConstructionMaterial(anyString(), anyLong(), any(Installation.class))).thenReturn(new InstallationMaterial());
 
         constructionMaterialCalculator.setProfileJoiner(12000);
@@ -78,7 +79,7 @@ public class ConstructionMaterialFactoryTest {
     @DisplayName("Should set hexagon screw correctly")
     public void shouldSetHexagonScrewCorrectly(){
         installation.setInstallationType(ConstructionType.DOUBLE_THREADED_SCREW_OBLIQUE);
-        when(materialService.createConstructionMaterial(anyString(), anyLong(), eq(installation))).thenReturn(new InstallationMaterial());
+        when(materialService.createConstructionMaterial(anyString(), anyLong(), any(Installation.class))).thenReturn(new InstallationMaterial());
 
         constructionMaterialCalculator.setHexagonScrew(12000);
 

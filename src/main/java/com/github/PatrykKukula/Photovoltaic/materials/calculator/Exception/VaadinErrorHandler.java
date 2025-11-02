@@ -1,10 +1,15 @@
 package com.github.PatrykKukula.Photovoltaic.materials.calculator.Exception;
 
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.View.LoginView;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.server.ErrorEvent;
 import com.vaadin.flow.server.ErrorHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Component;
+
+import javax.naming.AuthenticationException;
 
 import static com.github.PatrykKukula.Photovoltaic.materials.calculator.View.Components.NotificationComponents.showErrorMessage;
 
@@ -18,6 +23,12 @@ public class VaadinErrorHandler implements ErrorHandler {
         if (throwable instanceof AppException ex) {
             showErrorMessage(ex.getUserMessage());
         }
-        else showErrorMessage(throwable.getMessage());
+        else {
+            showErrorMessage(throwable.getMessage());
+            if (throwable instanceof BadCredentialsException || throwable instanceof AuthenticationException){
+                UI.getCurrent().navigate(LoginView.class);
+            }
+        }
+        throwable.printStackTrace();
     }
 }

@@ -7,6 +7,7 @@ import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.UserEntit
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Service.InstallationService;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Service.ProjectService;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Service.UserEntityService;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.View.Components.FileExportLayout;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.View.Components.PageButtons;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.View.Components.SingleInstallationLayout;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.View.Installation.AddInstallationView;
@@ -54,7 +55,9 @@ public class ProjectView extends VerticalLayout implements HasUrlParameter<Long>
         getStyle().set("width", "40%").set("display", "flex").set("align-items", "center")
                 .set("margin", "auto").set("border-left", "2px solid black").set("border-right", "2px solid black").set("min-height", "100vh");
 
-            project = projectService.findProjectById(projectId);
+        FileExportLayout fileExportLayout = new FileExportLayout(projectId, projectService);
+
+        project = projectService.findProjectById(projectId);
 
             installations = installationService.findAllInstallationsForProject(projectId, InstallationsRequestDto.builder().pageNo(PAGE_NO).pageSize(PAGE_SIZE).sortDirection(SORT_DESC).build());
             pageButtons = new PageButtons<>(installations, renderInstallations());
@@ -64,9 +67,8 @@ public class ProjectView extends VerticalLayout implements HasUrlParameter<Long>
             VerticalLayout right = new VerticalLayout(moduleDataHeader(), moduleData());
             HorizontalLayout detailsLayout = new HorizontalLayout(left, right);
 
-
-            add(projectTitle(), detailsLayout, buttonsDiv(), installationsHeader(),
-                    addInstalationButton(), installationsLayout, pageButtons);
+        add(projectTitle(), detailsLayout, buttonsDiv(), installationsHeader(),
+                    addInstalationButton(), fileExportLayout, installationsLayout, pageButtons);
     }
 
     private HorizontalLayout projectDetailsLayout(){
@@ -98,7 +100,6 @@ public class ProjectView extends VerticalLayout implements HasUrlParameter<Long>
             }
         };
     }
-
     private Div buttonsDiv(){
         Div div = new Div();
         Button editButton = editButton();

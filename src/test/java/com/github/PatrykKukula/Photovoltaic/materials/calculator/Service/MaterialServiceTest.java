@@ -29,8 +29,6 @@ public class MaterialServiceTest {
     @Mock
     private ConstructionMaterialRepository constructionMaterialRepository;
     @Mock
-    private ElectricalMaterialRepository electricalMaterialRepository;
-    @Mock
     private InstallationMaterialRepository materialRepository;
     @InjectMocks
     private MaterialService materialService;

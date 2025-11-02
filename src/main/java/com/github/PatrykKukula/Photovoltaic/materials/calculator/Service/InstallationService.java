@@ -9,20 +9,22 @@ import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Project.Pro
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Exception.InvalidRowQuantityException;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Exception.PowerOutOfBoundsException;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Exception.ResourceNotFoundException;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Files.MaterialsExporter;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.InstallationMaterialAssembler.Construction.ConstructionMaterialAssembler;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.InstallationMaterialAssembler.Electrical.ElectricalMaterialAssembler;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.InstallationMaterialAssembler.MaterialBuilderFactory;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Mapper.InstallationMapper;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.*;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Repository.InstallationMaterialRepository;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Repository.InstallationRepository;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Repository.ProjectRepository;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Utils.InstallationMaterialListToMapMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.data.domain.Page;
@@ -32,12 +34,14 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.CacheConstants.*;
 import static com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ElectricalMaterialConstants.*;
-import static com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.PagingConstants.PAGE_NO;
-import static com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.PagingConstants.PAGE_SIZE;
 import static com.github.PatrykKukula.Photovoltaic.materials.calculator.Utils.ServiceUtils.validateId;
 
 @Slf4j
@@ -47,8 +51,10 @@ public class InstallationService {
     private final InstallationRepository installationRepository;
     private final MaterialBuilderFactory factory;
     private final ProjectRepository projectRepository;
+    private final InstallationMaterialRepository installationMaterialRepository;
     private final UserEntityService userService;
     private final CacheManager cacheManager;
+    private final MaterialsExporter materialsExporter;
 
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @Transactional
@@ -58,7 +64,7 @@ public class InstallationService {
                     @CacheEvict(value = INSTALLATION_COUNT, key = "#a1.projectId")
             }
     )
-    public Installation createInstallation(InstallationDto installationDto, ProjectDto projectDto){
+    public Installation createInstallation(InstallationDto installationDto, ProjectDto projectDto) throws IOException {
         Installation installation = InstallationMapper.mapInstallationDtoToInstallation(installationDto);
         validateRowsQuantity(installation.getRows());
         UserEntity user = userService.loadCurrentUser();
@@ -136,6 +142,19 @@ public class InstallationService {
         Installation installation = installationRepository.findByIdWithRowsAndProject(installationId).orElseThrow(() -> new ResourceNotFoundException("Installation", installationId));
         return InstallationMapper.mapInstallationToInstallationUpdateDto(installation);
     }
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    public ByteArrayOutputStream exportInstallationMaterialsToExcel(Long installationId) throws IOException {
+        Installation installation = installationRepository.findByIdWithRowsAndProject(installationId).orElseThrow(() -> new ResourceNotFoundException("Installation", installationId));
+        List<InstallationMaterial> constructionMaterials = installationMaterialRepository.fetchConstructionMaterialsForInstallation(installationId);
+        List<InstallationMaterial> electricalMaterials = installationMaterialRepository.fetchElectricalMaterialsForInstallation(installationId);
+
+        InstallationMaterialListToMapMapper mapper = new InstallationMaterialListToMapMapper();
+
+        Map<String, Long> constructionMaterialsMap = mapper.createConstructionMaterialsMap(constructionMaterials);
+        Map<String, Long> electricalMaterialsMap = mapper.createElectricalMaterialsMap(electricalMaterials);
+        return materialsExporter.exportMaterialsToExcelForInstallation(installation, constructionMaterialsMap, electricalMaterialsMap);
+    }
+
     private void setMaterials(Installation installation, ProjectDto projectDto){
         log.info("Invoking set materials with strings:{} ", installation.getStrings());
         ConstructionMaterialAssembler constructionAssembler = factory.createConstructionAssembler(installation, projectDto);

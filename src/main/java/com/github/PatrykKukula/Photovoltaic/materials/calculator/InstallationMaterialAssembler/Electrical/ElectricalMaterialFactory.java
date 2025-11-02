@@ -48,8 +48,7 @@ public class ElectricalMaterialFactory {
         return installation.getPhaseNumber() == THREE_PHASE ? createThreePhasedInverter() :createSinglePhasedInverter();
     }
     public InstallationMaterial createDcSwitchboard(){
-        Integer poles = dcSwitchboardMap.ceilingEntry(((installation.getStrings() * POLES_PER_STRING))).getValue();
-        log.info("DC switchboard poles:{} ", poles);
+        Integer poles = dcSwitchboardMap.floorEntry(((installation.getStrings() * POLES_PER_STRING))).getValue();
         return materialService.createElectricalMaterial("DC switchboard %sP".formatted(poles), 1L, installation);
     }
     public InstallationMaterial createAcSwitchboard(){
@@ -210,7 +209,7 @@ public class ElectricalMaterialFactory {
         differentialProtectionMap.put(50.0, 100);
     }
     private void fillDcSwitchboardMap(){
-        dcSwitchboardMap.put(7, 8);
+        dcSwitchboardMap.put(0, 8);
         dcSwitchboardMap.put(9, 12);
         dcSwitchboardMap.put(13, 24);
         dcSwitchboardMap.put(25, 36);

@@ -74,7 +74,7 @@ public class ElectricalMaterialFactoryTest {
 
         electricalMaterialFactory.createInverter();
 
-        verify(materialService).createElectricalMaterial(eq("3 phased inverter 5 kW"), eq(1L), eq(installation));
+        verify(materialService).createElectricalMaterial(eq("3 Phased inverter 5 kW"), eq(1L), eq(installation));
     }
     @Test
     @DisplayName("Should create single phased inverter correctly")
@@ -85,7 +85,7 @@ public class ElectricalMaterialFactoryTest {
 
         electricalMaterialFactory.createInverter();
 
-        verify(materialService).createElectricalMaterial(eq("1 phased inverter 3,00 kW"), eq(1L), eq(installation));
+        verify(materialService).createElectricalMaterial(eq("1 Phased inverter 3.00 kW"), eq(1L), eq(installation));
     }
     @Test
     @DisplayName("Should create DC switchboard correctly")
@@ -112,7 +112,7 @@ public class ElectricalMaterialFactoryTest {
 
         electricalMaterialFactory.createAcCable();
 
-        verify(materialService).createElectricalMaterial(eq("AC cable 5x2.5mm2"), eq(10L), eq(installation));
+        verify(materialService).createElectricalMaterial(eq("AC cable 5x2.5 mm2"), eq(10L), eq(installation));
     }
     @Test
     @DisplayName("Should create AC cable three phased correctly min value")
@@ -122,7 +122,7 @@ public class ElectricalMaterialFactoryTest {
 
         electricalMaterialFactory.createAcCable();
 
-        verify(materialService).createElectricalMaterial(eq("AC cable 5x25.0mm2"), eq(10000L), eq(installation));
+        verify(materialService).createElectricalMaterial(eq("AC cable 5x25.0 mm2"), eq(10000L), eq(installation));
     }
     @Test
     @DisplayName("Should create AC cable single phased correctly min value")
@@ -133,7 +133,7 @@ public class ElectricalMaterialFactoryTest {
 
         electricalMaterialFactory.createAcCable();
 
-        verify(materialService).createElectricalMaterial(eq("AC cable 3x2.5mm2"), eq(10L), eq(installation));
+        verify(materialService).createElectricalMaterial(eq("AC cable 3x2.5 mm2"), eq(10L), eq(installation));
     }
     @Test
     @DisplayName("Should create DC cable correctly under 10 kW installation")
@@ -142,7 +142,7 @@ public class ElectricalMaterialFactoryTest {
 
         electricalMaterialFactory.createDcCable();
 
-        verify(materialService).createElectricalMaterial(eq("DC cable 4mm2"), eq(100L), eq(installation));
+        verify(materialService).createElectricalMaterial(eq("DC cable 4 mm2"), eq(100L), eq(installation));
     }
     @Test
     @DisplayName("Should create DC cable correctly over 10 kW installation")
@@ -152,7 +152,7 @@ public class ElectricalMaterialFactoryTest {
 
         electricalMaterialFactory.createDcCable();
 
-        verify(materialService).createElectricalMaterial(eq("DC cable 6mm2"), eq(100L), eq(installation));
+        verify(materialService).createElectricalMaterial(eq("DC cable 6 mm2"), eq(100L), eq(installation));
     }
     @Test
     @DisplayName("Should create DC fuse correctly")

@@ -6,7 +6,11 @@ import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Project.Pro
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Service.InstallationService;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Service.MaterialService;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Service.ProjectService;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.View.Components.FileExportLayout;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.View.Components.SingleInstallationLayout;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.View.Project.ProjectView;
+import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -41,25 +45,29 @@ public class InstallationView extends VerticalLayout implements HasUrlParameter<
         InstallationDto installation = installationService.findInstallationById(installationId);
         ProjectDto project = projectService.findProjectById(installation.getProjectId());
 
+
         SingleInstallationLayout singleInstallationLayout = new SingleInstallationLayout(installationService, installation, project, true);
         singleInstallationLayout.setSizeFull();
 
         constructionMaterials = materialService.fetchConstructionMaterialsForInstallation(installationId);
         electricalMaterials = materialService.fetchElectricalMaterialsForInstallation(installationId);
 
+        FileExportLayout fileExportLayout = new FileExportLayout(installationId, installationService);
+
         setConstructionMaterialsLayout();
         setElectricalMaterialsLayout();
         HorizontalLayout materialsLayout = new HorizontalLayout(constructionMaterialsLayout, electricalMaterialsLayout);
         materialsLayout.getStyle().set("justify-content", "space-between").set("align-self", "center").set("width", "100%");
+        Button backToProjectButton = backToProjectButton(project.getProjectId());
 
-        add(singleInstallationLayout, materialsLayout);
+        add(singleInstallationLayout, fileExportLayout, backToProjectButton, materialsLayout);
     }
-    private void setConstructionMaterialsLayout(){
+    private void setConstructionMaterialsLayout() {
         Div header = new Div("Construction materials");
         header.getStyle().set("font-weight", "bold").set("font-size", "22px").set("font-family", "georgia");
         constructionMaterialsLayout.add(header);
         constructionMaterialsLayout.getStyle().set("align-items", "start").set("gap", "0px");
-        for (InstallationMaterialDto material : constructionMaterials){
+        for (InstallationMaterialDto material : constructionMaterials) {
             Span name = new Span(material.getName() + ": ");
             name.getStyle().set("font-weight", "bold");
             Span quantity = new Span(material.getQuantity().toString());
@@ -70,12 +78,12 @@ public class InstallationView extends VerticalLayout implements HasUrlParameter<
             constructionMaterialsLayout.add(materialLayout);
         }
     }
-    private void setElectricalMaterialsLayout(){
+    private void setElectricalMaterialsLayout() {
         Div header = new Div("Electrical materials");
         header.getStyle().set("font-weight", "bold").set("font-size", "22px").set("font-family", "georgia");
         electricalMaterialsLayout.add(header);
         electricalMaterialsLayout.getStyle().set("align-items", "start").set("gap", "0px").set("width", "900px");
-        for (InstallationMaterialDto material : electricalMaterials){
+        for (InstallationMaterialDto material : electricalMaterials) {
             Span name = new Span(material.getName() + ": ");
             name.getStyle().set("font-weight", "bold");
             Span quantity = new Span(material.getQuantity().toString());
@@ -86,4 +94,13 @@ public class InstallationView extends VerticalLayout implements HasUrlParameter<
             electricalMaterialsLayout.add(materialLayout);
         }
     }
+    private Button backToProjectButton(Long projectId) {
+        Button button = new Button("Back to project");
+        button.addClickListener(e -> UI.getCurrent().navigate(ProjectView.class, projectId));
+        button.getStyle().set("align-self", "center");
+        return button;
+    }
 }
+
+
+

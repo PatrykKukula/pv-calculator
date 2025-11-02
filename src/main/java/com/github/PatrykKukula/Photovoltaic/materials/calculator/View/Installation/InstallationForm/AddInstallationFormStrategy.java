@@ -10,6 +10,8 @@ import com.github.PatrykKukula.Photovoltaic.materials.calculator.View.Project.Pr
 import com.vaadin.flow.component.UI;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.IOException;
+
 @Slf4j
 public class AddInstallationFormStrategy implements InstallationFormStrategy<InstallationDto> {
 
@@ -18,7 +20,7 @@ public class AddInstallationFormStrategy implements InstallationFormStrategy<Ins
         return "Fill form to add installation";
     }
     @Override
-    public void save(InstallationService installationService, InstallationInterface installationInterface, ProjectDto projectDto, Long installationId) {
+    public void save(InstallationService installationService, InstallationInterface installationInterface, ProjectDto projectDto, Long installationId) throws IOException {
         Installation savedInstallation = installationService.createInstallation((InstallationDto) installationInterface, projectDto);
         log.info("Installation saved successfully:{} ", savedInstallation);
         UI.getCurrent().navigate(InstallationView.class, savedInstallation.getInstallationId());

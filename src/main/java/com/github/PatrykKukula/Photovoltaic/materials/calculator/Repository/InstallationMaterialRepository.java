@@ -14,4 +14,10 @@ public interface InstallationMaterialRepository extends JpaRepository<Installati
     List<InstallationMaterial> fetchConstructionMaterialsForInstallation(@Param(value = "installationId") Long installationId);
     @Query("SELECT m FROM InstallationMaterial m JOIN FETCH m.electricalMaterial WHERE m.installation.installationId= :installationId")
     List<InstallationMaterial> fetchElectricalMaterialsForInstallation(@Param(value = "installationId") Long installationId);
+    @Query("SELECT DISTINCT m FROM InstallationMaterial m JOIN m.installation i JOIN i.project p JOIN FETCH m.electricalMaterial" +
+            " WHERE p.projectId= :projectId")
+    List<InstallationMaterial> fetchElectricalMaterialsForProject(@Param(value = "projectId") Long projectId);
+    @Query("SELECT DISTINCT m FROM InstallationMaterial m JOIN m.installation i JOIN i.project p JOIN FETCH m.constructionMaterial" +
+            " WHERE p.projectId= :projectId")
+    List<InstallationMaterial> fetchConstructionMaterialsForProject(@Param(value = "projectId") Long projectId);
 }

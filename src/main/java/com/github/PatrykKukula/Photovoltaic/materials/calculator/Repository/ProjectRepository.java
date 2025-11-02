@@ -30,4 +30,6 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
     Long getAllModulesByProjectId(@Param(value = "projectId") Long projectId);
     @Query("SELECT p.modulePower FROM Project p WHERE p.projectId= :projectId")
     Long getModulePowerByProjectId(@Param(value = "projectId") Long projectId);
+    @Query("SELECT COALESCE(SUM(r.moduleQuantity * p.modulePower) / 1000, 0) FROM Project p JOIN p.installations i JOIN i.rows r")
+    Double getTotalPowerForProject(@Param(value = "projectId") Long projectId);
 }

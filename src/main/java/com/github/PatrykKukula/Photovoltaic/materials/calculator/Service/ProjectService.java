@@ -5,15 +5,20 @@ import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Project.Pro
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Project.ProjectUpdateDto;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Exception.InvalidOwnershipException;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Exception.ResourceNotFoundException;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Files.MaterialsExporter;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.InstallationMaterialAssembler.Construction.ConstructionMaterialAssembler;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.InstallationMaterialAssembler.Electrical.ElectricalMaterialAssembler;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.InstallationMaterialAssembler.MaterialBuilderFactory;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Mapper.InstallationMaterialMapper;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Mapper.ProjectMapper;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.Installation;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.InstallationMaterial;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.Project;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.UserEntity;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Repository.InstallationMaterialRepository;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Repository.InstallationRepository;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Repository.ProjectRepository;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Utils.InstallationMaterialListToMapMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +32,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import static com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.CacheConstants.*;
 import static com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ElectricalMaterialConstants.CONVERT_W_TO_KW;
@@ -41,6 +49,9 @@ import static com.github.PatrykKukula.Photovoltaic.materials.calculator.Utils.Se
 @RequiredArgsConstructor
 public class ProjectService {
     private final ProjectRepository projectRepository;
+    private final InstallationRepository installationRepository;
+    private final InstallationMaterialRepository installationMaterialRepository;
+    private final MaterialsExporter materialsExporter;
     private final UserEntityService userService;
     private final MaterialBuilderFactory builderFactory;
     private final CacheManager cacheManager;
@@ -155,6 +166,22 @@ public class ProjectService {
                if (cache != null) cache.put(installation.getInstallationId(), electricalMaterials.stream().map(InstallationMaterialMapper::mapInstallationMaterialToInstallationMaterialDto));
            });
        }
+    }
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    public ByteArrayOutputStream exportProjectMaterialsToExcel(Long projectId) throws IOException {
+        List<Installation> installations = installationRepository.findAllInstallationsForProject(projectId);
+        Project project = projectRepository.findById(projectId).orElseThrow(() -> new ResourceNotFoundException("Project", projectId));
+        InstallationMaterialListToMapMapper mapper = new InstallationMaterialListToMapMapper();
+
+        List<InstallationMaterial> electricalMaterials = installationMaterialRepository.fetchElectricalMaterialsForProject(projectId);
+        Map<String, Long> electricalMaterialsMap = mapper.createElectricalMaterialsMap(electricalMaterials);
+
+        List<InstallationMaterial> constructionMaterials = installationMaterialRepository.fetchConstructionMaterialsForProject(projectId);
+        Map<String, Long> constructionMaterialsMap = mapper.createConstructionMaterialsMap(constructionMaterials);
+
+        Double power = projectRepository.getTotalPowerForProject(projectId);
+
+        return materialsExporter.exportMaterialsToExcelForProject(installations, project, electricalMaterialsMap, constructionMaterialsMap, installations.size(), power);
     }
     private Project fetchProjectById(Long projectId){
         return projectRepository.findByProjectIdWithUserAndInstallations(projectId).orElseThrow(() -> new ResourceNotFoundException("Project", projectId));

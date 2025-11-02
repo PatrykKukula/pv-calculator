@@ -36,8 +36,7 @@ public class ConstructionMaterialFactory {
         this is not 100% accurate because it depends on total length of the row, however it gives a good starting point
      */
     public InstallationMaterial setProfileJoiner(long profile){
-        log.info("Profile:{} , profile length:{} ", profile, PROFILE_LENGTH);
-        return constructionMaterialService.createConstructionMaterial("Profile joiner", Math.round(((double)profile / PROFILE_LENGTH)), installation);
+        return constructionMaterialService.createConstructionMaterial("Profile joiner", Math.round(((double)profile / PROFILE_LENGTH) / CONVERT_UNIT_FROM_MM_TO_M), installation);
     }
     public InstallationMaterial setHexagonScrew(long profile){
         switch (installation.getInstallationType()){

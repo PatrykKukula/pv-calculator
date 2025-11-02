@@ -11,10 +11,12 @@ import com.github.PatrykKukula.Photovoltaic.materials.calculator.Exception.Inval
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Exception.InvalidRowQuantityException;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Exception.PowerOutOfBoundsException;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Exception.ResourceNotFoundException;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Files.MaterialsExporter;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.InstallationMaterialAssembler.Construction.ConstructionMaterialAssembler;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.InstallationMaterialAssembler.Electrical.ElectricalMaterialAssembler;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.InstallationMaterialAssembler.MaterialBuilderFactory;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.*;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Repository.InstallationMaterialRepository;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Repository.InstallationRepository;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Repository.ProjectRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,8 +31,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,6 +60,10 @@ public class InstallationServiceTest {
     private ElectricalMaterialAssembler electricalMaterialAssembler;
     @Mock
     private CacheManager cacheManager;
+    @Mock
+    private MaterialsExporter materialsExporter;
+    @Mock
+    private InstallationMaterialRepository installationMaterialRepository;
     @InjectMocks
     private InstallationService installationService;
     private InstallationDto installationDto;
@@ -144,7 +153,7 @@ public class InstallationServiceTest {
     }
     @Test
     @DisplayName("Should create installation correctly")
-    public void shouldCreateInstallationCorrectly(){
+    public void shouldCreateInstallationCorrectly() throws IOException {
         when(userEntityService.loadCurrentUser()).thenReturn(user);
         when(factory.createConstructionAssembler(any(Installation.class), any(ProjectDto.class))).thenReturn(constructionMaterialAssembler);
         when(constructionMaterialAssembler.createInstallationConstructionMaterials()).thenReturn(constructionMaterials);
@@ -225,7 +234,7 @@ public class InstallationServiceTest {
         when(factory.createElectricalAssembler(any(Installation.class), anyLong())).thenReturn(electricalMaterialAssembler);
         when(electricalMaterialAssembler.createInstallationElectricalMaterials()).thenReturn(electricalMaterials);
         when(installationRepository.save(any(Installation.class))).thenAnswer(invocation -> invocation.getArgument(0));
-    
+
 
         Installation updatedInstallation = installationService.updateInstallation(1L, installationUpdateDto, projectDto);
 
@@ -283,5 +292,17 @@ public class InstallationServiceTest {
         InstallationUpdateDto returnedInstallation = installationService.findInstallationUpdateById(1L);
 
         assertEquals("address", returnedInstallation.getAddress());
+    }
+    @Test
+    @DisplayName("Should export installation materials to excel correctly")
+    public void shouldCreateExcelFileCorrectlyWhenExportInstallationMaterialsToExcel() throws IOException {
+        when(installationRepository.findByIdWithRowsAndProject(anyLong())).thenReturn(Optional.of(installation));
+        when(installationMaterialRepository.fetchConstructionMaterialsForInstallation(anyLong())).thenReturn(Collections.emptyList());
+        when(installationMaterialRepository.fetchElectricalMaterialsForInstallation(anyLong())).thenReturn(Collections.emptyList());
+        when(materialsExporter.exportMaterialsToExcelForInstallation(any(Installation.class), anyMap(), anyMap())).thenReturn(new ByteArrayOutputStream());
+
+        installationService.exportInstallationMaterialsToExcel(1L);
+
+        verify(materialsExporter, times(1)).exportMaterialsToExcelForInstallation(installation, Collections.emptyMap(), Collections.emptyMap());
     }
 }
