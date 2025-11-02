@@ -154,7 +154,6 @@ public class InstallationService {
         Map<String, Long> electricalMaterialsMap = mapper.createElectricalMaterialsMap(electricalMaterials);
         return materialsExporter.exportMaterialsToExcelForInstallation(installation, constructionMaterialsMap, electricalMaterialsMap);
     }
-
     private void setMaterials(Installation installation, ProjectDto projectDto){
         log.info("Invoking set materials with strings:{} ", installation.getStrings());
         ConstructionMaterialAssembler constructionAssembler = factory.createConstructionAssembler(installation, projectDto);

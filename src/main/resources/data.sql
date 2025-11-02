@@ -19,7 +19,7 @@ VALUES (1, 'Title1', 'Investor', 'Country', 'Voivodeship', 'City', now(), 500, 1
 (1, 'Title12', 'Investor', 'Country', 'Voivodeship', 'City', now(), 500, 1800, 1100, 35);
 
 INSERT INTO construction_material (name) VALUES
-('End clamp 30 mm'), ('End clamp 35 mm'), ('End clamp 40 mm'), ('Mid clamp'), ('Alle screw 20 mm'), ('Allen screw 25 mm'),
+('End clamp 30 mm'), ('End clamp 35 mm'), ('End clamp 40 mm'), ('Mid clamp'), ('Allen screw 20 mm'), ('Allen screw 25 mm'),
 ('Allen screw 30 mm'), ('Sliding key'), ('Sleeve for threaded rod'), ('Chemical anchor'), ('EPDM M10'),
 ('Threaded rod M10'), ('Aluminium angle bar 40x3'), ('Trapeze screws'), ('Trapeze'), ('Screws for vario hook'),
 ('Adapter'), ('Double threaded screw L=250mm'), ('Vario hook'), ('Hexagon nut M10'), ('Hexagon screw M10x250'),

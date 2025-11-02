@@ -10,9 +10,9 @@ import java.util.List;
 
 @Repository
 public interface InstallationMaterialRepository extends JpaRepository<InstallationMaterial, Long> {
-    @Query("SELECT m FROM InstallationMaterial m JOIN FETCH m.constructionMaterial WHERE m.installation.installationId= :installationId")
+    @Query("SELECT DISTINCT m FROM InstallationMaterial m JOIN FETCH m.constructionMaterial WHERE m.installation.installationId= :installationId")
     List<InstallationMaterial> fetchConstructionMaterialsForInstallation(@Param(value = "installationId") Long installationId);
-    @Query("SELECT m FROM InstallationMaterial m JOIN FETCH m.electricalMaterial WHERE m.installation.installationId= :installationId")
+    @Query("SELECT DISTINCT m FROM InstallationMaterial m JOIN FETCH m.electricalMaterial WHERE m.installation.installationId= :installationId")
     List<InstallationMaterial> fetchElectricalMaterialsForInstallation(@Param(value = "installationId") Long installationId);
     @Query("SELECT DISTINCT m FROM InstallationMaterial m JOIN m.installation i JOIN i.project p JOIN FETCH m.electricalMaterial" +
             " WHERE p.projectId= :projectId")

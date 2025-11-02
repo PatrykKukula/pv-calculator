@@ -149,7 +149,7 @@ public class ProjectService {
                 installation.getMaterials().addAll(constructionMaterials);
 
                 Cache cache = cacheManager.getCache(CONSTRUCTION_MATERIALS);
-                if (cache != null) cache.put(installation.getInstallationId(), constructionMaterials.stream().map(InstallationMaterialMapper::mapInstallationMaterialToInstallationMaterialDto));
+                if (cache != null) cache.put(installation.getInstallationId(), constructionMaterials.stream().map(InstallationMaterialMapper::mapInstallationMaterialToInstallationMaterialDto).toList());
             });
         }
     }
@@ -163,7 +163,7 @@ public class ProjectService {
                installation.getMaterials().addAll(electricalMaterials);
 
                Cache cache = cacheManager.getCache(ELECTRICAL_MATERIALS);
-               if (cache != null) cache.put(installation.getInstallationId(), electricalMaterials.stream().map(InstallationMaterialMapper::mapInstallationMaterialToInstallationMaterialDto));
+               if (cache != null) cache.put(installation.getInstallationId(), electricalMaterials.stream().map(InstallationMaterialMapper::mapInstallationMaterialToInstallationMaterialDto).toList());
            });
        }
     }
