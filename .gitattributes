@@ -1,4 +1,13 @@
-/mvnw text eol=lf
+/mvnw
+text=auto eol=lf
 *.cmd text eol=crlf
-* linguist-vendored
-*.js linguist-vendored=false
+*.js linguist-vendored
+*.ts linguist-vendored
+*.html linguist-vendored
+vite.config.ts linguist-vendored
+package.json linguist-vendored
+pnpm-lock.yaml linguist-vendored
+package-lock.json linguist-vendored
+
+*.java linguist-detectable=true
+*.java linguist-language=Java

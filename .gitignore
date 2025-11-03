@@ -1,11 +1,13 @@
 node_modules/
 HELP.md
 target/
+frontend/generated/
+vite.config.ts
+package-lock.json
 .mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 ### STS ###
->>>>>>> restore-vaadin
 .apt_generated
 .classpath
 .factorypath
