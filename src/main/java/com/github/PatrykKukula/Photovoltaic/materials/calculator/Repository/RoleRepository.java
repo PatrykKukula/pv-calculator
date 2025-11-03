@@ -1,0 +1,12 @@
+package com.github.PatrykKukula.Photovoltaic.materials.calculator.Repository;
+
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.Role;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
+
+@Repository
+public interface RoleRepository extends JpaRepository<Role, Long> {
+    Optional<Role> findByName(String roleName);
+}

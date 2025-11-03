@@ -1,0 +1,22 @@
+package com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Installation;
+
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ConstructionType;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ModuleOrientation;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.PhaseNumber;
+
+import java.util.List;
+
+public interface InstallationInterface {
+    Long getInstallationId();
+    String getAddress();
+    ConstructionType getConstructionType();
+    ModuleOrientation getModuleOrientation();
+    Integer getStrings();
+    List<RowDto> getRows();
+    boolean isLightingProtection();
+    Integer getAcCableLength();
+    Integer getDcCableLength();
+    Integer getLgyCableLength();
+    void setRows(List<RowDto> rows);
+    PhaseNumber getPhaseNumber();
+}

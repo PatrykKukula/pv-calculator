@@ -1,0 +1,10 @@
+:host,
+html, body{
+
+}
+vaadin-vertical-layout, vaadin-horizontal-layout {
+
+}
+vaadin-button {
+    cursor: pointer
+}
