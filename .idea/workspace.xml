@@ -4,7 +4,72 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e6dab4fd-e979-42d3-8fee-ebb6e4b33f80" name="Changes" comment="config update" />
+    <list default="true" id="e6dab4fd-e979-42d3-8fee-ebb6e4b33f80" name="Changes" comment="config update">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pv-calculator" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/flow/generated-flow-imports.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/flow/generated-flow-imports.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/flow/generated-flow-webcomponent-imports.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/flow/generated-flow-webcomponent-imports.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/Flow.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/Flow.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/Flow.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/Flow.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/FlowBootstrap.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/FlowBootstrap.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/FlowBootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/FlowBootstrap.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/FlowClient.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/FlowClient.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/FlowClient.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/FlowClient.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/ReactRouterOutletElement.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/ReactRouterOutletElement.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/comboBoxConnector.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/comboBoxConnector.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/contextMenuConnector.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/contextMenuConnector.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/contextMenuTargetConnector.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/contextMenuTargetConnector.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/base-panel-DFXiqdfs.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/base-panel-DFXiqdfs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/copilot-Clqe7NnV.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/copilot-Clqe7NnV.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/copilot-features-plugin-CV1K2mvr.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/copilot-features-plugin-CV1K2mvr.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/copilot-feedback-plugin-CFUIsOki.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/copilot-feedback-plugin-CFUIsOki.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/copilot-global-vars-later-apQh56DX.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/copilot-global-vars-later-apQh56DX.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/copilot-info-plugin-ixH-DlL8.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/copilot-info-plugin-ixH-DlL8.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/copilot-init-step2-BjRXdW-2.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/copilot-init-step2-BjRXdW-2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/copilot-log-plugin-Dg6JDlQz.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/copilot-log-plugin-Dg6JDlQz.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/copilot-shortcuts-plugin-DRG-A1mq.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/copilot-shortcuts-plugin-DRG-A1mq.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/figma-public/figma-api.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/figma-public/figma-api.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/icons-jl0-u2LC.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/icons-jl0-u2LC.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/index-UZcwxJY4.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/index-UZcwxJY4.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/overlay-monkeypatch-ByWcx4Vt.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/overlay-monkeypatch-ByWcx4Vt.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/query-BykXNUlT.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/query-BykXNUlT.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/shared/copilot-plugin-support.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/shared/copilot-plugin-support.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/shared/flow-utils.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/shared/flow-utils.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/state-B6616V18.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/state-B6616V18.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/datepickerConnector.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/datepickerConnector.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/disableOnClickFunctions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/disableOnClickFunctions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/dndConnector.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/dndConnector.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/flow-component-directive.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/flow-component-directive.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/flow-component-renderer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/flow-component-renderer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/gridConnector.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/gridConnector.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/index.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/lit-renderer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/lit-renderer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/menubarConnector.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/menubarConnector.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/messageListConnector.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/messageListConnector.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/selectConnector.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/selectConnector.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/theme-util.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/theme-util.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/tooltip.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/tooltip.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/vaadin-big-decimal-field.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/vaadin-big-decimal-field.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/vaadin-dev-tools/License.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/vaadin-dev-tools/License.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/vaadin-dev-tools/connection.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/vaadin-dev-tools/connection.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/vaadin-dev-tools/live-reload-connection.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/vaadin-dev-tools/live-reload-connection.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/vaadin-dev-tools/pre-trial-splash-screen.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/vaadin-dev-tools/pre-trial-splash-screen.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/vaadin-dev-tools/vaadin-dev-tools.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/vaadin-dev-tools/vaadin-dev-tools.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/vaadin-dev-tools/vaadin-dev-tools.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/vaadin-dev-tools/vaadin-dev-tools.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/vaadin-dev-tools/websocket-connection.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/vaadin-dev-tools/websocket-connection.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/vaadin-grid-flow-selection-column.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/vaadin-grid-flow-selection-column.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/vaadin-popover/popover.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/vaadin-popover/popover.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/vaadin-time-picker/helpers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/vaadin-time-picker/helpers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/vaadin-time-picker/timepickerConnector.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/vaadin-time-picker/timepickerConnector.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/virtualListConnector.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/virtualListConnector.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/vaadin.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/vaadin.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -52,6 +117,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Main.executor": "Run",
+    "Application.PhotovoltaicMaterialsCalculatorApplication.executor": "Run",
     "JUnit.AbstractConstructionModelTest.executor": "Run",
     "JUnit.AbstractProfileConstructionModelTest.executor": "Run",
     "JUnit.ConstructionMapperTest.executor": "Run",
@@ -93,7 +159,7 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.19839142",
-    "settings.editor.selected.configurable": "reference.projectsettings.compiler.annotationProcessors",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -108,13 +174,29 @@
       <recent name="pl.patrykkukula.Builders" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Application.PhotovoltaicMaterialsCalculatorApplication">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="pl.patrykkukula.Main" />
       <module name="PV" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="pl.patrykkukula.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PhotovoltaicMaterialsCalculatorApplication" type="Application" factoryName="Application" nameIsGenerated="true">
+      <envs>
+        <env name="DATASOURCE_PASSWORD" value="Patryk" />
+      </envs>
+      <option name="MAIN_CLASS_NAME" value="com.github.PatrykKukula.Photovoltaic.materials.calculator.PhotovoltaicMaterialsCalculatorApplication" />
+      <module name="Photovoltaic-materials-calculator" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.github.PatrykKukula.Photovoltaic.materials.calculator.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -183,6 +265,14 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.PhotovoltaicMaterialsCalculatorApplication" />
+      <item itemvalue="Application.Main" />
+      <item itemvalue="JUnit.ConstructionMapperTest" />
+      <item itemvalue="JUnit.InstallationBuilderUtilsTest" />
+      <item itemvalue="JUnit.InstallationBuilderUtilsTest.shouldThrowInputMismatchExceptionCorrectly" />
+      <item itemvalue="JUnit.MaterialListBuilderTest" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
@@ -192,14 +282,6 @@
         <item itemvalue="JUnit.InstallationBuilderUtilsTest.shouldThrowInputMismatchExceptionCorrectly" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.23654.153" />
-        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-IU-243.23654.153" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -360,6 +442,9 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/pv-calculator" />
+    </ignored-roots>
     <MESSAGE value="Project update" />
     <MESSAGE value="Added unit testing" />
     <MESSAGE value="Correct readme typos" />
