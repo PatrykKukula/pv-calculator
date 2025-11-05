@@ -1,10 +1,10 @@
 # Photovoltaic Project Manager
 
-Web application created to help manage photovoltaic investments projects and create materials needed to build PV installation efortlessly.
+Web application created to help managing photovoltaic investments projects and create materials needed to build PV installation efortlessly.
 
 This application allows end users to manage their photovoltaic projects. Users can create many projects and keep them in one place, making them easy to access and manage. While managing your installations is comfortable, **this application stands out for it's function to create basic electrical and construction materials** for variety types of photovoltaic installations.
 
-Creating installation is easy and user friendly - it only needs to fill simple form with basic data about installation. Everything else is done on the backend of the application using OOP principles and design patterns like strategy or factory which makes application scalable, easy to maintain and fullfill open/close principle. This application can handle installations up to 49,995 kW due to the polish energetic law policy. Data is validated in the backend of the application, preventing to save invalid installation, but also at the frontend layer with visible notifications and error messages if something goes wrong.
+Creating installation is easy and user friendly - there is only need to fill simple form with basic data about installation. Everything else is done in the backend of the application using OOP principles and design patterns like strategy or factory, which makes application scalable, easy to maintain and fullfill open/closed principle. This application can handle installations up to 49,995 kW due to the polish energetic law policy. Data is validated in the backend of the application, preventing to save invalid installation, and also if something goes wrong, notification or error message is displayed to user.
 
 Read the following sections for more details.
 
@@ -30,17 +30,17 @@ Read the following sections for more details.
  
 # Application security
 
-Application is secured with Spring Boot security on the backend layer and UI navigations. Endpoints are secured with role based access - user needs to be logged in and have proper 'USER' role.
+Application is secured with Spring Boot security in the backend layer. Endpoints are secured with role based access - user needs to be logged in and have proper 'USER' role.
  
 Any activity will be blocked on the server side if user is not logged in. Furthermore, UI routes will redirect to login page, when anonymous user tries to reach protected endpoint.
 
-More than that, services has implemented validation to keep users from having access to other users resources.
+More than that, services have implemented validation to keep users from having access to other users resources.
 
 As the extra security layer services use method level security.
 
 To be able to use application, user need to be logged in and create account, if don't already have one.
  
-Registration form is validated and user need to meet special conditions for username and password.
+Registration form has validation rules and user need to meet special conditions for username and password.
 
 <img width="1915" height="518" alt="image" src="https://github.com/user-attachments/assets/9273154e-d159-484b-b169-71894d71e6de" />
 
@@ -54,9 +54,9 @@ Registration form is validated and user need to meet special conditions for user
 
 Application is validated in multiple places through backend services and UI components like notification or error messages. Server won't let invalid data to be put into database. 
 
-Services will validate data, throw existing or custom expection, and display notification for user in browser. Custom exception have two different messages - one to be displayed for user, and one to be displayed in logs. 
+Services will validate data, throw existing or custom expection, and display notification to user in browser. Custom exception have two different messages - one to be displayed for user, and one to be displayed in logs. 
 
-In top of that applicataion user **Bean Validation** to display proper information under the data forms before hitting save button. Notification will be shown if user persists to save invalid data. Most of the validation has custom rules on the created installation parameters. 
+In top of that applicataion uses **Bean Validation** to display proper information under the data forms before hitting save button. Notification will be shown if user persists to save invalid data. Most of the validation has custom rules on the created installation parameters. 
 
 
 ## Bean level validation
@@ -74,7 +74,7 @@ While creating projects, special conditions have to be met. For example allowed 
 
 ## Catching exceptions with notifications
 
-Before insert data into database everything have to be valid. Not everything can be done through Bean Validation, some things need to be done in the services. 
+Before inserting data into database everything have to be valid. Not everything can be done through Bean Validation, some things need to be done in the services. 
 
 For example if login credentials are invalid, notification is poped.
 
@@ -91,7 +91,7 @@ Another example, while creating installation, due to the polish energetic law re
 
 Application is cached using Caffeine with custom CaffeineCache implementation to provide logging for cache operations.
 
-Example log:
+Example log for missing cache:
 
 <img width="1502" height="28" alt="image" src="https://github.com/user-attachments/assets/95b6136a-c31b-4505-bf32-a0c0e3836bf3" />
 
@@ -118,7 +118,7 @@ To create project user need to fill form with basic data about project and most 
 
 Updating project has same form, with that difference that it is filled with currently set values.
 
-Updating module data in project will trigger service method to recreate each material in every installation, to keep data synchronized.
+Updating module data in project will trigger service method to recreate materials in every installation in this project, to keep data synchronized.
 
 
 
@@ -126,7 +126,7 @@ Updating module data in project will trigger service method to recreate each mat
 
 To create installation user need to provide basic data about installation. Many of the form fields are selectable comboboxes to choose from. User doesn't really need to know a lot of technical stuff to create installation, only most basic like cables length (for example from the inverter to the switchboard in the building), phase number or if building has lighting protection.
 
-Form in add and update installation are implemented with factory and strategy patterns.
+Form layout in add and update installation routes are implemented with factory and strategy patterns.
 
 <img width="384" height="848" alt="image" src="https://github.com/user-attachments/assets/275d0a79-971d-478c-b5ca-96f77a4b4a62" />
 
@@ -139,7 +139,7 @@ In *my projects route*, user can browse all the projects. Browsing projects uses
 
 <img width="856" height="806" alt="image" src="https://github.com/user-attachments/assets/35997c82-a36b-487f-9fd2-debe631420ce" />
 
-To see all the details, user need to go to the project route. All the details are available there, as well as buttons to update and remove project data or export materials for all the installation within project to excel.
+To see all the details, user need to go to the project route. All the details are available there, as well as buttons to update and remove project data or export materials for all the installations within project to excel.
 Also, that route contains all the installations within the project (pageable).
 
 <img width="772" height="821" alt="image" src="https://github.com/user-attachments/assets/4834a7ce-25ca-4852-9cee-7706ca8b32f4" />
@@ -160,11 +160,10 @@ When clicking *export* button, user need to provide file name in the dialog wind
 
 <img width="198" height="154" alt="image" src="https://github.com/user-attachments/assets/e55ff3fb-b07b-4d85-af2c-0d58efe01f23" />
 
-And downloaded:
 
 <img width="468" height="148" alt="image" src="https://github.com/user-attachments/assets/4449af5a-e570-4747-ab74-df005f16ce23" />
 
-In the downloaded file there are 2 sheets. Materials and summary.
+In the downloaded file for whole project there are 2 sheets. Materials and summary.
 
 In **Materials** sheet there is basic data and materials for the installation.
 
@@ -173,6 +172,8 @@ In **Materials** sheet there is basic data and materials for the installation.
 In **Summary** sheet there is projects summary with materials for all the installation for given project.
 
 <img width="636" height="742" alt="image" src="https://github.com/user-attachments/assets/24ffc509-baeb-4eee-9702-5edf95d36118" />
+
+Exporting single installation materials doesn't have summary sheet.
 
 
 # Creating materials
@@ -214,7 +215,7 @@ Materials are created based on the following parameters:
 
 **Important note**
 
-Application is not perfect, some misscalculations may occur. To use application user need to have at least basic knowledge about how to build photovoltaic installation and what are the components of building electrical energy supply system.
+To use application user need to have at least basic knowledge about how to build photovoltaic installation and what are the components of building electrical energy supply system.
 
 Application takes into account construction materials with very high accuracy. When it comes to electrical materials, application creates basic materials that are preety much always needed to build installation according to law, polish norms and good engineering practice, however installations may have some special requirments that may vary. If installation goes out of the typical polish house box, user should check created material list carefully and take into account every single special requirment or request.
 
