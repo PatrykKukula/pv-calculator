@@ -7,6 +7,7 @@ import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.UserEntit
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Service.InstallationService;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Service.ProjectService;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Service.UserEntityService;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.View.AppLayoutImpl;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.View.Components.FileExportLayout;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.View.Components.PageButtons;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.View.Components.SingleInstallationLayout;
@@ -37,7 +38,7 @@ import static com.github.PatrykKukula.Photovoltaic.materials.calculator.View.Com
 import static com.github.PatrykKukula.Photovoltaic.materials.calculator.View.Components.ProjectCommonComponents.valuesDiv;
 
 @Slf4j
-@Route("/project")
+@Route(value = "/project", layout = AppLayoutImpl.class)
 @PageTitle("PV calculator")
 @RolesAllowed({"USER", "ADMIN"})
 @RequiredArgsConstructor
@@ -52,6 +53,8 @@ public class ProjectView extends VerticalLayout implements HasUrlParameter<Long>
 
     @Override
     public void setParameter(BeforeEvent event, Long projectId) {
+        removeAll();
+
         getStyle().set("width", "40%").set("display", "flex").set("align-items", "center")
                 .set("margin", "auto").set("border-left", "2px solid black").set("border-right", "2px solid black").set("min-height", "100vh");
 
@@ -90,8 +93,8 @@ public class ProjectView extends VerticalLayout implements HasUrlParameter<Long>
     }
     private Runnable renderInstallations(){
         return () -> {
-            List<InstallationDto> installations = installationService.findAllInstallationsForProject(project.getProjectId(), new InstallationsRequestDto(SORT_ASC, pageButtons.getCurrentPage(), PAGE_SIZE)).getContent();
             installationsLayout.removeAll();
+            List<InstallationDto> installations = installationService.findAllInstallationsForProject(project.getProjectId(), new InstallationsRequestDto(SORT_ASC, pageButtons.getCurrentPage(), PAGE_SIZE)).getContent();
             for (InstallationDto installation : installations){
                 VerticalLayout singleInstallationLayout = new SingleInstallationLayout(installationService, installation, project, false);
                 singleInstallationLayout.addClickListener(e -> UI.getCurrent().navigate(InstallationView.class, installation.getInstallationId()));

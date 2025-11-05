@@ -2,6 +2,7 @@ package com.github.PatrykKukula.Photovoltaic.materials.calculator.View.Component
 
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Service.InstallationService;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Service.ProjectService;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.Anchor;
@@ -27,6 +28,7 @@ public class FileExportLayout extends Div {
     }
     public FileExportLayout(Long projectId, ProjectService projectService){
         this.projectService = projectService;
+        setupProjectDialog(projectId);
         setupProjectDialog(projectId);
         fileName.setHelperText("Insert file name");
         add(exportToExcelButton());
@@ -62,7 +64,8 @@ public class FileExportLayout extends Div {
             try (OutputStream outputStream = event.getOutputStream()) {
                 outputStream.write(projectService.exportProjectMaterialsToExcel(projectId).toByteArray());
             }
-            event.getUI().access(() -> dialog.close());
+            event.getUI().access(() -> {});
+
         }, "Export to excel");
         anchor.getStyle().set("align-self", "center").set("color", "white").set("margin", "auto").set("justify-self", "center");
         return anchor;

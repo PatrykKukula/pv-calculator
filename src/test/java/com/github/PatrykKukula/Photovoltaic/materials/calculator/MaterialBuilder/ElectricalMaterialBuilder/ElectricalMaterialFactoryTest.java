@@ -3,6 +3,7 @@ package com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilde
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ConstructionType;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ModuleOrientation;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.PhaseNumber;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Project.ProjectDto;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.InstallationMaterialAssembler.Electrical.ElectricalMaterialFactory;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.Installation;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.InstallationMaterial;
@@ -31,6 +32,7 @@ public class ElectricalMaterialFactoryTest {
     private Installation installation;
     private Long modulePower;
     private Row row;
+    private ProjectDto projectDto;
 
     @BeforeEach
     public void setUp(){
@@ -56,7 +58,13 @@ public class ElectricalMaterialFactoryTest {
                 .lgyCableLength(10)
                 .build();
         modulePower = 500L;
-        electricalMaterialFactory = new ElectricalMaterialFactory(materialService, installation, modulePower);
+        projectDto = ProjectDto.builder()
+                .moduleFrame(30)
+                .modulePower(500)
+                .moduleLength(2000)
+                .moduleWidth(1000)
+                .build();
+        electricalMaterialFactory = new ElectricalMaterialFactory(materialService, installation, modulePower, projectDto);
     }
     @Test
     @DisplayName("Should create photovoltaic module correctly")
@@ -142,7 +150,7 @@ public class ElectricalMaterialFactoryTest {
 
         electricalMaterialFactory.createDcCable();
 
-        verify(materialService).createElectricalMaterial(eq("DC cable 4 mm2"), eq(100L), eq(installation));
+        verify(materialService).createElectricalMaterial(eq("DC cable 4 mm2"), eq(120L), eq(installation));
     }
     @Test
     @DisplayName("Should create DC cable correctly over 10 kW installation")
@@ -152,7 +160,7 @@ public class ElectricalMaterialFactoryTest {
 
         electricalMaterialFactory.createDcCable();
 
-        verify(materialService).createElectricalMaterial(eq("DC cable 6 mm2"), eq(100L), eq(installation));
+        verify(materialService).createElectricalMaterial(eq("DC cable 6 mm2"), eq(131L), eq(installation));
     }
     @Test
     @DisplayName("Should create DC fuse correctly")

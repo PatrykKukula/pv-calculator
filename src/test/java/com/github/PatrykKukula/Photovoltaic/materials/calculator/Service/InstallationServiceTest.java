@@ -157,7 +157,7 @@ public class InstallationServiceTest {
         when(userEntityService.loadCurrentUser()).thenReturn(user);
         when(factory.createConstructionAssembler(any(Installation.class), any(ProjectDto.class))).thenReturn(constructionMaterialAssembler);
         when(constructionMaterialAssembler.createInstallationConstructionMaterials()).thenReturn(constructionMaterials);
-        when(factory.createElectricalAssembler(any(Installation.class), anyLong())).thenReturn(electricalMaterialAssembler);
+        when(factory.createElectricalAssembler(any(Installation.class), anyLong(), any(ProjectDto.class))).thenReturn(electricalMaterialAssembler);
         when(electricalMaterialAssembler.createInstallationElectricalMaterials()).thenReturn(electricalMaterials);
         when(projectRepository.findById(anyLong())).thenReturn(Optional.of(project));
         when(installationRepository.save(any(Installation.class))).thenAnswer(invocation -> invocation.getArgument(0));
@@ -199,7 +199,7 @@ public class InstallationServiceTest {
         when(userEntityService.loadCurrentUser()).thenReturn(user);
         when(factory.createConstructionAssembler(any(Installation.class), any(ProjectDto.class))).thenReturn(constructionMaterialAssembler);
         when(constructionMaterialAssembler.createInstallationConstructionMaterials()).thenReturn(constructionMaterials);
-        when(factory.createElectricalAssembler(any(Installation.class), anyLong())).thenReturn(electricalMaterialAssembler);
+        when(factory.createElectricalAssembler(any(Installation.class), anyLong(), any(ProjectDto.class))).thenReturn(electricalMaterialAssembler);
         when(electricalMaterialAssembler.createInstallationElectricalMaterials()).thenReturn(electricalMaterials);
         when(projectRepository.findById(anyLong())).thenReturn(Optional.empty());
 
@@ -231,7 +231,7 @@ public class InstallationServiceTest {
         when(installationRepository.findByIdWithRowsAndProject(anyLong())).thenReturn(Optional.of(installation));
         when(factory.createConstructionAssembler(any(Installation.class), any(ProjectDto.class))).thenReturn(constructionMaterialAssembler);
         when(constructionMaterialAssembler.createInstallationConstructionMaterials()).thenReturn(constructionMaterials);
-        when(factory.createElectricalAssembler(any(Installation.class), anyLong())).thenReturn(electricalMaterialAssembler);
+        when(factory.createElectricalAssembler(any(Installation.class), anyLong(), any(ProjectDto.class))).thenReturn(electricalMaterialAssembler);
         when(electricalMaterialAssembler.createInstallationElectricalMaterials()).thenReturn(electricalMaterials);
         when(installationRepository.save(any(Installation.class))).thenAnswer(invocation -> invocation.getArgument(0));
 

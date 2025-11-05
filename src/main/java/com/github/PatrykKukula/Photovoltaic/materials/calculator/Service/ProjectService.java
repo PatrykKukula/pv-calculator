@@ -155,8 +155,9 @@ public class ProjectService {
     }
     private void setElectricalMaterials(ProjectUpdateDto projectUpdateDto, Project project){
        if (projectUpdateDto.getModulePower() != project.getModulePower()){
+           ProjectDto projectDto = ProjectMapper.mapProjectToProjectDto(project);
            project.getInstallations().forEach(installation -> {
-               ElectricalMaterialAssembler assembler = builderFactory.createElectricalAssembler(installation, projectUpdateDto.getModulePower().longValue());
+               ElectricalMaterialAssembler assembler = builderFactory.createElectricalAssembler(installation, projectUpdateDto.getModulePower().longValue(), projectDto);
                List<InstallationMaterial> electricalMaterials = assembler.createInstallationElectricalMaterials();
 
                installation.getMaterials().removeIf(material -> material.getElectricalMaterial() != null);

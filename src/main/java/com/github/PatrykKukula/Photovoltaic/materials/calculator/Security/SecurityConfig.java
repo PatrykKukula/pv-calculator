@@ -33,13 +33,12 @@ public class SecurityConfig  {
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED));
         http.authorizeHttpRequests(request ->{
                 request.requestMatchers( "/login", "/register").permitAll();
-                request.requestMatchers("/home/**", "/projects/**").hasAnyRole("ADMIN", "USER");
+                request.requestMatchers("/home", "/projects/**", "/installation/**", "/projects/**", "/projects").hasAnyRole("ADMIN", "USER");
                 });
         http.with(VaadinSecurityConfigurer.vaadin(), configurer -> {
             configurer.loginView(LoginView.class);
         });
         http.authenticationProvider(authenticationProvider);
-
 
         return http.build();
     }

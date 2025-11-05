@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;
 
-@Route("/projects/edit")
+@Route("/project/update")
 @PageTitle("PV calculator - edit")
 @RolesAllowed({"USER", "ADMIN"})
 @RequiredArgsConstructor

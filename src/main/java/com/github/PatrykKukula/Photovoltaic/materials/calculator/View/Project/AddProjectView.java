@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 
 
 @Slf4j
-@Route("/projects/add")
+@Route("/project/add")
 @PageTitle("PV calculator - add project")
 @RolesAllowed({"USER", "ADMIN"})
 @RequiredArgsConstructor

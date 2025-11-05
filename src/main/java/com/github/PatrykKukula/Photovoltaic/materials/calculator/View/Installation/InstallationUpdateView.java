@@ -13,7 +13,7 @@ import com.vaadin.flow.router.Route;
 import jakarta.annotation.security.RolesAllowed;
 import lombok.RequiredArgsConstructor;
 
-@Route("update-installation")
+@Route("/installation/update")
 @PageTitle("Update installation")
 @RolesAllowed({"USER", "ADMIN"})
 @RequiredArgsConstructor

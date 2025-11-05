@@ -14,7 +14,7 @@ import com.vaadin.flow.router.Route;
 import jakarta.annotation.security.RolesAllowed;
 import lombok.RequiredArgsConstructor;
 
-@Route("add-installation")
+@Route("/installation/add")
 @PageTitle("PV calculator - add installation")
 @RolesAllowed({"USER", "ADMIN"})
 @RequiredArgsConstructor

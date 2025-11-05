@@ -5,9 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6dab4fd-e979-42d3-8fee-ebb6e4b33f80" name="Changes" comment="config update">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/log4j2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/InstallationMaterialAssembler/Electrical/ElectricalMaterialFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/InstallationMaterialAssembler/Electrical/ElectricalMaterialFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/InstallationMaterialAssembler/MaterialBuilderFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/InstallationMaterialAssembler/MaterialBuilderFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/Security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/Security/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/Service/InstallationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/Service/InstallationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/Service/ProjectService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/Service/ProjectService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/AppLayoutImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/AppLayoutImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/Components/FileExportLayout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/Components/FileExportLayout.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/Installation/AddInstallationView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/Installation/AddInstallationView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/Installation/InstallationUpdateView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/Installation/InstallationUpdateView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/Project/AddProjectView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/Project/AddProjectView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/Project/ProjectUpdateView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/Project/ProjectUpdateView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/Project/ProjectView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/Project/ProjectView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/MaterialBuilder/ElectricalMaterialBuilder/ElectricalMaterialFactoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/MaterialBuilder/ElectricalMaterialBuilder/ElectricalMaterialFactoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/Service/InstallationServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/Service/InstallationServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +76,7 @@
     "JUnit.DoubleThreadedTest.executor": "Run",
     "JUnit.ElectricListBuilderTest.executor": "Run",
     "JUnit.ElectricMaterialsBuilderTest.executor": "Run",
+    "JUnit.ElectricalMaterialFactoryTest.executor": "Run",
     "JUnit.FileManagerTest.executor": "Run",
     "JUnit.FlatDoubleThreadedTest.executor": "Run",
     "JUnit.FlatThreadedRodTest.executor": "Run",
@@ -113,7 +127,7 @@
       <recent name="pl.patrykkukula.Builders" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.PhotovoltaicMaterialsCalculatorApplication">
+  <component name="RunManager" selected="JUnit.ProjectServiceTest">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="pl.patrykkukula.Main" />
       <module name="PV" />
@@ -143,62 +157,63 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ConstructionMapperTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="PV" />
+    <configuration name="ElectricalMaterialFactoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Photovoltaic-materials-calculator" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="pl.patrykkukula.Utils.MaterialsUtils.*" />
+          <option name="PATTERN" value="com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilder.ElectricalMaterialBuilder.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="pl.patrykkukula.Utils.MaterialsUtils" />
-      <option name="MAIN_CLASS_NAME" value="pl.patrykkukula.Utils.MaterialsUtils.ConstructionMapperTest" />
+      <option name="PACKAGE_NAME" value="com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilder.ElectricalMaterialBuilder" />
+      <option name="MAIN_CLASS_NAME" value="com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilder.ElectricalMaterialBuilder.ElectricalMaterialFactoryTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="InstallationBuilderUtilsTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="PV" />
+    <configuration name="ElectricalMaterialFactoryTest.shouldCreateDcCableCorrectlyOver10KwInstallation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Photovoltaic-materials-calculator" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="pl.patrykkukula.Utils.MaterialsUtils.*" />
+          <option name="PATTERN" value="com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilder.ElectricalMaterialBuilder.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="pl.patrykkukula.Utils.MaterialsUtils" />
-      <option name="MAIN_CLASS_NAME" value="pl.patrykkukula.Utils.MaterialsUtils.InstallationBuilderUtilsTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="InstallationBuilderUtilsTest.shouldThrowInputMismatchExceptionCorrectly" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="PV" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="pl.patrykkukula.Utils.MaterialsUtils.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="pl.patrykkukula.Utils.MaterialsUtils" />
-      <option name="MAIN_CLASS_NAME" value="pl.patrykkukula.Utils.MaterialsUtils.InstallationBuilderUtilsTest" />
-      <option name="METHOD_NAME" value="shouldThrowInputMismatchExceptionCorrectly" />
+      <option name="PACKAGE_NAME" value="com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilder.ElectricalMaterialBuilder" />
+      <option name="MAIN_CLASS_NAME" value="com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilder.ElectricalMaterialBuilder.ElectricalMaterialFactoryTest" />
+      <option name="METHOD_NAME" value="shouldCreateDcCableCorrectlyOver10KwInstallation" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MaterialListBuilderTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="PV" />
+    <configuration name="ElectricalMaterialFactoryTest.shouldCreateDcCableCorrectlyUnder10KwInstallation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Photovoltaic-materials-calculator" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="pl.patrykkukula.Builders.*" />
+          <option name="PATTERN" value="com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilder.ElectricalMaterialBuilder.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="pl.patrykkukula.Builders" />
-      <option name="MAIN_CLASS_NAME" value="pl.patrykkukula.Builders.MaterialListBuilderTest" />
+      <option name="PACKAGE_NAME" value="com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilder.ElectricalMaterialBuilder" />
+      <option name="MAIN_CLASS_NAME" value="com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilder.ElectricalMaterialBuilder.ElectricalMaterialFactoryTest" />
+      <option name="METHOD_NAME" value="shouldCreateDcCableCorrectlyUnder10KwInstallation" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProjectServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Photovoltaic-materials-calculator" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.github.PatrykKukula.Photovoltaic.materials.calculator.Service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.github.PatrykKukula.Photovoltaic.materials.calculator.Service" />
+      <option name="MAIN_CLASS_NAME" value="com.github.PatrykKukula.Photovoltaic.materials.calculator.Service.ProjectServiceTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -207,18 +222,18 @@
     <list>
       <item itemvalue="Application.PhotovoltaicMaterialsCalculatorApplication" />
       <item itemvalue="Application.Main" />
-      <item itemvalue="JUnit.ConstructionMapperTest" />
-      <item itemvalue="JUnit.InstallationBuilderUtilsTest" />
-      <item itemvalue="JUnit.InstallationBuilderUtilsTest.shouldThrowInputMismatchExceptionCorrectly" />
-      <item itemvalue="JUnit.MaterialListBuilderTest" />
+      <item itemvalue="JUnit.ElectricalMaterialFactoryTest" />
+      <item itemvalue="JUnit.ElectricalMaterialFactoryTest.shouldCreateDcCableCorrectlyOver10KwInstallation" />
+      <item itemvalue="JUnit.ElectricalMaterialFactoryTest.shouldCreateDcCableCorrectlyUnder10KwInstallation" />
+      <item itemvalue="JUnit.ProjectServiceTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ProjectServiceTest" />
+        <item itemvalue="JUnit.ElectricalMaterialFactoryTest.shouldCreateDcCableCorrectlyOver10KwInstallation" />
+        <item itemvalue="JUnit.ElectricalMaterialFactoryTest.shouldCreateDcCableCorrectlyUnder10KwInstallation" />
+        <item itemvalue="JUnit.ElectricalMaterialFactoryTest" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="JUnit.ConstructionMapperTest" />
-        <item itemvalue="JUnit.MaterialListBuilderTest" />
-        <item itemvalue="JUnit.InstallationBuilderUtilsTest" />
-        <item itemvalue="JUnit.InstallationBuilderUtilsTest.shouldThrowInputMismatchExceptionCorrectly" />
       </list>
     </recent_temporary>
   </component>

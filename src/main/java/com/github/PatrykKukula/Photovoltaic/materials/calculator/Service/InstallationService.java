@@ -159,7 +159,7 @@ public class InstallationService {
         ConstructionMaterialAssembler constructionAssembler = factory.createConstructionAssembler(installation, projectDto);
         List<InstallationMaterial> constructionMaterials = constructionAssembler.createInstallationConstructionMaterials();
 
-        ElectricalMaterialAssembler electricalAssembler = factory.createElectricalAssembler(installation, projectDto.getModulePower().longValue());
+        ElectricalMaterialAssembler electricalAssembler = factory.createElectricalAssembler(installation, projectDto.getModulePower().longValue(), projectDto);
         List<InstallationMaterial> electricalMaterials = electricalAssembler.createInstallationElectricalMaterials();
 
         installation.getMaterials().clear();

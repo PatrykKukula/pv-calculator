@@ -260,7 +260,7 @@ public class ProjectServiceTest {
         projectUpdateDto.setModulePower(600);
         when(userService.loadCurrentUser()).thenReturn(user);
         when(projectRepository.findByProjectIdWithUserAndInstallations(anyLong())).thenReturn(Optional.of(project));
-        when(builderFactory.createElectricalAssembler(any(), any())).thenReturn(electricalMaterialAssembler);
+        when(builderFactory.createElectricalAssembler(any(), any(), any(ProjectDto.class))).thenReturn(electricalMaterialAssembler);
         when(electricalMaterialAssembler.createInstallationElectricalMaterials())
                 .thenReturn(List.of(InstallationMaterial.builder().electricalMaterial(ElectricalMaterial.builder().name("electrical material").build()).build()));
 

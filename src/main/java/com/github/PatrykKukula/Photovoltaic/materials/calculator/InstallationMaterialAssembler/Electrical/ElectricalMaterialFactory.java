@@ -1,5 +1,8 @@
 package com.github.PatrykKukula.Photovoltaic.materials.calculator.InstallationMaterialAssembler.Electrical;
 
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ConstructionMaterialConstants;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ModuleOrientation;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Project.ProjectDto;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.Installation;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.InstallationMaterial;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.Row;
@@ -10,6 +13,7 @@ import java.util.List;
 import java.util.NavigableMap;
 import java.util.TreeMap;
 
+import static com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ConstructionMaterialConstants.*;
 import static com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ElectricalMaterialConstants.*;
 import static com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.PhaseNumber.THREE_PHASE;
 import static java.lang.Math.sqrt;
@@ -29,12 +33,14 @@ public class ElectricalMaterialFactory {
     private final List<Double> crossSectionValues = List.of(2.5, 4.0,6.0,10.0,16.0,25.0);
     private int overcurrentProtectionCurrent;
     private Double inverterPower;
+    private final ProjectDto project;
 
 
-    public ElectricalMaterialFactory(MaterialService materialService, Installation installation, Long modulePower){
+    public ElectricalMaterialFactory(MaterialService materialService, Installation installation, Long modulePower, ProjectDto project){
         this.materialService = materialService;
         this.installation = installation;
         this.modulePower = modulePower;
+        this.project = project;
         fillProtectionCurrentMap();
         fillInverterMap();
         fillDifferentialProtectionMap();
@@ -63,7 +69,12 @@ public class ElectricalMaterialFactory {
     }
     public InstallationMaterial createDcCable(){
         int crossSection = calculateTotalPower() <= 10 ? 4 : 6;
-        return materialService.createElectricalMaterial("DC cable %s mm2".formatted(crossSection), installation.getDcCableLength().longValue(), installation);
+        long value = installation.getModuleOrientation() == ModuleOrientation.VERTICAL ?
+                installation.getDcCableLength() + (project.getModuleWidth() / CONVERT_UNIT_FROM_MM_TO_M) * installation.getRows().stream().mapToLong(Row::getModuleQuantity).sum()
+                        + installation.getRows().size() * 10L :
+                installation.getDcCableLength() + (project.getModuleLength() / CONVERT_UNIT_FROM_MM_TO_M) * installation.getRows().stream().mapToLong(Row::getModuleQuantity).sum()
+                        + installation.getRows().size() * 10L;
+        return materialService.createElectricalMaterial("DC cable %s mm2".formatted(crossSection), value, installation);
     }
     public InstallationMaterial createDcFuse(){
         long quantity = installation.getStrings() * DC_FUSE_PER_HOLDER;

@@ -6,6 +6,7 @@ import com.github.PatrykKukula.Photovoltaic.materials.calculator.InstallationMat
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.InstallationMaterialAssembler.Electrical.ElectricalMaterialAssembler;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.InstallationMaterialAssembler.Electrical.ElectricalMaterialFactory;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.Installation;
+import com.github.PatrykKukula.Photovoltaic.materials.calculator.Model.Project;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Service.MaterialService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -21,8 +22,8 @@ public class MaterialBuilderFactory {
         ConstructionMaterialFactory constructionMaterialfactory = new ConstructionMaterialFactory(materialService, installation, project);
         return new ConstructionMaterialAssembler(installation, materialService, constructionMaterialfactory, project);
     }
-    public ElectricalMaterialAssembler createElectricalAssembler(Installation installation, Long modulePower){
-        ElectricalMaterialFactory electricalMaterialFactory = new ElectricalMaterialFactory(materialService, installation, modulePower);
+    public ElectricalMaterialAssembler createElectricalAssembler(Installation installation, Long modulePower, ProjectDto project){
+        ElectricalMaterialFactory electricalMaterialFactory = new ElectricalMaterialFactory(materialService, installation, modulePower, project);
         return new ElectricalMaterialAssembler(electricalMaterialFactory);
     }
 }
