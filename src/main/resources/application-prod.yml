@@ -1,0 +1,30 @@
+server:
+  port: ${PORT:8080}
+spring:
+  application:
+    name: Photovoltaic-projects-manager
+  config:
+    activate:
+      on-profile: production
+  datasource:
+    url: ${DATASOURCE_URL}
+    hikari:
+      maximum-pool-size: 15
+      maximum-idle: 8
+      connection-timeout: 30000
+      data-source:
+        properties:
+          ssl: true
+          ssl-mode: require
+  jpa:
+    hibernate:
+      ddl-auto: update
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      format-sql: false
+    show-sql: false
+vaadin:
+  production-mode: true
+logging:
+  level:
+    root: INFO
+    com.github.PatrykKukula.Photovoltaic.materials.calculator: INFO

@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.github.PatrykKukula</groupId>
-	<artifactId>Photovoltaic-materials-calculator</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>Photovoltaic-materials-calculator</name>
-	<description>Application to create material lists</description>
+	<artifactId>Photovoltaic-project-manager</artifactId>
+	<version>0.0.1</version>
+	<name>Photovoltaic-project-manager</name>
+	<description>Application to manage photovoltaic projects</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -130,12 +130,36 @@
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
 						</exclude>
+						<exclude>
+							<groupId>org.springframework.boot</groupId>
+							<artifactId>spring-boot-devtools</artifactId>
+						</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.2.5</version>
+				<configuration>
+					<testFailureIgnore>false</testFailureIgnore>
+					<argLine>-Xmx1024m</argLine>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.vaadin</groupId>
+				<artifactId>vaadin-maven-plugin</artifactId>
+				<version>${vaadin.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-frontend</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
-
 	<profiles>
 		<profile>
 			<id>production</id>
@@ -150,7 +174,6 @@
 						</exclusion>
 					</exclusions>
 				</dependency>
-
 			</dependencies>
 			<build>
 				<plugins>
@@ -163,7 +186,6 @@
 								<id>frontend</id>
 								<phase>compile</phase>
 								<goals>
-									<goal>prepare-frontend</goal>
 									<goal>build-frontend</goal>
 								</goals>
 							</execution>
@@ -173,6 +195,5 @@
 			</build>
 		</profile>
 	</profiles>
-
 </project>
 

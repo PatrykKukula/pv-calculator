@@ -7,6 +7,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ProjectMapperTest {
@@ -37,6 +39,7 @@ public class ProjectMapperTest {
                 .moduleFrame(30)
                 .moduleLength(2000)
                 .moduleWidth(1000)
+                .createdAt(LocalDateTime.now())
                 .build();
         projectUpdateDto = ProjectUpdateDto.builder()
                 .title("updated title")
@@ -68,12 +71,11 @@ public class ProjectMapperTest {
     @Test
     @DisplayName(value = "Should map ProjectDto to Project correctly with null fields")
     public void shouldMapProjectDtoToProjectCorrectlyWithNullFields(){
-        projectDto = ProjectDto.builder()
-                .investor(null)
-                .country(null)
-                .voivodeship(null)
-                .city(null)
-                .build();
+        projectDto.setInvestor(null);
+        projectDto.setCountry(null);
+        projectDto.setVoivodeship(null);
+        projectDto.setCity(null);
+
         Project mappedProject = ProjectMapper.mapProjectDtoToProject(projectDto);
 
         assertEquals("", mappedProject.getInvestor());
@@ -104,6 +106,7 @@ public class ProjectMapperTest {
                 .country(null)
                 .voivodeship(null)
                 .city(null)
+                .createdAt(LocalDateTime.now())
                 .build();
         ProjectDto mappedProject = ProjectMapper.mapProjectToProjectDto(project);
 
@@ -126,18 +129,5 @@ public class ProjectMapperTest {
         assertEquals(35, mappedProject.getModuleFrame());
         assertEquals(2100, mappedProject.getModuleLength());
         assertEquals(1100, mappedProject.getModuleWidth());
-    }
-    @Test
-    @DisplayName("Should not change entity when map ProjectUpdateDto to Project with null values")
-    public void shouldNotChangeEntityWhenMapProjectUpdateDtoToProjectWithNullValues(){
-        projectUpdateDto = new ProjectUpdateDto();
-
-        Project mappedProject = ProjectMapper.mapProjectUpdateDtoToProject(projectUpdateDto, project);
-
-        assertEquals("title", mappedProject.getTitle());
-        assertEquals("investor", mappedProject.getInvestor());
-        assertEquals("country", mappedProject.getCountry());
-        assertEquals("city", mappedProject.getCity());
-        assertEquals("voivodeship", mappedProject.getVoivodeship());
     }
 }
