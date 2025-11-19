@@ -5,26 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6dab4fd-e979-42d3-8fee-ebb6e4b33f80" name="Changes" comment="config update">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/application-prod.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/flow/Flow.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/flow/Flow.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/flow/ReactAdapter.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jsx-dev-transform/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jsx-dev-transform/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jsx-dev-transform/jsx-dev-runtime.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jsx-dev-transform/jsx-dev-runtime.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jsx-dev-transform/jsx-runtime.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/jsx-dev-transform/jsx-runtime.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/layouts.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/routes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/routes.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/theme-global-theme.components.generated.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/theme-global-theme.components.generated.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/theme-global-theme.generated.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/theme-global-theme.generated.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/theme-global-theme.global.generated.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/theme-global-theme.global.generated.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/vaadin-react.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/vite-devmode.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/Mapper/ProjectMapperTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/Mapper/ProjectMapperTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vite.generated.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vite.generated.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application-prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-prod.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

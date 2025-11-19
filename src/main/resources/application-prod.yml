@@ -3,9 +3,6 @@ server:
 spring:
   application:
     name: Photovoltaic-projects-manager
-  config:
-    activate:
-      on-profile: production
   datasource:
     url: ${DATASOURCE_URL}
     hikari:
