@@ -16,7 +16,7 @@ COPY --from=build --chown=appuser:appuser /app/target/*.jar app.jar
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "app.jar", "--spring.profiles.active=prod"]
+ENTRYPOINT ["java", "-Dfile.encoding=UTF-8", "-jar", "app.jar", "--spring.profiles.active=prod"]
 
 
 

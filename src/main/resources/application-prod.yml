@@ -4,15 +4,11 @@ spring:
   application:
     name: Photovoltaic-projects-manager
   datasource:
-    url: ${DATASOURCE_URL}
+    url: ${DATASOURCE_URL}?sslmode=required
     hikari:
       maximum-pool-size: 15
       maximum-idle: 8
       connection-timeout: 30000
-      data-source:
-        properties:
-          ssl: true
-          ssl-mode: require
   jpa:
     hibernate:
       ddl-auto: update
