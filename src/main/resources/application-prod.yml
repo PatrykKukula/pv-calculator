@@ -4,7 +4,7 @@ spring:
   application:
     name: Photovoltaic-projects-manager
   datasource:
-    url: ${DATASOURCE_URL}?sslmode=required
+    url: ${DATASOURCE_URL}?sslmode=require&connectTimeout=10&socketTimeout=10
     hikari:
       maximum-pool-size: 15
       maximum-idle: 8
