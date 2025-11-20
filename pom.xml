@@ -162,7 +162,7 @@
 	</build>
 	<profiles>
 		<profile>
-			<id>production</id>
+			<id>prod</id>
 			<dependencies>
 				<dependency>
 					<groupId>com.vaadin</groupId>
