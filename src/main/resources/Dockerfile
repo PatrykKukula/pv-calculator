@@ -17,6 +17,3 @@ COPY --from=build --chown=appuser:appuser /app/target/*.jar app.jar
 EXPOSE 8080
 
 ENTRYPOINT ["java", "-Dfile.encoding=UTF-8", "-Djava.net.preferIPv4Stack=true", "-Djava.net.preferIPv6Addresses=false","-jar", "app.jar", "--spring.profiles.active=prod"]
-
-
-
