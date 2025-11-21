@@ -5,37 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6dab4fd-e979-42d3-8fee-ebb6e4b33f80" name="Changes" comment="config update">
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/flow/generated-flow-imports.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/flow/generated-flow-imports.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/flow/generated-flow-webcomponent-imports.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/flow/generated-flow-webcomponent-imports.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot-version.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/base-panel-DFXiqdfs.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/copilot-Clqe7NnV.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/copilot-features-plugin-CV1K2mvr.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/copilot-feedback-plugin-CFUIsOki.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/copilot-global-vars-later-apQh56DX.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/copilot-info-plugin-ixH-DlL8.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/copilot-init-step2-BjRXdW-2.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/copilot-log-plugin-Dg6JDlQz.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/copilot-shortcuts-plugin-DRG-A1mq.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/figma-public/figma-api.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/icons-jl0-u2LC.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/index-UZcwxJY4.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/overlay-monkeypatch-ByWcx4Vt.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/query-BykXNUlT.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/shared/copilot-plugin-support.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/shared/flow-utils.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/copilot/state-B6616V18.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/vaadin-dev-tools/License.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/vaadin-dev-tools/connection.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/vaadin-dev-tools/live-reload-connection.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/vaadin-dev-tools/pre-trial-splash-screen.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/vaadin-dev-tools/vaadin-dev-tools.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/vaadin-dev-tools/vaadin-dev-tools.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/jar-resources/vaadin-dev-tools/websocket-connection.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/generated/vaadin.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/generated/vaadin.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.github/workflows/ci-cd.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
