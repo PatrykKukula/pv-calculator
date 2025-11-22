@@ -13,6 +13,4 @@ public class PhotovoltaicMaterialsCalculatorApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PhotovoltaicMaterialsCalculatorApplication.class, args);
 	}
-	// CI/CD test
-
 }
