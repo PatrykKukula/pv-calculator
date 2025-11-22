@@ -32,7 +32,7 @@ public class SecurityConfig  {
         http.securityContext(sc -> sc.requireExplicitSave(false));
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED));
         http.authorizeHttpRequests(request ->{
-                request.requestMatchers( "/login", "/register").permitAll();
+                request.requestMatchers( "/login", "/register", "/health").permitAll();
                 request.requestMatchers("/home", "/projects/**", "/installation/**", "/projects/**", "/projects").hasAnyRole("ADMIN", "USER");
                 });
         http.with(VaadinSecurityConfigurer.vaadin(), configurer -> {
