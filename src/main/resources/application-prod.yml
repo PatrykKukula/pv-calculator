@@ -12,9 +12,9 @@ spring:
   datasource:
     url: ${DATASOURCE_URL}&sslmode=require&connectTimeout=10&socketTimeout=10&preparedStatementCacheQueries=0
     hikari:
-      maximum-pool-size: 15
-      maximum-idle: 8
-      connection-timeout: 30000
+      maximum-pool-size: 8
+      maximum-idle: 2
+      connection-timeout: 10000
   jpa:
     hibernate:
       ddl-auto: update
