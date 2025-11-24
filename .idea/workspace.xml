@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6dab4fd-e979-42d3-8fee-ebb6e4b33f80" name="Changes" comment="config update">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/AppLayoutImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/AppLayoutImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/Project/ProjectsView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/Project/ProjectsView.java" afterDir="false" />
     </list>

@@ -5,6 +5,8 @@ import com.github.PatrykKukula.Photovoltaic.materials.calculator.Dto.Project.Pro
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.Service.ProjectService;
 import com.github.PatrykKukula.Photovoltaic.materials.calculator.View.Components.PageButtons;
 import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -40,8 +42,14 @@ public class ProjectsView extends VerticalLayout implements HasUrlParameter<Long
         pageButtons = new PageButtons<>(projects, renderPage());
 
         renderPage().run();
+        Button createProjectButton = createProjectButton(userId);
+        add(createProjectButton);
+        if (projects.getContent().isEmpty()){
+            VerticalLayout layout = setNoProjectsLayout();
+            addComponentAtIndex(0, layout);
+        }
+        else add(projectsLayout, pageButtons);
 
-        add(projectsLayout, pageButtons);
     }
     private Runnable renderPage(){
        return () -> {
@@ -52,6 +60,20 @@ public class ProjectsView extends VerticalLayout implements HasUrlParameter<Long
                projectsLayout.add(layout);
            }
        };
+    }
+    private VerticalLayout setNoProjectsLayout(){
+        VerticalLayout layout = new VerticalLayout();
+        Div div = new Div("You do not have any projects");
+        div.getStyle().set("font-size", "24px").set("font-family", "georgia");
+        layout.add(div);
+        layout.setAlignItems(Alignment.CENTER);
+        return layout;
+    }
+    private Button createProjectButton(Long userId){
+        Button button = new Button("Create new project");
+        button.addClickListener(e -> UI.getCurrent().navigate(AddProjectView.class, userId));
+        button.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        return button;
     }
     private VerticalLayout setSingleProjectLayout(ProjectDto project){
         VerticalLayout layout = new VerticalLayout();

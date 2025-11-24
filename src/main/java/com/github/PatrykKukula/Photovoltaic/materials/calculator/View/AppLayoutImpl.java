@@ -13,10 +13,12 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.Layout;
 import com.vaadin.flow.server.VaadinServletRequest;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.web.csrf.CsrfToken;
 
 import java.util.Optional;
 
+@Slf4j
 @Layout
 @AnonymousAllowed
 @CssImport("./styles/app-layout-styles.css")
@@ -48,7 +50,7 @@ public class AppLayoutImpl extends AppLayout {
         Span span = new Span("My projects");
         span.addClassName("tab");
         span.addClickListener(e -> {
-            if (UI.getCurrent().getCurrentView().isAttached()) UI.getCurrent().getPage().reload();
+            if (UI.getCurrent().getCurrentView() instanceof ProjectsView) UI.getCurrent().getPage().reload();
             else UI.getCurrent().navigate(ProjectsView.class, user.getUserId());
         });
         return span;
