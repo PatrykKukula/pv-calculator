@@ -1,6 +1,5 @@
 package com.github.PatrykKukula.Photovoltaic.materials.calculator.Exception;
 
-import com.github.PatrykKukula.Photovoltaic.materials.calculator.View.LoginView;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.server.ErrorEvent;
 import com.vaadin.flow.server.ErrorHandler;
@@ -23,10 +22,11 @@ public class VaadinErrorHandler implements ErrorHandler {
         if (throwable instanceof AppException ex) {
             showErrorMessage(ex.getUserMessage());
         }
+
         else {
             showErrorMessage(throwable.getMessage());
             if (throwable instanceof BadCredentialsException || throwable instanceof AuthenticationException){
-                UI.getCurrent().navigate(LoginView.class);
+                UI.getCurrent().getPage().reload();
             }
         }
         throwable.printStackTrace();

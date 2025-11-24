@@ -35,7 +35,7 @@ public class AppLayoutImpl extends AppLayout {
 
         Optional<UserEntity> userOpt = userEntityService.loadCurrentUserForVaadin();
         if (userOpt.isEmpty()) {
-            container.add(loginTab());
+            container.addToEnd(loginTab());
         }
         if (userOpt.isPresent()){
             user = userOpt.get();

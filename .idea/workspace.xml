@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6dab4fd-e979-42d3-8fee-ebb6e4b33f80" name="Changes" comment="config update">
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-prod.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/Exception/VaadinErrorHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/Exception/VaadinErrorHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/AppLayoutImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/AppLayoutImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/LoginView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +57,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Main.executor": "Run",
-    "Application.PhotovoltaicMaterialsCalculatorApplication.executor": "Run",
+    "Application.PhotovoltaicMaterialsCalculatorApplication.executor": "Vaadin.HotswapAgentExecutor",
     "JUnit.AbstractConstructionModelTest.executor": "Run",
     "JUnit.AbstractProfileConstructionModelTest.executor": "Run",
     "JUnit.ConstructionMapperTest.executor": "Run",
@@ -107,7 +110,7 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.19839142",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
+    "settings.editor.selected.configurable": "reference.projectsettings.compiler.annotationProcessors",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -125,7 +128,7 @@
       <recent name="pl.patrykkukula.Builders" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.PhotovoltaicMaterialsCalculatorApplicationTests">
+  <component name="RunManager" selected="Application.PhotovoltaicMaterialsCalculatorApplication">
     <configuration name="PhotovoltaicMaterialsCalculatorApplication" type="Application" factoryName="Application" nameIsGenerated="true">
       <envs>
         <env name="DATASOURCE_PASSWORD" value="Patryk" />
@@ -142,21 +145,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PhotovoltaicMaterialsCalculatorApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Photovoltaic-materials-calculator" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.github.PatrykKukula.Photovoltaic.materials.calculator.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.github.PatrykKukula.Photovoltaic.materials.calculator" />
-      <option name="MAIN_CLASS_NAME" value="com.github.PatrykKukula.Photovoltaic.materials.calculator.PhotovoltaicMaterialsCalculatorApplicationTests" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Scratch" type="Java Scratch" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Scratch" />
       <option name="SCRATCH_FILE_URL" value="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_41.java" />
@@ -164,9 +152,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.PhotovoltaicMaterialsCalculatorApplication" />
+      <item itemvalue="Java Scratch.Scratch" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.PhotovoltaicMaterialsCalculatorApplicationTests" />
         <item itemvalue="Java Scratch.Scratch" />
       </list>
     </recent_temporary>

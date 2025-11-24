@@ -62,9 +62,9 @@ class LoginListener implements ComponentEventListener<AbstractLogin.LoginEvent>{
     @Override
     public void onComponentEvent(AbstractLogin.LoginEvent event) {
             boolean login = userEntityService.login(new LoginDto(event.getUsername(), event.getPassword()));
+            UI.getCurrent().getPage().reload();
             if (login) {
                 UI.getCurrent().navigate(MainView.class);
-                UI.getCurrent().refreshCurrentRoute(true);
             }
     }
 }
