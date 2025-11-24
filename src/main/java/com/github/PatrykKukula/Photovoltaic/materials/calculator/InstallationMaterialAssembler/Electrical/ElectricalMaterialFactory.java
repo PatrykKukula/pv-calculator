@@ -70,10 +70,10 @@ public class ElectricalMaterialFactory {
     public InstallationMaterial createDcCable(){
         int crossSection = calculateTotalPower() <= 10 ? 4 : 6;
         long value = installation.getModuleOrientation() == ModuleOrientation.VERTICAL ?
-                installation.getDcCableLength() + (project.getModuleWidth() / CONVERT_UNIT_FROM_MM_TO_M) * installation.getRows().stream().mapToLong(Row::getModuleQuantity).sum()
-                        + installation.getRows().size() * 10L :
-                installation.getDcCableLength() + (project.getModuleLength() / CONVERT_UNIT_FROM_MM_TO_M) * installation.getRows().stream().mapToLong(Row::getModuleQuantity).sum()
-                        + installation.getRows().size() * 10L;
+                (project.getModuleWidth() / CONVERT_UNIT_FROM_MM_TO_M) * installation.getRows().stream().mapToLong(Row::getModuleQuantity).sum()*2
+                        + (long)installation.getStrings() * installation.getDcCableLength() + installation.getRows().size()*5L:
+                 (project.getModuleLength() / CONVERT_UNIT_FROM_MM_TO_M) * installation.getRows().stream().mapToLong(Row::getModuleQuantity).sum()*2
+                        + (long)installation.getStrings() * installation.getDcCableLength() + installation.getRows().size()*5L ;
         return materialService.createElectricalMaterial("DC cable %s mm2".formatted(crossSection), value, installation);
     }
     public InstallationMaterial createDcFuse(){

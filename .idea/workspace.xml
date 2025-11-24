@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e6dab4fd-e979-42d3-8fee-ebb6e4b33f80" name="Changes" comment="config update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/InstallationMaterialAssembler/Electrical/ElectricalMaterialFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/InstallationMaterialAssembler/Electrical/ElectricalMaterialFactory.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
