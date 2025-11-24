@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e6dab4fd-e979-42d3-8fee-ebb6e4b33f80" name="Changes" comment="config update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/InstallationMaterialAssembler/Electrical/ElectricalMaterialFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/InstallationMaterialAssembler/Electrical/ElectricalMaterialFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/MaterialBuilder/ElectricalMaterialBuilder/ElectricalMaterialFactoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/MaterialBuilder/ElectricalMaterialBuilder/ElectricalMaterialFactoryTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,71 +52,71 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "Application.PhotovoltaicMaterialsCalculatorApplication.executor": "Vaadin.HotswapAgentExecutor",
-    "JUnit.AbstractConstructionModelTest.executor": "Run",
-    "JUnit.AbstractProfileConstructionModelTest.executor": "Run",
-    "JUnit.ConstructionMapperTest.executor": "Run",
-    "JUnit.ConstructionMaterialAssemblerTest.executor": "Run",
-    "JUnit.ConstructionMaterialFactoryTest.executor": "Run",
-    "JUnit.DoubleThreadedTest.executor": "Run",
-    "JUnit.ElectricListBuilderTest.executor": "Run",
-    "JUnit.ElectricMaterialsBuilderTest.executor": "Run",
-    "JUnit.ElectricalMaterialAssemblerTest.executor": "Run",
-    "JUnit.ElectricalMaterialFactoryTest.executor": "Run",
-    "JUnit.ElectricalMaterialFactoryTest.shouldCreateDcCableCorrectlyOver10KwInstallation.executor": "Run",
-    "JUnit.ElectricalMaterialFactoryTest.shouldCreateDcCableCorrectlyUnder10KwInstallation.executor": "Run",
-    "JUnit.FileManagerTest.executor": "Run",
-    "JUnit.FlatDoubleThreadedTest.executor": "Run",
-    "JUnit.FlatThreadedRodTest.executor": "Run",
-    "JUnit.InstallationBuilderTest.executor": "Run",
-    "JUnit.InstallationBuilderUtilsTest.executor": "Run",
-    "JUnit.InstallationBuilderUtilsTest.shouldThrowIllegalArgumentCorrectly.executor": "Run",
-    "JUnit.InstallationBuilderUtilsTest.shouldThrowInputMismatchExceptionCorrectly.executor": "Run",
-    "JUnit.InstallationBuilderUtilsTest.shouldThrowInputMismatchExceptionForInvalidType.executor": "Run",
-    "JUnit.InstallationListTest.executor": "Run",
-    "JUnit.InstallationMapperTest.executor": "Run",
-    "JUnit.InstallationMaterialMapperTest.executor": "Run",
-    "JUnit.InstallationTest.executor": "Run",
-    "JUnit.InverterTest.executor": "Run",
-    "JUnit.MaterialListBuilderTest.executor": "Run",
-    "JUnit.MenuHandlerTest.executor": "Run",
-    "JUnit.MenuHandlerTest.shouldNotExitWhenUserChoosesToCreateList.executor": "Run",
-    "JUnit.MenuHandlerTest.shouldThrowIllegalArgumentExceptionWhenInvalidInputAction.executor": "Run",
-    "JUnit.MenuOptionTest.executor": "Run",
-    "JUnit.PhotovoltaicMaterialsCalculatorApplicationTests.executor": "Run",
-    "JUnit.ProjectMapperTest.executor": "Run",
-    "JUnit.ProjectServiceTest.executor": "Run",
-    "JUnit.ScannerUtilsTest.executor": "Run",
-    "JUnit.ScannerUtilsTest.shouldThrowNumberFormatExceptionWhenStringIsPassedToReadInt.executor": "Run",
-    "JUnit.TrapezeTest.executor": "Run",
-    "JUnit.VarioHookTest.executor": "Run",
-    "Java Scratch.Scratch.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "F:/Projekty/Photovoltaic materials calculator/src/main/resources",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.19839142",
-    "settings.editor.selected.configurable": "reference.projectsettings.compiler.annotationProcessors",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.PhotovoltaicMaterialsCalculatorApplication.executor&quot;: &quot;Vaadin.HotswapAgentExecutor&quot;,
+    &quot;JUnit.AbstractConstructionModelTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AbstractProfileConstructionModelTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ConstructionMapperTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ConstructionMaterialAssemblerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ConstructionMaterialFactoryTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.DoubleThreadedTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ElectricListBuilderTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ElectricMaterialsBuilderTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ElectricalMaterialAssemblerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ElectricalMaterialFactoryTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ElectricalMaterialFactoryTest.shouldCreateDcCableCorrectlyOver10KwInstallation.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ElectricalMaterialFactoryTest.shouldCreateDcCableCorrectlyUnder10KwInstallation.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FileManagerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FlatDoubleThreadedTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FlatThreadedRodTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InstallationBuilderTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InstallationBuilderUtilsTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InstallationBuilderUtilsTest.shouldThrowIllegalArgumentCorrectly.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InstallationBuilderUtilsTest.shouldThrowInputMismatchExceptionCorrectly.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InstallationBuilderUtilsTest.shouldThrowInputMismatchExceptionForInvalidType.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InstallationListTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InstallationMapperTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InstallationMaterialMapperTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InstallationTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.InverterTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MaterialListBuilderTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MenuHandlerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MenuHandlerTest.shouldNotExitWhenUserChoosesToCreateList.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MenuHandlerTest.shouldThrowIllegalArgumentExceptionWhenInvalidInputAction.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MenuOptionTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PhotovoltaicMaterialsCalculatorApplicationTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ProjectMapperTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ProjectServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ScannerUtilsTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ScannerUtilsTest.shouldThrowNumberFormatExceptionWhenStringIsPassedToReadInt.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TrapezeTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.VarioHookTest.executor&quot;: &quot;Run&quot;,
+    &quot;Java Scratch.Scratch.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/Projekty/Photovoltaic materials calculator/src/main/resources&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.19839142&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.annotationProcessors&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "JAVA"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;JAVA&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="F:\Projekty\Photovoltaic materials calculator\src\main\resources" />
@@ -126,7 +126,7 @@
       <recent name="pl.patrykkukula.Builders" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.PhotovoltaicMaterialsCalculatorApplication">
+  <component name="RunManager" selected="JUnit.ElectricalMaterialFactoryTest">
     <configuration name="PhotovoltaicMaterialsCalculatorApplication" type="Application" factoryName="Application" nameIsGenerated="true">
       <envs>
         <env name="DATASOURCE_PASSWORD" value="Patryk" />
@@ -143,6 +143,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ElectricalMaterialFactoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Photovoltaic-materials-calculator" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilder.ElectricalMaterialBuilder.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilder.ElectricalMaterialBuilder" />
+      <option name="MAIN_CLASS_NAME" value="com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilder.ElectricalMaterialBuilder.ElectricalMaterialFactoryTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Scratch" type="Java Scratch" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Scratch" />
       <option name="SCRATCH_FILE_URL" value="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_41.java" />
@@ -153,9 +168,11 @@
     <list>
       <item itemvalue="Application.PhotovoltaicMaterialsCalculatorApplication" />
       <item itemvalue="Java Scratch.Scratch" />
+      <item itemvalue="JUnit.ElectricalMaterialFactoryTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ElectricalMaterialFactoryTest" />
         <item itemvalue="Java Scratch.Scratch" />
       </list>
     </recent_temporary>

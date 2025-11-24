@@ -150,7 +150,7 @@ public class ElectricalMaterialFactoryTest {
 
         electricalMaterialFactory.createDcCable();
 
-        verify(materialService).createElectricalMaterial(eq("DC cable 4 mm2"), eq(120L), eq(installation));
+        verify(materialService).createElectricalMaterial(eq("DC cable 4 mm2"), eq(215L), eq(installation));
     }
     @Test
     @DisplayName("Should create DC cable correctly over 10 kW installation")
@@ -160,7 +160,7 @@ public class ElectricalMaterialFactoryTest {
 
         electricalMaterialFactory.createDcCable();
 
-        verify(materialService).createElectricalMaterial(eq("DC cable 6 mm2"), eq(131L), eq(installation));
+        verify(materialService).createElectricalMaterial(eq("DC cable 6 mm2"), eq(226L), eq(installation));
     }
     @Test
     @DisplayName("Should create DC fuse correctly")
