@@ -6,6 +6,8 @@ This application allows end users to manage their photovoltaic projects. Users c
 
 Creating installation is easy and user friendly - there is only need to fill simple form with basic data about installation. Everything else is done in the backend of the application using OOP principles and design patterns like strategy or factory, which makes application scalable, easy to maintain and fullfill open/closed principle. This application can handle installations up to 49,995 kW due to the polish energetic law policy. Data is validated in the backend of the application, preventing to save invalid installation, and also if something goes wrong, notification or error message is displayed to user.
 
+**Live demo available at https://photovoltaic-project-manager.onrender.com**
+
 Read the following sections for more details.
 
 # Core features
@@ -15,6 +17,7 @@ Read the following sections for more details.
 - Creating and managing PV installations
 - Creating material lists effortlessly
 - Exporting material lists to an excel file
+- Live demo and CI/CD with GitHub Actions
 
 # Technologies
 
@@ -24,6 +27,8 @@ Read the following sections for more details.
 - JUnit5 & Mockito
 - Lombok
 - Apache POI OOXML
+- GitHub Actions
+- Docker
 - Caffeine
 
 
@@ -99,6 +104,10 @@ Example log for missing cache:
 ## Testing
 
 Application is tested with JUnit5 and Mockito for various scenarios. Dozens of tests are implemented to provide application reliability.
+
+## CI/CD
+
+CI/CD is applied with GitHub Actions. Workflow run's all the tests, caching Maven dependencies, building JAR file and deploying application on Render server via Render API.
 
 
 # Navigation through application
