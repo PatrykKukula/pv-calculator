@@ -48,7 +48,8 @@ public class AppLayoutImpl extends AppLayout {
         Span span = new Span("My projects");
         span.addClassName("tab");
         span.addClickListener(e -> {
-            UI.getCurrent().navigate(ProjectsView.class, user.getUserId());
+            if (UI.getCurrent().getCurrentView().isAttached()) UI.getCurrent().getPage().reload();
+            else UI.getCurrent().navigate(ProjectsView.class, user.getUserId());
         });
         return span;
     }

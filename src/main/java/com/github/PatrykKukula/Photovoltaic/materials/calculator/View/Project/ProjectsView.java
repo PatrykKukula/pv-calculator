@@ -9,10 +9,7 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.router.BeforeEvent;
-import com.vaadin.flow.router.HasUrlParameter;
-import com.vaadin.flow.router.PageTitle;
-import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.*;
 import jakarta.annotation.security.RolesAllowed;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -27,7 +24,7 @@ import static com.github.PatrykKukula.Photovoltaic.materials.calculator.View.Com
 @PageTitle("PV Calculator - projects")
 @RequiredArgsConstructor
 @RolesAllowed({"USER", "ADMIN"})
-public class ProjectsView extends VerticalLayout implements HasUrlParameter<Long> {
+public class ProjectsView extends VerticalLayout implements HasUrlParameter<Long>, BeforeEnterObserver {
     private final ProjectService projectService;
     private VerticalLayout projectsLayout = new VerticalLayout();
     private PageButtons<ProjectDto> pageButtons;
@@ -82,5 +79,8 @@ public class ProjectsView extends VerticalLayout implements HasUrlParameter<Long
         layout.setSpacing(false);
         layout.addClickListener(e -> UI.getCurrent().navigate(ProjectView.class, project.getProjectId()));
         return layout;
+    }
+    @Override
+    public void beforeEnter(BeforeEnterEvent event) {
     }
 }
