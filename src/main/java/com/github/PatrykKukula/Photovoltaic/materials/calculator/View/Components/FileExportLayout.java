@@ -29,7 +29,6 @@ public class FileExportLayout extends Div {
     public FileExportLayout(Long projectId, ProjectService projectService){
         this.projectService = projectService;
         setupProjectDialog(projectId);
-        setupProjectDialog(projectId);
         fileName.setHelperText("Insert file name");
         add(exportToExcelButton());
     }
