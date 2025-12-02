@@ -7,6 +7,7 @@ import com.github.PatrykKukula.Photovoltaic.materials.calculator.View.Components
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -26,6 +27,7 @@ import static com.github.PatrykKukula.Photovoltaic.materials.calculator.View.Com
 @PageTitle("PV Calculator - projects")
 @RequiredArgsConstructor
 @RolesAllowed({"USER", "ADMIN"})
+@CssImport("./styles/common-styles.css")
 public class ProjectsView extends VerticalLayout implements HasUrlParameter<Long>, BeforeEnterObserver {
     private final ProjectService projectService;
     private VerticalLayout projectsLayout = new VerticalLayout();
@@ -77,6 +79,7 @@ public class ProjectsView extends VerticalLayout implements HasUrlParameter<Long
     }
     private VerticalLayout setSingleProjectLayout(ProjectDto project){
         VerticalLayout layout = new VerticalLayout();
+        layout.addClassName("white-background");
         Div title = getProjectTitle(project);
         layout.add(title);
         VerticalLayout projectDetails = getProjectDetails(project);

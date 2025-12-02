@@ -190,6 +190,7 @@ public class InstallationFormLayout<T extends InstallationInterface> extends Ver
     }
     private ComboBox<ConstructionType> installationTypeComboBox(){
         ComboBox<ConstructionType> comboBox = new ComboBox<>("Installation type");
+        comboBox.addClassName("vaadin-combo-box");
         comboBox.getStyle().set("width", "40%");
         comboBox.setItems(ConstructionType.values());
         comboBox.setItemLabelGenerator(constructionTypeLabelGenerator());
@@ -200,6 +201,7 @@ public class InstallationFormLayout<T extends InstallationInterface> extends Ver
     }
     private ComboBox<ModuleOrientation> moduleOrientationComboBox(){
         ComboBox<ModuleOrientation> comboBox = new ComboBox<>("Module orientation");
+        comboBox.addClassName("vaadin-combo-box");
         comboBox.getStyle().set("width", "40%");
         comboBox.setItems(ModuleOrientation.values());
         comboBox.setItemLabelGenerator(moduleOrientationLabelGenerator());
@@ -210,6 +212,7 @@ public class InstallationFormLayout<T extends InstallationInterface> extends Ver
     }
     private ComboBox<PhaseNumber> phaseNumbernComboBox(){
         ComboBox<PhaseNumber> comboBox = new ComboBox<>("Phase number:");
+        comboBox.addClassName("vaadin-combo-box");
         comboBox.getStyle().set("width", "40%");
         comboBox.setItems(PhaseNumber.values());
         comboBox.setItemLabelGenerator(item -> item.name().toLowerCase());
@@ -220,6 +223,7 @@ public class InstallationFormLayout<T extends InstallationInterface> extends Ver
     }
     private ComboBox<Boolean> lightingProtectionComboBox(){
         ComboBox<Boolean> comboBox = new ComboBox<>("Lighting protection in object");
+        comboBox.addClassName("vaadin-combo-box");
         comboBox.getStyle().set("width", "40%");
         comboBox.setItems(true, false);
         comboBox.setItemLabelGenerator(item -> item ? "Present" : "Not present");
@@ -230,6 +234,7 @@ public class InstallationFormLayout<T extends InstallationInterface> extends Ver
     }
     private TextField addressField(){
         TextField textField = new TextField("Address");
+        textField.addClassName("vaadin-text-field");
         binder.forField(textField)
                 .withValidator(new BeanValidator(strategy.getDtoClass(), "address"))
                 .bind("address");
@@ -285,11 +290,13 @@ public class InstallationFormLayout<T extends InstallationInterface> extends Ver
     }
     private IntegerField integerField(String label){
         IntegerField integerField = new IntegerField(label);
+        integerField.addClassName("vaadin-integer-field");
         integerField.getStyle().set("width", "40%");
         return integerField;
     }
     private Button cancelButton(Long id){
         Button button = new Button("Cancel");
+        button.getStyle().set("background-color", "lightgrey");
         button.addClickListener(e -> {
             strategy.cancel(id);
         });

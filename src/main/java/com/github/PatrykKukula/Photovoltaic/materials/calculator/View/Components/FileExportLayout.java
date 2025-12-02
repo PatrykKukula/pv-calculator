@@ -34,7 +34,7 @@ public class FileExportLayout extends Div {
     }
     private Button exportToExcelButton() {
         Button button = new Button("Export materials to excel");
-        button.getStyle().set("align-self", "center");
+        button.getStyle().set("align-self", "center").set("background-color", "lightgrey");
         button.addClickListener(e -> {
             dialog.open();
         });

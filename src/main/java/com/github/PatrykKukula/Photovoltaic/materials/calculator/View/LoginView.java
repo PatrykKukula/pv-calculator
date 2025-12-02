@@ -50,6 +50,7 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
         Button button = new Button("Don't have account? Click to register.");
         button.addClickListener(event -> UI.getCurrent().navigate(RegisterView.class));
         button.getStyle().set("padding", "10px").set("margin", "0");
+
         return button;
     }
 }

@@ -8,6 +8,7 @@ import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.Layout;
@@ -17,6 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.web.csrf.CsrfToken;
 
 import java.util.Optional;
+
+import static com.github.PatrykKukula.Photovoltaic.materials.calculator.Constants.ImageConstants.MAIN_IMAGE_1;
 
 @Slf4j
 @Layout
@@ -44,6 +47,7 @@ public class AppLayoutImpl extends AppLayout {
             container.add(new Span(myProjectsTab(), createProjectTab()), logoutTab());
         }
 
+        addBackgroundImageWithGradient();
         addToNavbar(container);
     }
     private Span myProjectsTab(){
@@ -82,5 +86,32 @@ public class AppLayoutImpl extends AppLayout {
                 </form>
                 """.formatted(csrf.getParameterName(), csrf.getToken()));
         logoutForm.setClassName("dropdown-tab");
+    }
+    private void addBackgroundImageWithGradient() {
+        Image backgroundImage = new Image(MAIN_IMAGE_1, "Background");
+        backgroundImage.getStyle()
+                .set("position", "absolute")
+                .set("top", "0")
+                .set("left", "0")
+                .set("width", "100%")
+                .set("height", "100%")
+                .set("object-fit", "cover")
+                .set("object-position", "center right")
+                .set("z-index", "-1")
+                .set("pointer-events", "none");
+
+        Div gradientOverlay = new Div();
+        gradientOverlay.getStyle()
+                .set("position", "absolute")
+                .set("top", "0")
+                .set("left", "0")
+                .set("width", "100%")
+                .set("height", "100%")
+                .set("background", "linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.7) 30%, rgba(255, 255, 255, 0) 100%)")
+                .set("z-index", "-1")
+                .set("pointer-events", "none");
+
+        getElement().insertChild(0, backgroundImage.getElement());
+        getElement().insertChild(1, gradientOverlay.getElement());
     }
 }

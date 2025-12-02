@@ -5,8 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6dab4fd-e979-42d3-8fee-ebb6e4b33f80" name="Changes" comment="config update">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/Constants/ImageConstants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/MaterialBuilder/ElectricalMaterialBuilder/ElectricalMaterialFactoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/MaterialBuilder/ElectricalMaterialBuilder/ElectricalMaterialFactoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/bundles/dev.bundle" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/bundles/dev.bundle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/styles/common-styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/styles/common-styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/themes/global-theme/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/themes/global-theme/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/Security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/Security/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/AppLayoutImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/AppLayoutImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/Components/FileExportLayout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/Components/FileExportLayout.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/Components/PageButtons.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/Components/PageButtons.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/Components/SingleInstallationLayout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/Components/SingleInstallationLayout.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/Installation/InstallationForm/InstallationFormLayout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/Installation/InstallationForm/InstallationFormLayout.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/Installation/InstallationView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/Installation/InstallationView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/LoginView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/MainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/MainView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/Project/ProjectForm/ProjectFormLayout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/Project/ProjectForm/ProjectFormLayout.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/Project/ProjectView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/Project/ProjectView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/Project/ProjectsView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/PatrykKukula/Photovoltaic/materials/calculator/View/Project/ProjectsView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,12 +136,17 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="F:\Projekty\Photovoltaic materials calculator\src\main\resources" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Projekty\Photovoltaic materials calculator\src\main\resources\static\images" />
+      <recent name="F:\Projekty\Photovoltaic materials calculator\src\main\resources\static" />
+      <recent name="F:\Projekty\Photovoltaic materials calculator\src\main\resources\META-INF\resources" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="pl.patrykkukula.Utils.MaterialsUtils" />
       <recent name="pl.patrykkukula.Builders" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ElectricalMaterialFactoryTest">
+  <component name="RunManager" selected="Application.PhotovoltaicMaterialsCalculatorApplication">
     <configuration name="PhotovoltaicMaterialsCalculatorApplication" type="Application" factoryName="Application" nameIsGenerated="true">
       <envs>
         <env name="DATASOURCE_PASSWORD" value="Patryk" />
@@ -143,21 +163,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ElectricalMaterialFactoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Photovoltaic-materials-calculator" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilder.ElectricalMaterialBuilder.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilder.ElectricalMaterialBuilder" />
-      <option name="MAIN_CLASS_NAME" value="com.github.PatrykKukula.Photovoltaic.materials.calculator.MaterialBuilder.ElectricalMaterialBuilder.ElectricalMaterialFactoryTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Scratch" type="Java Scratch" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Scratch" />
       <option name="SCRATCH_FILE_URL" value="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_41.java" />
@@ -168,11 +173,9 @@
     <list>
       <item itemvalue="Application.PhotovoltaicMaterialsCalculatorApplication" />
       <item itemvalue="Java Scratch.Scratch" />
-      <item itemvalue="JUnit.ElectricalMaterialFactoryTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ElectricalMaterialFactoryTest" />
         <item itemvalue="Java Scratch.Scratch" />
       </list>
     </recent_temporary>

@@ -34,6 +34,7 @@ public class PageButtons<T> extends HorizontalLayout {
     }
     private void setUpNextButton(){
         nextButton = new Button(VaadinIcon.ARROW_RIGHT.create());
+        nextButton.addClassName("white-background");
         nextButton.setEnabled(pageNo + 1 < totalPages);
         nextButton.addClickListener(e -> {
             pageNo++;
@@ -45,6 +46,7 @@ public class PageButtons<T> extends HorizontalLayout {
     }
     private void setUpPreviousButton(){
         previousbutton = new Button(VaadinIcon.ARROW_LEFT.create());
+        previousbutton.addClassName("white-background");
         previousbutton.setEnabled(pageNo > 0);
         previousbutton.addClickListener(e -> {
             pageNo--;
@@ -57,6 +59,7 @@ public class PageButtons<T> extends HorizontalLayout {
     private void setUpPagesSpan(){
         String currentPage = totalPages > 0 ? String.valueOf(pageNo + 1)  : String.valueOf(pageNo);
         pageNoSpan = new Span(currentPage + "/" + totalPages);
+        pageNoSpan.getStyle().set("padding", "5px 10px");
         pagesSpan.add(previousbutton, pageNoSpan, nextButton);
         pagesSpan.getStyle().set("margin", "auto");
     }

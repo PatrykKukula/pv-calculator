@@ -32,6 +32,7 @@ public class SingleInstallationLayout extends VerticalLayout {
     private HorizontalLayout singleInstallationLayout(){
         HorizontalLayout layout = new HorizontalLayout();
         layout.setWidth("100%");
+        layout.addClassName("white-background");
 
         Icon delete = deleteIcon(installation.getInstallationId());
         Icon update = updateIcon(installation.getInstallationId());

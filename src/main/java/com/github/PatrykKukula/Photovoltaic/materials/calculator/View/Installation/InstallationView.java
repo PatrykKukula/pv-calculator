@@ -42,9 +42,10 @@ public class InstallationView extends VerticalLayout implements HasUrlParameter<
     @Override
     public void setParameter(BeforeEvent event, Long installationId) {
         getStyle().set("width", "40%").set("margin", "auto");
+        addClassName("white-background");
         InstallationDto installation = installationService.findInstallationById(installationId);
         ProjectDto project = projectService.findProjectById(installation.getProjectId());
-
+        constructionMaterialsLayout.getStyle().set("display", "flex-item");
 
         SingleInstallationLayout singleInstallationLayout = new SingleInstallationLayout(installationService, installation, project, true);
         singleInstallationLayout.setSizeFull();
@@ -97,7 +98,7 @@ public class InstallationView extends VerticalLayout implements HasUrlParameter<
     private Button backToProjectButton(Long projectId) {
         Button button = new Button("Back to project");
         button.addClickListener(e -> UI.getCurrent().navigate(ProjectView.class, projectId));
-        button.getStyle().set("align-self", "center");
+        button.getStyle().set("align-self", "center").set("background-color", "lightgrey");
         return button;
     }
 }

@@ -62,14 +62,14 @@ public class ProjectView extends VerticalLayout implements HasUrlParameter<Long>
 
         project = projectService.findProjectById(projectId);
 
-            installations = installationService.findAllInstallationsForProject(projectId, InstallationsRequestDto.builder().pageNo(PAGE_NO).pageSize(PAGE_SIZE).sortDirection(SORT_DESC).build());
-            pageButtons = new PageButtons<>(installations, renderInstallations());
-            renderInstallations().run();
+        installations = installationService.findAllInstallationsForProject(projectId, InstallationsRequestDto.builder().pageNo(PAGE_NO).pageSize(PAGE_SIZE).sortDirection(SORT_DESC).build());
+        pageButtons = new PageButtons<>(installations, renderInstallations());
+        renderInstallations().run();
 
-            VerticalLayout left = new VerticalLayout(projectDetailsHeader(), projectDetailsLayout());
-            VerticalLayout right = new VerticalLayout(moduleDataHeader(), moduleData());
-            HorizontalLayout detailsLayout = new HorizontalLayout(left, right);
-
+        VerticalLayout left = new VerticalLayout(projectDetailsHeader(), projectDetailsLayout());
+        VerticalLayout right = new VerticalLayout(moduleDataHeader(), moduleData());
+        HorizontalLayout detailsLayout = new HorizontalLayout(left, right);
+        addClassName("white-background");
         add(projectTitle(), detailsLayout, buttonsDiv(), installationsHeader(),
                     addInstalationButton(), fileExportLayout, installationsLayout, pageButtons);
     }
@@ -109,6 +109,8 @@ public class ProjectView extends VerticalLayout implements HasUrlParameter<Long>
         Button removeButton = removeButton();
         div.add(editButton, removeButton);
         div.getStyle().set("display", "flex").set("justify-content", "space-around").set("width", "100%");
+
+
 
         return div;
     }
@@ -179,6 +181,7 @@ public class ProjectView extends VerticalLayout implements HasUrlParameter<Long>
     }
     private Button editButton(){
         Button button = new Button("Edit project ", VaadinIcon.EDIT.create());
+        button.getStyle().set("background-color", "lightgrey");
         button.addClickListener(e -> UI.getCurrent().navigate(ProjectUpdateView.class, project.getProjectId()));
 
         return button;
@@ -186,6 +189,7 @@ public class ProjectView extends VerticalLayout implements HasUrlParameter<Long>
     private Button removeButton(){
         Button button = new Button("Remove project", VaadinIcon.FILE_REMOVE.create());
         button.addThemeVariants(ButtonVariant.LUMO_ERROR);
+        button.getStyle().set("background-color", "lightgrey");
         button.addClickListener(e -> {
             try{
                 Optional<UserEntity> user = userEntityService.loadCurrentUserForVaadin();
@@ -202,6 +206,7 @@ public class ProjectView extends VerticalLayout implements HasUrlParameter<Long>
     }
     private Button addInstalationButton(){
         Button button = new Button("Add installation", VaadinIcon.PLUS.create());
+        button.getStyle().set("background-color", "lightgrey");
         button.addClickListener(e ->{
             UI.getCurrent().navigate(AddInstallationView.class, project.getProjectId());
         });

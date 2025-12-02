@@ -8,3 +8,10 @@ vaadin-vertical-layout, vaadin-horizontal-layout {
 vaadin-button {
     cursor: pointer
 }
+vaadin-login-form-wrapper::part(form) {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+vaadin-login-form-wrapper {
+    background-color: transparent;
+}
+
