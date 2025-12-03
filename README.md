@@ -47,7 +47,7 @@ To be able to use application, user need to be logged in and create account, if 
  
 Registration form has validation rules and user need to meet special conditions for username and password.
 
-<img width="1915" height="518" alt="image" src="https://github.com/user-attachments/assets/9273154e-d159-484b-b169-71894d71e6de" />
+<img width="1919" height="912" alt="1" src="https://github.com/user-attachments/assets/1735e6ac-18a7-491c-9ceb-d2bcd3afd1f9" />
 
 
 
@@ -70,11 +70,12 @@ Below are two examples of bean level validation.
 
 In order to register correctly, user need to provide correct username and password. 
 
-<img width="504" height="400" alt="image" src="https://github.com/user-attachments/assets/47c7fcd3-c945-4fd0-b4e8-d89e7bcb5d87" />
+<img width="1919" height="912" alt="2" src="https://github.com/user-attachments/assets/246a8eb5-0d82-4ea1-a6d0-1b03b43f325c" />
+
 
 While creating projects, special conditions have to be met. For example allowed PV modules parameters have to be in range of values available in the market.
 
-<img width="514" height="526" alt="image" src="https://github.com/user-attachments/assets/d9fa22b2-0d60-48ab-9e38-08e0e11c3d4a" />
+<img width="726" height="556" alt="3" src="https://github.com/user-attachments/assets/4de3142a-2f95-4f11-903e-1c0008cdec56" />
 
 
 ## Catching exceptions with notifications
@@ -83,12 +84,13 @@ Before inserting data into database everything have to be valid. Not everything 
 
 For example if login credentials are invalid, notification is poped.
 
-<img width="416" height="446" alt="image" src="https://github.com/user-attachments/assets/43e1aa30-50d2-43a7-8470-7f1b64326c5f" />
+<img width="406" height="426" alt="4" src="https://github.com/user-attachments/assets/b43ffa1e-5315-4b5d-90ef-201fc61bd9fc" />
+
 
 Another example, while creating installation, due to the polish energetic law restriction microinstallations are up to 50 kWp (exclusive) of electrical power. That is why, maximum installation power is 49,995 (modules have power step of 5 Wp). Exceeding that power will end with notification.
 
-<img width="516" height="174" alt="image" src="https://github.com/user-attachments/assets/5f6aed61-559d-4973-8925-f50cb651a643" />
 
+<img width="516" height="810" alt="5" src="https://github.com/user-attachments/assets/1c76fac5-e961-479d-9bb8-2f26ae6f1de3" />
 
 
 
@@ -116,14 +118,16 @@ CI/CD is applied with GitHub Actions. Workflow run's all the tests, caching Mave
 
 After login user can either browse projects or create new one.
 
-<img width="1903" height="742" alt="image" src="https://github.com/user-attachments/assets/dc8abfdf-f272-47f4-a40f-02cf54be2ab5" />
+<img width="1911" height="919" alt="6" src="https://github.com/user-attachments/assets/b1ac9088-57bf-4566-a718-65a5fd8f0658" />
+
 
 
 ## Creating and updating project
 
 To create project user need to fill form with basic data about project and most basic data about PV modules that will be used. This data is needed to create electrical materials.
 
-<img width="504" height="794" alt="image" src="https://github.com/user-attachments/assets/2d11343b-bff0-4962-af8b-00aca313de77" />
+<img width="1917" height="916" alt="7" src="https://github.com/user-attachments/assets/b1b78b89-fafd-494a-958d-7785001d334d" />
+
 
 Updating project has same form, with that difference that it is filled with currently set values.
 
@@ -137,7 +141,8 @@ To create installation user need to provide basic data about installation. Many 
 
 Form layout in add and update installation routes are implemented with factory and strategy patterns.
 
-<img width="384" height="848" alt="image" src="https://github.com/user-attachments/assets/275d0a79-971d-478c-b5ca-96f77a4b4a62" />
+<img width="416" height="816" alt="8" src="https://github.com/user-attachments/assets/4a32db5b-13c5-4196-8310-4c60b131d74f" />
+
 
 Updating installation data will trigger service method to recreate each material in installation, to keep data synchronized.
 
@@ -146,12 +151,14 @@ Updating installation data will trigger service method to recreate each material
 
 In *my projects route*, user can browse all the projects. Browsing projects uses pagination system. This route show basic project data and creation date.
 
-<img width="856" height="806" alt="image" src="https://github.com/user-attachments/assets/35997c82-a36b-487f-9fd2-debe631420ce" />
+<img width="1911" height="918" alt="9" src="https://github.com/user-attachments/assets/83fcba9d-4932-40d2-9814-cfcb2b58bcbe" />
+
 
 To see all the details, user need to go to the project route. All the details are available there, as well as buttons to update and remove project data or export materials for all the installations within project to excel.
 Also, that route contains all the installations within the project (pageable).
 
-<img width="772" height="821" alt="image" src="https://github.com/user-attachments/assets/4834a7ce-25ca-4852-9cee-7706ca8b32f4" />
+
+<img width="1891" height="916" alt="10" src="https://github.com/user-attachments/assets/49ea5af5-4860-41e8-a552-c75af402f8fb" />
 
 
 ## Browsing installations
@@ -160,7 +167,8 @@ Installation can be reached from the project page. In this route, there are all 
 
 Below the basic data, there are also construction and electrical materials for given installatiion.
 
-<img width="852" height="830" alt="image" src="https://github.com/user-attachments/assets/59a78764-df81-43d5-97b2-fab6bfb85f4f" />
+<img width="760" height="842" alt="11" src="https://github.com/user-attachments/assets/4f556f87-0458-481e-96c4-b344bda62ab2" />
+
 
 
 ## Exporting to excel
